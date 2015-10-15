@@ -1,0 +1,113 @@
+\chapter{Úvod}
+
+\chapter{Anonymizace obrazových dat}
+
+Anonymizace dat je v dne¹ní dobì velmi aktuálním tématem. Velmi intenzivnì se na ní pracuje jak na úrovni datové, tak na úrovni anonymizace obrazových dat, která je také pøedmìtem této práce. Pokud je spoleènost schopna zajistit kvalitní anonymizaci dat, která spravuje, nejen, ¾e tím plní svoje zákonné povinnosti, mù¾e si tím také vylep¹it svoje jméno v oèích zákazníkù a spoleèností, se kterými spolupracuje. 
+
+Tato kapitola se blí¾e zabývá legislativním podtextem ochrany osobních údajù v sekci , dále potom v sekci / popisem pojmu anonymizace dat a v sekci / jsou popsány
+metody, které se k anonymizaci dat pou¾ívají v souèastnosti. 
+
+\section{Osobní údaje a jejich ochrana}\label{osobni_udaje}
+
+Ochrana osobních údajù v Èeské republice pøedstavuje soubor práv a povinností, které se vztahují k uchovávání a zacházení s daty pøímo se týkajícími dané fyzické
+osoby. Osobní údaje nemusí být v¾dy pøímo identifikující danou osobu (jako je napøíklad rodné èíslo, jméno a pøíjmenní, adresa trvalého bydli¹tì apod.). Za 
+osobní údaje jsou pova¾ovány jakékoliv údaje pøímo související se ¾ivotem konkrétní nebo urèitelné osoby. Mù¾e jít napøíklad o provozování koníèkù, èlenství v 
+politických stranách, úèast na specifických událostech, náv¹tìvy rùzných míst, velikost obleèení a podobnì. Ochrana osobních údajù (ochrana osobních dat) je v 
+Èeské republice regulována zákonem è. 101/2001 Sb., o ochranì osobních údajù a o zmìnì nìkterých zákonù a  dal¹ími právními pøedpisy.
+
+Zákon rozli¹uje osoby, které zpracovávají osobní údaje (správce osobních údajù) a osoby, jejich¾ data správci zpracovávají (subjekt osobních údajù). Správcùm jsou
+zákonem ukládány pøedev¹ím povinnosti, zatímco subjektùm údajù jsou dána práva. Dodr¾ování práv a povinností obou stran je v Èeské republice kontrolováno 
+prostøednictvím Úøadu na ochranu osobních údajù.
+
+Základní ideou ochrany osobních údajù je ta, ¾e osobní údaje jsou shroma¾dovány a zpracovávány za nìjakým úèelem. Ka¾dý úèel vy¾aduje jiný typ osobních údajù a také
+jiné mno¾ství takto zpracovávaných osobních údajù. Ve vý¹e uvedeném zákonì byly pro bli¾¹í specifikaci tìchto úèelù zavedeny pojmy úèel zpracování, prostøedky 
+zpracování, zpùsob zpracování, kategorie osobních údajù, kategorie subjektù údajù a kategorie pøíjemcù. V tìchto termínech je tøeba zpracovávání osobních údajù popsat.
+[citace ze zakona, pod carou: vyklad zhttp://www.oou.cz/]
+
+V této práci se budu vìnovat zpracovávání obrazového materiálu nasbíraného na veøejném prostranství. Vzhledem k tomu, ¾e veøejné prostranství je v¾dy snímáno za 
+bì¾ného dne, spolu s terénem, který je snímán, jsou nasnímáni i lidé a dal¹í objekty, které se v daném prostranství pohybují. Jak bylo øeèeno døíve v této kapitole,
+ve¹keré informace, které mohou prozradit jakékoliv údaje pøímo související s ¾ivotem dané osoby jsou pova¾ovány za osobní údaje. Z toho vyplývá, ¾e i obrazový 
+materiál nasnímaný na veøejném místì obsahující cizí osoby nebo automobily obsahuje osobní údaje a je tøeba se vìnovat zpùsobu jejich zpracování.
+
+V dne¹ní digitální dobì máme k dispozici velké mno¾ství obrazových dat. V této práci se budu vìnovat datùm zachytávaným pro úèely vizualizace prostoru z mapy 
+nasbírané v rámci slu¾by Panorama spoleènosti Seznam.cz. Tato data jsou sbírána prostøednictvím speciálnì upravené panoramatické kamery, která je umístìna na 
+støe¹e vozidla. Toto vozidlo pøi prùjezdu zpracovávanou lokalitou snímá svoje okolí a poøízený obrazový materiál se poté zpøístupòuje ¹iroké veøejnosti. Publikování 
+obrazového materiálu, na kterém se vyskytují osobní údaje jako jsou SPZ vozidel, oblièeje kolemjdoucích a podobnì je velmi citlivou zále¾itostí. Aby bylo 
+minimalizováno riziko zneu¾ití tìchto údajù, byla zvolena mo¾nost anonymizace.
+
+\section{Anonymizace}
+
+Anonymizovaná data jsou taková data, která nemohou vést pøímo k identifikaci konkrétního èlovìka. Pokud jsou data obsahující osobní údaje anonymizována, pøestávají podléhat 
+pøísným regulacím Zákona o ochranì osobních údajù a lze s nimi nakládat volnìji. 
+
+Hranici, kdy jsou data u¾ anonymizována nelze zcela jednoznaènì definovat a anonymizaci je 
+tøeba pro ka¾dou specifickou skupinu dat posuzovat individuálnì. Pouhé zaèernìní jména v dokumentech malé firmy napøíklad nemusí vést k tomu, ¾e konkrétní osoba nebude dle dal¹ích vodítek v dokumentech identifikovatelná. Pøíklad toho, ¾e stejná úroveò anonymizace nemusí mít v¾dy stejné výsledky mlze sledovat porovnáním obrázkù \ref{spz_anonym} a \ref{oblicej_anonym}. Oba obrázky jsou zpracovány stejným rozostøovacím filtrem. U SPZ na obrázku \ref{spz_anonym} by bylo dekódování pùvodní poznávací znaèky automobilu
+
+\begin{figure}
+				\centering
+				\includegraphics[width=130mm]{fig/anonym_car.pdf}
+				\caption{Anonymizovaná SPZ vozidla.}
+				\label{spz_anonym}
+\end{figure}
+
+\begin{figure}
+				\centering
+				\includegraphics[width=130mm]{fig/anonym_face.pdf}
+				\caption{Anonymizovaný oblièej.}
+				\label{oblicej_anonym}
+\end{figure}
+
+\section{Metody vyu¾ívané v souèasnosti}
+
+Datová anonymizace dosáhla v souèasné dobì uspkojivé úrovnì. Úspì¹nì anonymizována jsou jak data v pdf dokumentech, tak v databázích. Datovou anonymizaci lze v dne¹ní
+dobì provádìt plnì automaticky prostøednictvím mnoha nástrojù jak komerèních, tak volnì dostpuných.
+
+Anonymizace v obrazových datech zatím nedosáhla tak vysoké úrovnì a to hned z nìkolika dùvodù:
+1. Anonymizace v obrazových datech je velmi aplikaènì specifická - není proto tak velký tlak na její vývoj
+2. Anonymizace obrazových dat je výpoèetnì nároènìj¹í ne¾ anonymizace na úrovni datové
+3. 
+
+Anonymizace obrazových dat sestává ze dvou èástí: detekce èásti obrázku urèené k anonymizaci a vlastní proces anonymizace. Je zøejmé, ¾e vlastní proces anonymizace
+u¾ není výpoèetnì nijak nároèný proces. Jedná se zpravidla o aplikaci rozostøení, pøípadnì o pøidání vrstvy, která plnì pøekrývá anonymizované èásti obrázku. 
+Problematická v¹ak je detekce èásti obrázku urèené k anonymizaci. 
+
+\subsection{Manuální anonymizace}
+
+Po dlouhou dobu byla anonymizace obrazových dat potøeba vìt¹inou na malém objemu dat (napøíklad ve zpravodajství a podobnì). V takovém pøípadì je naprosto dostaèující
+provádìt výbìr èásti obrázku, která je urèena k anonymizaci manuálnì. 
+
+Kvalita takto anonymizovaného obrázku je velmi dobrá, proto¾e èlovìk pøímo vidí výsledek a doká¾e
+korigovat rozsah provedené úpravy tak, aby výsledný obrázek byl skuteènì anonymní. Na svoje limity tato metoda v¹ak nará¾í pøi nárùstu mno¾ství anonymizovaných dat.
+
+Pro pøedstavu pøi zpracovávání dat pro slu¾bu Panorama vzniknou ka¾dý snímací den 4TB obrazového materiálu z ka¾dého snímajícího vozidla. Takové mno¾ství dat u¾ není
+v rozumném èase mo¾né zpracovávat manuálnì a tak je tøeba vytvoøit automatizovanou variantu. 
+
+\subsection{Automatizovaná anonymizace}
+
+Automatizovaná anonymizace obrazových dat je zatím na poèátku svého vývoje. 
+
+Eyedea anonymization - to se pou¾ívá v Seznamu. TODO: zjistit jak to funguje a jaké jsou alternativy.
+
+Zásadním problémem automatizované anonymizace, hlavnì pøi anonymizaci SPZ vozidel, jsou chyby vzniklé pøi detekci SPZ. Ty jsou toti¾ èasto detekovány i na místech, na kterých se 
+sice na fotografii vyskytuje text, nikoliv v¹ak SPZ. Pøi pou¾ití anonymizovaných dat pro slu¾bu Panorama je tento druh chyb nepøijatelný. Jde toti¾ o omezení jednoho
+z dùle¾itých úèelù slu¾by Panorama. U¾ivatelùm slou¾í hlavnì pro lep¹í orientaci v terénu, který neznají. Pokud chce u¾ivatel slu¾bu vyu¾ít k rychlej¹ímu nalezení
+nìjaké prodejny, je naprosto ne¾ádoucí, aby v rámci automatické anonymizace SPZ vozidel byly anonymizovány i napø. nápisy nad vstupy do obchodù a provozoven. V aktuálním
+stavu automatizované anonymizace je právì tato závada velmi èastá. V této práci bude ukázáno, jakým zpùsobem se tìmto chybám vyvarovat.
+
+\chapter{Neuronové sítì}
+
+Neuronové sítì jsou jednou ze tøí hlavních podskupin vìdního oboru soft computing. Dal¹ími problematikami, které tato vìdní disciplína zkoumá jsou fuzzy 
+systémy a evoluèní algoritmy. Tato práce se vìnuje hlubokým neuronovým sítím pracujícím nad obrázkovými daty. Neuronové sítì jsou uvedeny do ¹ir¹ího 
+kontextu v této kapitole.
+
+\section{Historie neuronových sítí}
+
+\section{Pou¾itá terminologie}
+
+\section{Topologie sítí}
+
+\section{Uèení}
+
+\section{Hluboké neuronové sítì}
+
+\section{Finetunning}
