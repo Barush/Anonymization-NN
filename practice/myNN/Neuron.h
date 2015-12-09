@@ -1,10 +1,13 @@
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 enum Base {SUM}; //tady budou obrazkove operace jako konvoluce a tak
 enum Activ {THRESH, RAMP, SIGM, TGH};
 
 class Neuron { 
-	double *in;		  // array of inputs for the neuron
+	vector<double> in;		  // vector of inputs for the neuron
 	int inSize;		  // size of the input array
     double innerVal;  // value of the inner potential
     double out;       // output value
@@ -15,18 +18,17 @@ class Neuron {
 	
 public: 
     Neuron(int size){
-        inSize = size;
-        in = new double[size];      
+        inSize = size;     
         innerVal = 0.0;
         out = 0.0;
     }
 
     ~Neuron(){
-        delete []in;
+        
     } 
 
-    void setIn(int in_i, double input){in[in_i] = input;}
-    double getIn(int in_i){return in[in_i];}
+    void setIn(vector<double> input){in = input;}
+    double getIn(int in_i){return in.at(in_i);}
     double getInVal(){return innerVal;}
     double getOut(){return out;}
     void setBase(Base b){base = b;}
@@ -36,6 +38,9 @@ public:
     void setThresh(double t){threshold = t;}
     double getThresh(){return threshold;}
     
+
+    void clearIn(){in.clear();}
+
     //counts inner value of the neuron - depending on base function set
     //inner value is sotred in innerVal var
     void countInVal();

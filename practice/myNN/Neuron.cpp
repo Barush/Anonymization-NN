@@ -10,7 +10,7 @@ void Neuron::countInVal(){
         { // {} necessary because of sum declaration
             int sum = 0;
             for (int i = 0; i < inSize; i++){
-                sum += in[i];
+                sum += in.at(i);
             }
             //cout << "Sum is "<<sum<<endl;
             innerVal = sum;

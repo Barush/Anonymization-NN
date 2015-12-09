@@ -94,6 +94,70 @@
 			nìjaké prodejny, je naprosto ne¾ádoucí, aby v rámci automatické anonymizace SPZ vozidel byly anonymizovány i napø. nápisy nad vstupy do obchodù a provozoven. V aktuálním
 			stavu automatizované anonymizace je právì tato závada velmi èastá. V této práci bude ukázáno, jakým zpùsobem se tìmto chybám vyvarovat.
 
+	\section{Obrazová data}
+		Obrazová data byla dodána spoleèností Seznam.cz a.s. V této sekci bude popsán zpùsob, jakým jsou obrazová data pro slu¾bu Panorama snímána, a jak jsou dále zpracovávána ne¾ se dostanou ke koncovému u¾ivateli. Anonymizér, který je praktickým výstupem této práce je jen jedním èlánkem v sekvenci operací, která je nad ka¾dým zachyceným obrázkem provedena. 
+
+		\subsection{Snímání fotografií}
+			Fotografie jsou snímány speciálnì upraveným vozem s 15 kamerami rozmístìnými na støe¹e. Tyto kamery zabírají 360° okolí snímacího automobilu. Zpùsob, jakým jsou kamery na støe¹e automobilu umístìny, je znázornìn na obrázku \ref{snimaci_auto}. Kamery jsou na snímací hlavì umístìny ve dvou øadách. První snímá dolní èást výsledné fotografie - v té je umístìno ¹est kamer. V horní øadì je kamer umístìno 9 a snímají hlavní èást obrazu. TODO:zjistit, jestli tam není je¹tì jedna kamera nahoøe - to by bylo 6-8-1.
+
+			Pøi snímání se auto pohybuje rychlostí 70 km/h. Snímání se provádí na v¹ech 15 kamerách souèasnì ka¾dé 3 metry. Aby bylo mo¾né pozdìji fotografii co nejvíce pøiblí¾it tomu, jak prostøedí vnímá èlovìk, který se v nìm pohybuje, pøi ka¾dém snímku se zaznamená je¹tì sada metadat. Tyto zahrnují
+			\begin{itemize}
+				\item èíslo snímku
+				\item celek (15 fotografií), do kterého snímek patøí a poloha v nìm
+				\item datum snímání
+				\item zemìpisná poloha snímacího auta v souøadnicích UTM 33
+				\item $\omega$ -- úhel náklonu automobilu v pravolevém smìru
+				\item $\varphi$ -- úhel náklonu automobilu v pøedozadním smìru
+				\item $\kappa$ -- odklon smìru jízdy automobilu od severního smìru, dále oznaèováno pojmem \emph{heading} 
+				\item TADY BY MOHL BÝT OBRÁZEK S JEDNOTLIVÝMA ÚHLAMA
+			\end{itemize}
+
+			Pro výpoèet jednotlivých úhlù jsou k dispozici speciální senzory. Pro zaznamenávání headingu jsou na autì dvì vysoce pøesné GPS jednotky, které na základì rozdílu svých GPS poloh doká¾í pøesnì urèit smìr, kterým se snímací automobil pohybuje. Náklony ve v¹ech smìrech jsou mìøeny pomocí inerciální jednotky a odometru. 
+
+			\begin{figure}
+				\centering
+				\includegraphics[width=90mm]{fig/snimaci_auto.jpg}
+				\caption{Automobil s 15 kamerami umístìnými na snímací hlavì na støe¹e.}
+				\label{snimaci_auto}
+			\end{figure} 
+
+		\subsection{Ukládání fotografií}
+			Pøi snímání ka¾dé 3 metry v rychlosti 70 km/h musí kamery poøizovat fotografie v plném rozli¹ení v rychlosti 6,48 fps. V tomto okam¾iku tedy vzniká problém obrovského mno¾ství dat, která je tøeba okam¾itì zpracovávat. Je¹tì pøedtím, ne¾ jsou fotografie ve dvou kopiích ulo¾eny na jeden ze ètyø 600GB SSD diskù je tøeba je pøevést z formátu \emph{raw}, do kterého jsou poøizovány do formátu \emph{jpeg}, ve kterém jsou ukládány a dále zpracovávány. Tento pøevod je provádìn na výkonné grafické kartì umístìné v kufru automobilu pomocí technologie \emph{CUDA}.
+
+			Ve¹keré operace nad daty jsou provádìny v kufru automobilu, kam data ze støechy putují pøes vysokorychlostní datové kabely. Ka¾dá z 15 kamer je s poèítaèem spojena pomocí svojí vlastní 1 Gbitové linky. 
+
+		\subsection{Se¹ívání fotografií}
+			Jakmile se data dostanou z terénu, zaèíná rozsáhlá mno¾ina operací, která je nad nimi provádìna. Jako první pøijde na øadu se¹ívání snímkù. Pomocí nástroje navr¾eného ve spoleènosti Seznam.cz je z 15 fotografií zachycených v jednom okam¾iku vytvoøena jedinná ¹irokoúhlá fotografie, nad kterou se nadále pracuje. V rámci se¹ívání fotografií jsou také odstranìny èásti auta, které se dostaly do zábìru.
+
+		\subsection{Vyrovnávání fotografií}
+			Na fotografii se¹ité z 15 fotek je znaènì deformován horizont. Nyní tedy pøichází na øadu vyrovnání horizontu zachyceného prostøedí. 
+
+			Toto se provádí...jak se to dìlá? :D
+
+			Vzor výstupu z této operace je znázornìn na obrázku \ref{vyrovnano}
+			\begin{figure}
+				\centering
+				\includegraphics[width=90mm]{fig/vyrovnano.jpg}
+				\caption{360° fotografie po vyrovnání horizontu.}
+				\label{vyrovnano}
+			\end{figure} 			
+
+		\subsection{Namapování na kouli}
+			Výsledný obrázek je následnì namapován na kouli, na které u¾ je zobrazován koncovému u¾ivateli. Natoèení této koule v prostoru doká¾e dorovnat zakøivení, které vznikne vlivem snímání pod úhlem. V tomto okam¾iku jsou vyu¾ity zaznamenané úhly $\omega$ a $\varphi$, jejich¾ aplikace zamezí u¾ivatelskému pocitu \emph{padání} obrazu.
+
+			\subsubsection{Ekvirektangulární projekce}
+			Pro namapování obdélníkového obrazu na kouli je vyu¾ita ekvirektangulární projekce (v literatuøe té¾ oznaèována jako ekvidistantní projekce). Tato projekce vyu¾ívá pøepoèet souøadnic dle vztahù \ref{ekvi_x} a \ref{ekvi_y}, kde $x$ a $y$ jsou souøadnice na fotografii v rovinì, $\lambda$ znaèí zemìpisnou délku od centrálního poledníku v daném zobrazení, $\varphi$ znaèí zemìpisnou ¹íøku a $\varphi_1$ je parametr rovnobì¾ek, který urèuje rozsah skuteèné projekce. 
+
+			\begin{equation}
+				x = \lambda*cos(\varphi_1)
+				\label{ekvi_x}
+			\end{equation}
+
+			\begin{equation}
+				y = \varphi
+				\label{ekvi_y}
+			\end{equation}			
+
 \chapter{Neuronové sítì}
 
 	Neuronové sítì jsou jednou ze tøí hlavních podskupin vìdního oboru soft computing. Dal¹ími problematikami, které tato vìdní disciplína zkoumá jsou fuzzy systémy a evoluèní algoritmy. Tato práce se vìnuje hlubokým neuronovým sítím pracujícím nad obrázkovými daty. Neuronové sítì jsou uvedeny do ¹ir¹ího kontextu v této kapitole.
@@ -137,23 +201,14 @@
 				\end{equation}
 			\end{itemize}
 		\end{description}
-		 Ka¾dý vstup $i$ má svoji váhu $w_i$, kterou je hodnota $x_i$ vynásobena. Vnitøní potenciál neuronu $u$ je potom vypoèten podle následujícího vztahu:
-		}
 
-		\begin{equation}
-			u = f(\overrightarrow{x})\sum_{i=1}^{n}x_i*w_i
-		\end{equation}
-
-		Výstupní funkce je potom vypoètena podle následujícího vztahu:
+		Výstupní funkce je z vnitøního potenciálu vypoètena podle následujícího vztahu:
 
 		\begin{equation}
 			y = g(u) = g(f(\overrightarrow{x}))
 		\end{equation}
 
 		Kde $f()$ se nazývá \emph{bázovou funkcí} a $g()$ se nazývá \emph{aktivaèní funkcí} neuronu.
-
-		\subsection{Bázová funkce}
-			Bázovou funkcí se oznaèuje vnitøní funkce neuronu, podle které je vypoèítávána hodnota vnitøního potenciálu neuronu $u$. 
 
 		\begin{figure}
 						\centering
@@ -163,6 +218,7 @@
 		\end{figure}
 
 		\subsection{Perceptron}
+			Perceptron je nejjednodu¹¹ím modelem dopøedné neuronové sítì. Sestává pouze z jednoho neuronu. 
 
 		\subsection{Aktivaèní funkce}
 
