@@ -15,7 +15,7 @@ CPPFLAGS = --std=c++98 -pedantic -g -Wc99-extensions
 LIBS = 
 
 CC = g++ $(CPPFLAGS)
-OBJ = Neuron.o
+OBJ = Neuron.o Layer.o Net.o
 
 executable: mynn
 
@@ -24,6 +24,12 @@ mynn: main.cpp $(OBJ)
 
 Neuron.o: Neuron.h Neuron.cpp
 	$(CC) -c Neuron.cpp
+
+Layer.o: Layer.h Layer.cpp
+	$(CC) -c Layer.cpp
+
+Net.o: Net.h Net.cpp
+	$(CC) -c Net.cpp
 
 run:
 	./mynn
