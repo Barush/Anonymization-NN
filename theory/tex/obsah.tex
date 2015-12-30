@@ -184,52 +184,79 @@
 		\begin{figure}
 			\centering
 			\includegraphics[width=90mm]{fig/neuron.pdf}
-			\caption{Schéma biologického neuronu. Na obrázku je zobrazeno \emph{jádro}, které uchovává genetickou informaci buòky, \emph{soma} je tìlo buòky, \emph{dendrity} jsou vstupní body neuronu, \emph{axon} jsou výstupní výbì¾ky tvoøená axonovými vlákny a \emph{axonální zakonèení} jsou výstupní místa neuronu.}
+			\caption{Schéma biologického neuronu. Na obrázku je zobrazeno \emph{jádro}, které uchovává genetickou informaci buòky, \emph{soma} je tìlo buòky, \emph{dendrity} jsou vstupní body neuronu, \emph{axon} jsou výstupní výbì¾ky tvoøené axonovými vlákny a \emph{axonální zakonèení} jsou výstupní místa neuronu.}
 			\label{neuron}
 		\end{figure} 
 
 		V okam¾iku, kdy se v tìle neuronu nashromá¾dí dostateènì velký potenciál, zaène se ¹íøit nervovým vláknem (axonem) a¾ k axonálnímu zakonèení. Tady pøejde do dal¹ího neuronu. Velikost signálu pøená¹ená z dendritu do tìla neuronu závisí na síle impulzu sousedního neuronu, kterého se dendrit dotýká a také na \emph{synaptické váze}. V tìle neuronu se seètou hodnoty signálù od v¹ech aktivních dendritù. Pokud souèet hodnot pøekroèí jistý práh, soma vygeneruje nový impulz a tím se vzruch ¹íøí do dal¹ích neuronù. Bezprostøednì po vytvoøení pulzu se neuron stane na chvilku necitlivým. To má za následek generování nespojitého signálu, jeho¾ frekvence se mù¾e pohybovat v rozmezí 0,1-100Hz.
 
 	\section{Umìlý neuron}
-		Princip biologického neuronu je napodobován umìlým neuronem. Nejzákladnìj¹í model umìlého neuronu je zobrazen na obrázku \ref{art_neuron}, kde
+		Princip biologického neuronu je napodobován umìlým neuronem. Základní model umìlého neuronu je zobrazen na obrázku \ref{art_neuron}, kde
 
 		\begin{description}
 			\item[\textbf{$x_i$}] je vstupní hodnota, která mù¾e být napojena na primární vstup nebo na výstup jiného neuronu. 
-			\item[$w_i$] je váha propojení. Urèuje jak moc bude konkrétní vstup $i$ ovlivòovat výstup neuronu. Váhy se v prùbìhu výpoètu mìní, pøípadnì pøes nemìnnou váhu mù¾e být pøipojen tzv. \emph{bias}.
-			\item[$u$] je hodnota vnitøního potenciálu, která je závislá na zvolené bázové funkci. Nejèastìji vyu¾ívané jsou dvì:
-			\begin{itemize}
-				\item \textbf{Lineární}, pro kterou platí 
-				\begin{equation}
-					u = \sum_{i = 1}^{n} x_i * w_i
-				\end{equation}
-				\item \textbf{Radiální}, pro kterou platí 
-				\begin{equation}
-					u = \sqrt{\sum_{i = 1}^{n}(x_i - w_i)^2}
-				\end{equation}
-			\end{itemize}
+			\item[$w_i$] je váha propojení. Urèuje jak moc bude konkrétní vstup $i$ ovlivòovat výstup neuronu. Váhy se v prùbìhu výpoètu mìní - probíhá \emph{uèení}, pøípadnì pøes nemìnnou váhu mù¾e být pøipojen tzv. \emph{bias}.
+			\item[$u$] je hodnota vnitøního potenciálu neuronu.
 		\end{description}
-
-		Výstupní funkce je z vnitøního potenciálu vypoètena podle následujícího vztahu:
-
-		\begin{equation}
-			y = g(u) = g(f(\overrightarrow{x}))
-		\end{equation}
-
-		Kde $f()$ se nazývá \emph{bázovou funkcí} a $g()$ se nazývá \emph{aktivaèní funkcí} neuronu.
 
 		\begin{figure}
 			\centering
-			\includegraphics[width=100mm]{fig/art_neuron.pdf}
-			\caption{Obecné schéma umìlého neuronu, kde \overrightarrow{x} = ($x_1, x_2, ... x_n$) je vstupní vektor, \emph{u} je vnitøní potenciál a \emph{y} je výstupní hodnota.}
+			\includegraphics[width=90mm]{fig/art_neuron.pdf}
+			\caption{Obecné schéma umìlého neuronu, kde \overrightarrow{x} = ($x_1$, $x_2$, ... $x_n$) je vstupní vektor, \emph{u} je vnitøní potenciál a \emph{y} je výstupní hodnota.}
 			\label{art_neuron}
 		\end{figure}
 
-		\subsection{Perceptron}
-			Perceptron je nejjednodu¹¹ím modelem dopøedné neuronové sítì. Sestává pouze z jednoho neuronu. 
+		Jak je vidìt na obrázku \ref{art_neuron}, na vstup umìlého neuronu se pøivádí vektor èísel, ty jsou pronásobena vektorem vah, které mají zpravidla malé hodnoty (vìt¹inou v intervalu $<-1;1>$, pøípadnì $<-2;2>$), dále jsou nad nimi provedeny bázová a aktivaèní funkce (viz dále) a výstupem je jedinné èíslo. Umìlý neuron je tedy matematická struktura, která zpracovává èísla a na výstupu podává jiná èísla. 
 
-		\subsection{Aktivaèní funkce}
+		\begin{description}
+			\item[Bázová funkce] - urèuje zpùsob výpoètu vnitøního potenciálu $u$ neuronu. Nejèastìji vyu¾íváná je lineární bázová funkce. Její vztah pro výpoèet vnitøního potenciálu je uveden ve vztahu \ref{base_linear}. Dal¹í z vyu¾ívaných bázových funkcí je radiální bázová funkce - vztah \ref{base_radial}.
+			\begin{equation}
+				u = \sum_{i = 1}^n w_i \times x_i
+				\label{base_linear}
+			\end{equation}
+			\begin{equation}
+				u = \sqrt{\sum_{i = 1}^n (w_i \times x_i)^2}
+				\label{base_radial}
+			\end{equation}
+			\item[Aktivaèní funkce] - té¾ nazývaná \emph{pøenosová funkce}. Urèuje zpùsob výpoètu výstupu neuronu z jeho vnitøního potenciálu. Tøi neèastìji pou¾ívané aktivaèní funkce jsou znázornìny na obrázku \ref{aktivacni_fce}. Na ose x je v¾dy hodnota vnitøního potenciálu neuronu $u$, na ose y je potom výstupní hodnota neuronu.
 
-		\section{Topologie sítí}
+			\begin{figure}
+				\begin{minipage}{.33\linewidth}
+					\centering
+					\subfloat[Skoková funkce.]{\label{aktivacni:skokova}\includegraphics[scale=.33]{fig/skokova.pdf}}
+				\end{minipage}%				
+				\begin{minipage}{.33\linewidth}
+					\centering
+					\subfloat[Sigmoida.]{\label{aktivacni:sigmoida}\includegraphics[scale=.33]{fig/sigmoida.pdf}}
+				\end{minipage}%				
+				\begin{minipage}{.33\linewidth}
+					\centering
+					\subfloat[Hyperbolický tangens.]{\label{aktivacni:tanhyp}\includegraphics[scale=.33]{fig/tanhyp.pdf}}
+				\end{minipage}%
+				\caption{Nejèastìji vyu¾ívané aktivaèní funkce.}
+				\label{aktivacni_fce}
+			\end{figure}
+		\end{description}
+
+		Jednoduchý umìlý neuron s jedním biasem a skokovou aktivaèní funkcí je v literatuøe oznaèován jako \emph{perceptron}. Perceptron byl poprvé pøedstaven Frankem Rosenblattem v roce 1958, matematický model neuronu v¹ak byl známý u¾ od roku 1943 a princip èinnosti biologického neuronu dokonce u¾ od konce 19. století.
+
+		Pokud bychom chtìli perceptron vyu¾ít ke klasifikaci vzorkù do tøíd, narazíme na jeho základní problém. Doká¾e klasifikovat vzorky pøíslu¹ící pouze dvìma tøídám a tyto tøídy musí být lineárnì separovatelné. Váhy, které se upravují v prùbìhu uèení perceptronu lze matematicky pøevést na vztah pro pøímku v n-rozmìrném prostoru. V rovinì lze tedy lineární separovatelnost ilustrovat rozdìlením na dvì poloroviny, kdy v jedné se nacházejí vzorky jedné tøídy a ve druhé se nacházejí vzorky tøídy druhé. Rozdíl mezi lineárnì separovatelnými a lineárnì neseparovatelnými problémy je znázornìn na obrázku \ref{separable}. Mezi lineárnì neseparovatelné problémy se øadí u¾ i tak jednoduchý problém jako je XOR dvou hodnot (viz \ref{separable_xor}). To znaènì omezuje obecnou vyu¾itelnost perceptronu a vzniká tak potøeba sdru¾ování neuronù do neuronových sítí.
+		\begin{figure}
+			\begin{minipage}{.5\linewidth}
+				\centering
+				\subfloat[Lineárnì separovatelná funkce AND.]{\label{separable:and}\includegraphics[scale=.4]{fig/and.pdf}}
+			\end{minipage}%				
+			\begin{minipage}{.5\linewidth}
+				\centering
+				\subfloat[Lineárnì neseparovatelná funkce XOR.]{\label{separable_xor}\includegraphics[scale=.4]{fig/xor.pdf}}
+			\end{minipage}%		
+			\caption{Problém lineární separovatelnosti.}
+			\label{separable}
+		\end{figure}
+
+	\section{Neuronové sítì}
+		Neuronové sítì vznikají spojením nìkolika neuronù. 
+		\subsection{Topologie sítí}
 		\begin{figure}
 			\centering
 			\includegraphics[width=130mm]{fig/vrstvova.pdf}
@@ -249,7 +276,7 @@
 			\label{dopredna_net}
 		\end{figure}
 
-	\section{Uèení}
+		\subsection{Uèení}
 
 	\section{Hluboké neuronové sítì}
 
@@ -265,38 +292,38 @@
 	\end{figure}
 
 	\section{Pøedzpracování dat}	
-		Na primárním vstupu celého programu jsou pøijímány fotografie nasnímané v rámci sbìru dat pro slu¾bu Panorama. V¹echny dal¹í fáze u¾ v¹ak pracují na èísly typu \emph{double}, pøedzpracování dat tedy spoèívá v reprezentaci celého obrázku pomocí èíselného vektoru. Pokud je neuronová sí» natrénována ke klasifikaci velkých dat do \emph{n} tøíd, jejím hlavním úèelem je vyselektovat hodnoty, které jsou pro urèování tøíd podstatné - vytvoøit tzv. \emph{vektor rysù}. Tento vektor rysù, té¾ \emph{feature vector} je nejkondenzovanìj¹í informace z poèáteèních dat.
+		Na primárním vstupu celého programu jsou pøijímány fotografie nasnímané v rámci sbìru dat pro slu¾bu Panorama. V¹echny dal¹í fáze u¾ v¹ak pracují nad èísly typu \emph{double}, pøedzpracování dat tedy spoèívá v reprezentaci celého obrázku pomocí èíselného vektoru. Tento èíselný vektor musí mít pro jednotlivé obrázky co nejlep¹í rozli¹ovací schopnost. Pokud je neuronová sí» natrénována ke klasifikaci velkých dat do \emph{n} tøíd, jejím hlavním úèelem je vyselektovat hodnoty, které jsou pro urèování tøíd podstatné - vytvoøit tzv. \emph{vektor rysù}. Tento vektor rysù, té¾ \emph{feature vector} je nejkondenzovanìj¹í informace z poèáteèních dat, výstupem z pøedzpracování dat je tedy právì feature vector.
 
-		Pøi pøedzpracování dat je tedy vyu¾ita klasfikaèní sí» Ilsvrc, která byla pomocí \emph{finetuningu} (viz èást \ref{finetuning}) optimalizována pro práci nad daným data setem. Pro dal¹í pou¾ití není vyu¾íván primární výstup klasifikace (viz obrázek \ref{preprocessing}. Ze sítì je extrahován vektor rysù, jeho¾ nejvíce informaènì bohatá varianta se nachází v pøedposlední vrstvì sítì, která nese název \emph{FC7}.
+		K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc}, je¾ vznikla pøi pøíle¾itosti \emph{ImageNet Large Scale Visual Recognition Challenge 2015} - odtud zkratka Ilsvrc. Tato výzva se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a pak také na klasifikaci scény. Sí» Ilsvrc byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\0000 kategorií. 
+
+		Tato sí» byla v rámci této práce pomocí \emph{finetuningu} (viz èást \ref{finetuning}) optimalizována pro klasifikaci mno¾iny obrázkù bli¾¹í obrázkùm, se kterými budu pracovat. Pro dal¹í pou¾ití není vyu¾íván primární výstup klasifikace (viz obrázek \ref{preprocessing}. Ze sítì je extrahován vektor rysù, jeho¾ nejvíce informaènì bohatá varianta se nachází v pøedposlední vrstvì sítì, která nese název \emph{FC7}.
 
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=130mm]{fig/preprocessing.png}
 			\caption{Schéma pøedzpracování dat.}
 			\label{preprocessing}
-		\end{figure}
-
-		\subsection{Feature vector}
-			K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc}, je¾ vznikla pøi pøíle¾itosti \emph{ImageNet Large Scale Visual Recognition Challenge 2015} - odtud zkratka Ilsvrc. Tato výzva se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a pak také na klasifikaci scény. 
-
-			Tato sí» byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\0000 kategorií. 
+		\end{figure}			 
 
 		\subsection{Finetuning}\label{finetuning}
-			\emph{Finetuning} je metoda vyu¾íváná v pøípadì, ¾e u¾ máme úspì¹nì natrénovanou sí» a chceme ji vyu¾ít ke klasifikaci na velmi podobná data. Tato metoda mù¾e u¹etøit mnoho strojového èasu, proto¾e pokud u¾ máme váhy neuronové sítì natrénované na milionu obrázkù, místo abychom sí» trénovali znova\ od náhodné inicializace na podobných datech, mù¾eme vyu¾ít jako poèáteèní stav váhy natrénované sítì a pouze je pozmìnit pro klasifikaci nových dat do nových tøíd. Toto se dìlá dvìma rùznými zpùsoby:
+			\emph{Finetuning} je metoda vyu¾íváná v pøípadì, ¾e u¾ máme úspì¹nì natrénovanou sí» a chceme ji vyu¾ít ke klasifikaci na podobná data. Stadardnì se na poèátku tréninku neuronové sítì na nový typ vstupu v¹echny váhy inicializují náhodnì. Pokud v¹ak máme k dispozici u¾ sí» nauèenou na velké mno¾inì obrázkù, mù¾eme namísto náhodné inicializace nové sítì inicializovat váhy nové sítì na výsledné váhy nauèené sítì. Proces uèení této sítì se potom nazývá \emph{finetuning}. Ten lze provádìt více zpùsoby. Nejznámìj¹ími z nich jsou:
 
 			\begin{itemize}
 				\item Úpravou vah pouze v poslední vrstvì
 				\item Pøidáním nìkolika nových vrstev do nauèené neuronové sítì
 			\end{itemize}
 
+			Základním principem finetuningu je to, ¾e do vah v nauèené èásti sítì není pøíli¹ zasahováno. V pøípadì úpravy vah pouze v poslední vrstvì jsou ostatní váhy striktnì zachovány ve svojí pùvodní podobì. V pøípadì pøidání nových vrstev do nauèené sítì je tato celá zachována ve svojí pùvodní podobì a uèení probíhá pouze na nových vrstvách vzniklé sítì.
+
 	\section{Detekce aut v obrázku}
+
+		Neuronová sí» provádìjící detekci automobilù v obrázku je stì¾ejní èástí této diplomové práce. Je to té¾ její hlavní implementaèní èást. Cílem je získat neuronovou sí», je¾ na vstupu dostane feature vector vytvoøený v rámci pøedzpracování dat a na výstupu podá souøadnice èásti obrázku, ve které detekovala auto. 
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=130mm]{fig/car_detection.png}
 			\caption{Schéma detekce aut v obrázku.}
 			\label{car_detect}
 		\end{figure}
-
 
 	\section{Detekce SPZ ve vybrané èásti obrázku}
 		\begin{figure}[h]
@@ -315,6 +342,7 @@
 			\end{itemize}
 
 	\section{Rozmazání SPZ}
+		Popsat blur algoritmy etc. 
 
 
 
