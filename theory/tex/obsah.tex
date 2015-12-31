@@ -255,26 +255,63 @@
 		\end{figure}
 
 	\section{Neuronové sítì}
-		Neuronové sítì vznikají spojením nìkolika neuronù. 
+		Neuronová sí» jse výpoèetním systémem, o kterém mù¾e být uva¾ováno jako o \emph{èerné skøíòce}, která pøijímá vstupy a produkuje výstupy. Neuronová sí» se skládá z nìkolika vrstev umìlých neuronù a hlavní zlep¹ení, které neuronové sítì pøiná¹ejí oproti samotným neuronùm je mo¾nost klasifikace lineárnì neseparovatelných problémù.
+
+		Neuronové sítì jsou v praxi èasto nasazovány na nìkteré z komplikovaných problémù, jako napøíklad:
+
+		\begin{description}
+			\item[Klasifikace] - na vstup je pøilo¾en vektor a na výstupu je získáno zaøazení daného vektoru do nìkteré z pøedem definovaných tøíd.
+			\item[Hledání vzorù] - na vstup je pøilo¾en vzor a na výstupu je vygenerován výstup, který nejlépe odpovídá vzoru poskytnutému na vstupu.
+			\item[Doplòování vzorù] - na vstup je pøilo¾en vektor znázoròující èást hledaného vektoru. Na výstup jsou potom dotvoøeny chybìjící èáasti vzoru.
+			\item[Odstraòování ¹umu] - na vstup je pøilo¾en za¹umìný obrázek a na výstupu je získán obrázek s odstranìným ¹umem.
+			\item[Optimalizace] - na vstup je pøilo¾en systém, který správnì øe¹í danou optimalizaèní úlohu a na výstupu je získáno zoptimalizované øe¹ení.
+			\item[Øízení] - na vstup je pøilo¾en aktuální stav øízení a stav, do kterého chceme, aby se øízení dostalo a na výstupu získáme sekvence krokù, která tento pøechod zajistí.
+			\item[Simulace] - na vstup je pøilo¾en aktuální stav, pøípadnì i sekvence pøedchozích stavù øízení a na výstupu postupnì získáváme stavy, které odpovídají vývoji reálného systému z tìchto poèáteèních podmínek v èase.
+		\end{description}
+
+		V této práci se budu zabývat vyu¾itím klasifikaèních neuronových sítí ke komprimaci dat a dále pak k hledání vzorù v získaných komprimovaných datech.
+
 		\subsection{Topologie sítí}
-		\begin{figure}
-			\centering
-			\includegraphics[width=130mm]{fig/vrstvova.pdf}
-			\caption{Vrstvová sí». Výstup ka¾dého neuronu lze pou¾ít v aktuální nebo v ka¾dé dal¹í vrstvì. Neobsahuje zpìtné vazby.}
-			\label{vrstvova_net}
-		\end{figure}
-		\begin{figure}
-			\centering
-			\includegraphics[width=130mm]{fig/acyklicka.pdf}
-			\caption{Acyklická sí». Výstup ka¾dého neuronu lze pou¾ít v nìkteré z následujících vrstev.}
-			\label{acyklicka_net}
-		\end{figure}
-		\begin{figure}
-			\centering
-			\includegraphics[width=130mm]{fig/dopredna.pdf}
-			\caption{Dopøedná sí». Výstup neuronu lze pou¾ít v¾dy jen v následující vrstvì.}
-			\label{dopredna_net}
-		\end{figure}
+			Aby bylo mo¾né pomocí neuronových sítí øe¹it i lineárnì neseparovatelné problémy, je tøeba podstatnì zeslo¾itit jejich architekturu. To se dìlá vkládání dal¹ích vrstev neuronù do sítí. Dùle¾itým faktorem pøitom je, aby jednotlivé vrstvy neuronové sítì mìlý nelineární aktivaèní funkci. Pokud by toti¾ v¹echny vrstvy mìly lineární aktivaèní funkci, slo¾ením tìchto vrstev by pouze vznikla jiná lineární funkce a øe¹ením neuronové sítì by tedy stále ¹lo o hledání rovnice pøímky, která prostor øe¹ení rozdìlí na dvì poloroviny. 
+
+			Dal¹ím z dùle¾itých faktorù pøi návrhu neuronových sítí jsou jednotlivá propojení. V prùbìhu vývoje se experimentovalo s mnohými nastaveními propojení. Nìkterá pou¾ívaná propojení jsou zobrazena na obrázku \ref{nets}.Plnì propojená sí», ve které je ka¾dý neuron propojen se v¹emi neurony svojí vrstvy, vrstev pøedchozích i následujících se postupnì vyvinula ve vrstvovou sí» (viz \ref{nets:vrstvova}. Ve vrstvové síti lze výstup ka¾dého neuronu vyu¾ít jako vstup nìkterého z neuronù ve stejné vrstvì, pøípadnì jako vstup kteréhokoliv neuronu v nìkteré z vrstev následujících. Odstranìním zpìtných vazeb v rámci jednotlivých vrstev vzniká acyklická sí» (viz \ref{nets:acyklicka}). V acyklické síti mù¾e být výstup ka¾dého neuronu pøipojen na vstup kteréhokoliv neuronu v nìkteré z následujících vrstev. V této práci se budu vìnovat výhradnì výzkumu na dopøedných sítích. Dopøedná sí» (viz \ref{nets:dopredna}) vzniká omezením propojení acyklických sítí. V dopøedné síti mù¾e být výstup ka¾dého neuronu pøipojen pouze na vstup kteréhokoliv neuronu v logicky následující vrstvì neuronù.
+
+			\begin{figure}
+				\centering
+				\begin{minipage}{.5\linewidth}
+					\centering
+					\subfloat[Vrstvová sí».]{\label{nets:vrstvova}\includegraphics[scale=1]{fig/vrstvova.pdf}}
+				\end{minipage}%				
+				\begin{minipage}{.5\linewidth}
+					\centering
+					\subfloat[Acyklická sí».]{\label{nets:acyklicka}\includegraphics[scale=1]{fig/acyklicka.pdf}}
+				\end{minipage}\par \medskip		
+				\begin{minipage}{.5\linewidth}
+					\centering
+					\subfloat[Dopøedná sí».]{\label{nets:dopredna}\includegraphics[scale=1]{fig/dopredna.pdf}}
+				\end{minipage}%		
+				\caption{Vícevrstvé neuronové sítì.}
+				\label{nets}
+			\end{figure}
+
+			\subsubsection{Vícevrstvé sítì}
+				Vícevrstvá neuronová sí» má více ne¾ dvì vrstvy neuronù. První vrstva se nazývá \emph{vstupní vrstva} a nad naètenými vstupy neprovádí ¾ádnou operaci. Do celkového poètu vrstev se vstupní vrstva v literatuøe vìt¹inou nezapoèítává. Poslední vrstva se nazývá \emph{výstupní vrstva}. Tato vrstva se do celkového poètu vrstev zapoèítává, proto¾e pracuje jako obyèejná vrstva neuronové sítì. A¾ její výstupy jsou namapovány pøímo na primární výstupy celé neuronové sítì. V¹echny dal¹í vrstvy mezi vstupní a výstupní vrstvou se nazývají \emph{skryté vrstvy} a poèítají se do celkového poètu vrstev. 
+
+				V dopøedné neuronové síti je výstup ka¾dého neuronu ka¾dé vrstvy pøipojen na vstup v¹ech neuronù vrstvy následující. V ka¾dém z neuronù dal¹í vrstvy v¹ak mù¾e mít výstup aktuálního neuronu jinou dùle¾itost. Toto se nastavuje pomocí vah jednotlivých propojení. Pokud chceme nìkteré propojení úplnì eliminovat, jednodu¹e mu nastavíme váhu $0$ a daná hodnota nebude v následujícím neuronu vùbec uva¾ována.
+
+				Váhy jednotlivých propojení se pro pøehlednost zapisují pomocí matic. V ka¾dé neuronové síti existuje jedna váhová matice pro ka¾dou dvojici za sebou následujících vrstev. Zápis jednotlivých vah je znázornìn na obrázku \ref{w_matrix}.
+
+				TODO: OBRÁZEK DVOU VRSTEV SÍTÌ A PROPOJENÍ
+
+				\begin{equation}
+					\begin{array}{cc} x_1 & x_2 & \cdots & x_n \end{array} \par \medskip
+					\begin{array}{c} y_1 \\ y_2 \\ \vdots \\ y_m \end{array}
+					\begin{bmatrix} w_{11} & w_{12} & \cdots & w_{1n} \\
+								    w_{21} & w_{22} & \cdots & w_{2n} \\
+								    \vdots & \vdots & \ddots & \vdots \\
+								    w_{m1} & w_{m2} & \cdots & w_{mn} \end{bmatrix}
+				\end{equation}
+
 
 		\subsection{Uèení}
 

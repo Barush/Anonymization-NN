@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.1.11)  9 DEC 2015 18:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.1.11)  31 DEC 2015 18:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -474,7 +474,11 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip56
 )
-(./projekt.aux)
+(./projekt.aux
+
+LaTeX Warning: Label `snimaci_auto' multiply defined.
+
+)
 \openout1 = `projekt.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
@@ -667,134 +671,320 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.78 
-      [4] [5 <./fig/anonym_car.pdf> <./fig/anonym_face.pdf>] [6]
-<fig/snimaci_auto.jpg, id=212, 608.58948pt x 342.33157pt>
+      [4] [5 <./fig/anonym_car.pdf> <./fig/anonym_face.pdf>]
+
+LaTeX Warning: Reference `anonymized_bad' on page 6 undefined on input line 92.
+
+
+<fig/act_problems.png, id=206, 421.0932pt x 210.5466pt>
+File: fig/act_problems.png Graphic file (type png)
+
+<use fig/act_problems.png>
+Package pdftex.def Info: fig/act_problems.png used on input line 99.
+(pdftex.def)             Requested size: 256.0748pt x 128.0445pt.
+ [6 <./fig/act_problems.png>]
+<fig/snimaci_auto.jpg, id=215, 608.58948pt x 342.33157pt>
 File: fig/snimaci_auto.jpg Graphic file (type jpg)
 
 <use fig/snimaci_auto.jpg>
-Package pdftex.def Info: fig/snimaci_auto.jpg used on input line 119.
+Package pdftex.def Info: fig/snimaci_auto.jpg used on input line 126.
 (pdftex.def)             Requested size: 256.0748pt x 144.04466pt.
  [7 <./fig/snimaci_auto.jpg>]
-<fig/vyrovnano.jpg, id=219, 8222.72pt x 4111.36pt>
+<fig/vyrovnano.jpg, id=223, 8222.72pt x 4111.36pt>
 File: fig/vyrovnano.jpg Graphic file (type jpg)
  <use fig/vyrovnano.jpg>
-Package pdftex.def Info: fig/vyrovnano.jpg used on input line 140.
+Package pdftex.def Info: fig/vyrovnano.jpg used on input line 147.
 (pdftex.def)             Requested size: 256.0748pt x 127.97781pt.
 
-[8 <./fig/vyrovnano.jpg>]
+[8 <./fig/vyrovnano.jpg>] [9]
 Kapitola 3.
-<fig/neuron.pdf, id=234, 369.8858pt x 369.8858pt>
+<fig/neuron.pdf, id=243, 369.8858pt x 369.8858pt>
 File: fig/neuron.pdf Graphic file (type pdf)
  <use fig/neuron.pdf>
-Package pdftex.def Info: fig/neuron.pdf used on input line 179.
+Package pdftex.def Info: fig/neuron.pdf used on input line 186.
 (pdftex.def)             Requested size: 256.0748pt x 256.07936pt.
- [9
+ [10
 
 ]
-[10 <./fig/neuron.pdf>] <fig/art_neuron.pdf, id=264, 227.62209pt x 142.2638pt>
+<fig/art_neuron.pdf, id=250, 227.62209pt x 142.2638pt>
 File: fig/art_neuron.pdf Graphic file (type pdf)
 
 <use fig/art_neuron.pdf>
-Package pdftex.def Info: fig/art_neuron.pdf used on input line 215.
-(pdftex.def)             Requested size: 284.52756pt x 177.851pt.
+Package pdftex.def Info: fig/art_neuron.pdf used on input line 204.
+(pdftex.def)             Requested size: 256.0748pt x 160.0659pt.
 
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
                    \crcr 
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
                    \crcr 
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
                    \crcr 
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
                    \crcr 
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.216 ...otenciál a \emph{y} je výstupní hodnota.}
+l.205 ...otenciál a \emph{y} je výstupní hodnota.}
                                                   
 ? 
-<fig/vrstvova.pdf, id=265, 227.62209pt x 142.2638pt>
+[11 <./fig/neuron.pdf>] <fig/skokova.pdf, id=275, 505.89pt x 505.89pt>
+File: fig/skokova.pdf Graphic file (type pdf)
+
+<use fig/skokova.pdf>
+Package pdftex.def Info: fig/skokova.pdf used on input line 226.
+(pdftex.def)             Requested size: 166.9442pt x 166.9442pt.
+
+Overfull \hbox (24.22443pt too wide) in paragraph at lines 226--227
+ [][] 
+ []
+
+<fig/sigmoida.pdf, id=276, 505.89pt x 505.89pt>
+File: fig/sigmoida.pdf Graphic file (type pdf)
+ <use fig/sigmoida.pdf>
+Package pdftex.def Info: fig/sigmoida.pdf used on input line 230.
+(pdftex.def)             Requested size: 166.9442pt x 166.9442pt.
+
+Overfull \hbox (24.22443pt too wide) in paragraph at lines 230--231
+ [][] 
+ []
+
+<fig/tanhyp.pdf, id=277, 505.89pt x 505.89pt>
+File: fig/tanhyp.pdf Graphic file (type pdf)
+ <use fig/tanhyp.pdf>
+Package pdftex.def Info: fig/tanhyp.pdf used on input line 234.
+(pdftex.def)             Requested size: 166.9442pt x 166.9442pt.
+
+Overfull \hbox (24.22443pt too wide) in paragraph at lines 234--235
+ [][] 
+ []
+
+[12 <./fig/art_neuron.pdf> <./fig/skokova.pdf> <./fig/sigmoida.pdf> <./fig/tanh
+yp.pdf>] <fig/and.pdf, id=332, 505.89pt x 505.89pt>
+File: fig/and.pdf Graphic file (type pdf)
+ <use fig/and.pdf>
+Package pdftex.def Info: fig/and.pdf used on input line 247.
+(pdftex.def)             Requested size: 202.3524pt x 202.3524pt.
+
+<fig/xor.pdf, id=333, 505.89pt x 505.89pt>
+File: fig/xor.pdf Graphic file (type pdf)
+ <use fig/xor.pdf>
+Package pdftex.def Info: fig/xor.pdf used on input line 251.
+(pdftex.def)             Requested size: 202.3524pt x 202.3524pt.
+ [13 <./fig/and.pdf> <./fig/xor.pdf>] <fig/vrstvova.pdf, id=357, 227.62209pt x 
+142.2638pt>
 File: fig/vrstvova.pdf Graphic file (type pdf)
- <use fig/vrstvova.pdf>
-Package pdftex.def Info: fig/vrstvova.pdf used on input line 228.
-(pdftex.def)             Requested size: 369.88582pt x 231.20631pt.
 
-<fig/acyklicka.pdf, id=266, 227.62209pt x 142.2638pt>
+<use fig/vrstvova.pdf>
+Package pdftex.def Info: fig/vrstvova.pdf used on input line 283.
+(pdftex.def)             Requested size: 227.62152pt x 142.26344pt.
+
+Overfull \hbox (11.38063pt too wide) in paragraph at lines 283--284
+ [][] 
+ []
+
+<fig/acyklicka.pdf, id=358, 227.62209pt x 142.2638pt>
 File: fig/acyklicka.pdf Graphic file (type pdf)
  <use fig/acyklicka.pdf>
-Package pdftex.def Info: fig/acyklicka.pdf used on input line 234.
-(pdftex.def)             Requested size: 369.88582pt x 231.20631pt.
+Package pdftex.def Info: fig/acyklicka.pdf used on input line 287.
+(pdftex.def)             Requested size: 227.62152pt x 142.26344pt.
 
-<fig/dopredna.pdf, id=267, 227.62209pt x 142.2638pt>
+Overfull \hbox (11.38063pt too wide) in paragraph at lines 287--288
+ [][] 
+ []
+
+<fig/dopredna.pdf, id=359, 227.62209pt x 142.2638pt>
 File: fig/dopredna.pdf Graphic file (type pdf)
  <use fig/dopredna.pdf>
-Package pdftex.def Info: fig/dopredna.pdf used on input line 240.
-(pdftex.def)             Requested size: 369.88582pt x 231.20631pt.
+Package pdftex.def Info: fig/dopredna.pdf used on input line 291.
+(pdftex.def)             Requested size: 227.62152pt x 142.26344pt.
 
-[11 <./fig/art_neuron.pdf>] [12 <./fig/vrstvova.pdf> <./fig/acyklicka.pdf>]
-[13 <./fig/dopredna.pdf>]
+Overfull \hbox (11.38063pt too wide) in paragraph at lines 291--292
+ [][] 
+ []
+
+
+LaTeX Warning: Reference `w_matrix' on page 14 undefined on input line 302.
+
+[14] [15 <./fig/vrstvova.pdf> <./fig/acyklicka.pdf> <./fig/dopredna.pdf>]
+! Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.307 					\begin{array}{cc} x_1 & x_2 &
+                                         \cdots & x_n \end{array} \par \medskip
+
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.307 ...x_1 & x_2 & \cdots & x_n \end{array} \par
+                                                   \medskip
+? 
+! Display math should end with $$.
+<to be read again> 
+                   \par 
+l.307 ...x_1 & x_2 & \cdots & x_n \end{array} \par
+                                                   \medskip
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.308 					\begin{array}{c}
+                            y_1 \\ y_2 \\ \vdots \\ y_m \end{array}
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.308 ...} y_1 \\ y_2 \\ \vdots \\ y_m \end{array}
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.309 					\begin{bmatrix}
+                           w_{11} & w_{12} & \cdots & w_{1n} \\
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.312 ... & w_{m2} & \cdots & w_{mn} \end{bmatrix}
+                                                  
+? 
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.313 				\end{equation}
+                        
+? 
+! You can't use `\eqno' in horizontal mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.313 				\end{equation}
+                        
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.313 				\end{equation}
+                        
+? 
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.313 				\end{equation}
+                        
+? 
+[16]
 Kapitola 4.
-)
-No file projekt.bbl.
-[14
+<fig/overall.png, id=390, 556.9608pt x 47.2164pt>
+File: fig/overall.png Graphic file (type png)
+ <use fig/overall.png>
+Package pdftex.def Info: fig/overall.png used on input line 326.
+(pdftex.def)             Requested size: 426.79134pt x 36.18236pt.
 
-]
+Overfull \hbox (0.1858pt too wide) in paragraph at lines 332--333
+\IL2/cmr/m/n/10.95 dat pro slu-¾bu Pa-no-rama. V¹echny da-l¹í fáze u¾ v¹ak pra-
+cují nad èísly typu \IL2/cmr/m/it/10.95 double\IL2/cmr/m/n/10.95 , pøedzpra-
+ []
+
+! Undefined control sequence.
+l.334 ...ne¾ 14 milionù obrázkù rozøazených do 1\0
+                                                  000 kategorií.
+? 
+<fig/preprocessing.png, id=393, 393.6306pt x 152.4897pt>
+File: fig/preprocessing.png Graphic file (type png)
+
+<use fig/preprocessing.png>
+Package pdftex.def Info: fig/preprocessing.png used on input line 340.
+(pdftex.def)             Requested size: 369.88582pt x 143.29146pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17
+
+ <./fig/overall.png>]
+<fig/car_detection.png, id=401, 397.7259pt x 93.7101pt>
+File: fig/car_detection.png Graphic file (type png)
+
+<use fig/car_detection.png>
+Package pdftex.def Info: fig/car_detection.png used on input line 360.
+(pdftex.def)             Requested size: 369.88582pt x 87.15091pt.
+
+<fig/plate_detection.png, id=402, 346.6551pt x 65.2839pt>
+File: fig/plate_detection.png Graphic file (type png)
+
+<use fig/plate_detection.png>
+Package pdftex.def Info: fig/plate_detection.png used on input line 368.
+(pdftex.def)             Requested size: 369.88582pt x 69.6638pt.
+ [18 <./fig/preprocessing.png> <./fig/car_detection.png>])
+No file projekt.bbl.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 146.
- [15]
+[19 <./fig/plate_detection.png>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 146.
  (./projekt.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 146.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 146.
 Package rerunfilecheck Info: File `projekt.out' has not changed.
-(rerunfilecheck)             Checksum: 6BA1DE821B7E7727945B911AA6780B22;4229.
+(rerunfilecheck)             Checksum: 3CAFE8370BC82BB41980685CDCCCBFDC;4342.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
 
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 146.
  ) 
 Here is how much of TeX's memory you used:
- 13703 strings out of 493315
- 197059 string characters out of 6137904
- 272889 words of memory out of 5000000
- 16934 multiletter control sequences out of 15000+600000
- 22901 words of font info for 52 fonts, out of 8000000 for 9000
+ 13797 strings out of 493315
+ 198743 string characters out of 6137904
+ 274797 words of memory out of 5000000
+ 17000 multiletter control sequences out of 15000+600000
+ 23471 words of font info for 53 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 44i,18n,42p,5264b,517s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,18n,47p,5268b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cs/xl2.enc}</usr/local/tex
 live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
@@ -806,13 +996,13 @@ ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive
 texmf-dist/fonts/type1/public/cs/csbx10.pfb></usr/local/texlive/2013/texmf-dist
 /fonts/type1/public/cs/csbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
 e1/public/cs/csr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/c
-s/csti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sf
-rm1095.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.
-pfb>
-Output written on projekt.pdf (19 pages, 12290358 bytes).
+s/csr9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cs/csti10.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><
+/usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on projekt.pdf (23 pages, 15177608 bytes).
 PDF statistics:
- 385 PDF objects out of 1000 (max. 8388607)
- 316 compressed objects within 4 object streams
- 59 named destinations out of 1000 (max. 500000)
- 272 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 480 PDF objects out of 1000 (max. 8388607)
+ 386 compressed objects within 4 object streams
+ 77 named destinations out of 1000 (max. 500000)
+ 322 words of extra memory for PDF output out of 10000 (max. 10000000)
 
