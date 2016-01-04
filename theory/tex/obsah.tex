@@ -218,7 +218,7 @@
 				u = \sqrt{\sum_{i = 1}^n (w_i \times x_i)^2}
 				\label{base_radial}
 			\end{equation}
-			\item[Aktivaèní funkce] - té¾ nazývaná \emph{pøenosová funkce}. Urèuje zpùsob výpoètu výstupu neuronu z jeho vnitøního potenciálu. Tøi neèastìji pou¾ívané aktivaèní funkce jsou znázornìny na obrázku \ref{aktivacni_fce}. Na ose x je v¾dy hodnota vnitøního potenciálu neuronu $u$, na ose y je potom výstupní hodnota neuronu.
+			\item[Aktivaèní funkce] - té¾ nazývaná \emph{pøenosová funkce}, vyu¾ívá se pro ni symbol $\sigma$. Urèuje zpùsob výpoètu výstupu neuronu z jeho vnitøního potenciálu. Tøi neèastìji pou¾ívané aktivaèní funkce jsou znázornìny na obrázku \ref{aktivacni_fce}. Na ose x je v¾dy hodnota vnitøního potenciálu neuronu $u$, na ose y je potom výstupní hodnota neuronu.
 
 			\begin{figure}
 				\begin{minipage}{.33\linewidth}
@@ -299,23 +299,123 @@
 
 				V dopøedné neuronové síti je výstup ka¾dého neuronu ka¾dé vrstvy pøipojen na vstup v¹ech neuronù vrstvy následující. V ka¾dém z neuronù dal¹í vrstvy v¹ak mù¾e mít výstup aktuálního neuronu jinou dùle¾itost. Toto se nastavuje pomocí vah jednotlivých propojení. Pokud chceme nìkteré propojení úplnì eliminovat, jednodu¹e mu nastavíme váhu $0$ a daná hodnota nebude v následujícím neuronu vùbec uva¾ována.
 
-				Váhy jednotlivých propojení se pro pøehlednost zapisují pomocí matic. V ka¾dé neuronové síti existuje jedna váhová matice pro ka¾dou dvojici za sebou následujících vrstev. Zápis jednotlivých vah je znázornìn na obrázku \ref{w_matrix}.
-
-				TODO: OBRÁZEK DVOU VRSTEV SÍTÌ A PROPOJENÍ
-
-				\begin{equation}
-					\begin{array}{cc} x_1 & x_2 & \cdots & x_n \end{array} \par \medskip
-					\begin{array}{c} y_1 \\ y_2 \\ \vdots \\ y_m \end{array}
-					\begin{bmatrix} w_{11} & w_{12} & \cdots & w_{1n} \\
-								    w_{21} & w_{22} & \cdots & w_{2n} \\
-								    \vdots & \vdots & \ddots & \vdots \\
-								    w_{m1} & w_{m2} & \cdots & w_{mn} \end{bmatrix}
-				\end{equation}
-
+				Váhy jednotlivých propojení se pro pøehlednost zapisují pomocí matic. V ka¾dé neuronové síti existuje jedna váhová matice pro ka¾dou dvojici za sebou následujících vrstev. Zápis jednotlivých vah je blí¾e popsán v èásti \ref{backpropagation}.
 
 		\subsection{Uèení}
+			Nejdùle¾itìj¹í vlastností neuronových sítí je pochopitelnì schopnost najít øe¹ení daného problému. Toto hledání øe¹ení - \emph{uèení} - probíhá prostøednictvím zmìny vah jednotlivých propojení tak, aby neuronová sí» podávala co nejpøesnìj¹í výsledky pro daný problém. Stejná neuronová sí» na stejný vstup podá v¾dy stejný výstup. Nejobecnìj¹ím dìlením algoritmù pro uèení je na uèení s uèitelem a bez uèitele.
+
+			\begin{description}
+				\item[Uèení s uèitelem] je proces, který vyu¾ívá vnìj¹ího uèitele nebo globálnì známou informaci. V ka¾dém cyklu uèení je vypoètena aktuální odchylka výstupu sítì od oèekávaného výstupu, která se potom minimalizuje. Hlavní problémy, kolem kterých se diskuze o uèení s uèitelem ubírá jsou kdy uèení ukonèit, jak èasto a jak dlouho vyu¾ívat k uèení jeden vzorek vstupu a jak vyu¾ívat informaci o vývoji uèení a zmìnì chyby. Uèení s uèitelem lze dále rozdìlit na \emph{strukturální uèení s uèitelem}, kde hodnota výstupu sítì závisí pouze na aktuálních hodnotách na vstupu, zatímco u \emph{temporálního uèení s uèitelem} aktuální hodnota výstupu závisí i na vstupech a výstupech z pøedchozích cyklù uèení.
+				\item[Uèení bez uèitele] je té¾ nazýváno \emph{samo-organizace}. Nebere v potaz ¾ádného vnìj¹ího uèitele a pracuje pouze s informacemi známymi bìhem uèení. Algoritmy uèení bez uèitele se sna¾í zorganizovat trénovací data a nalézt v nich co nejspecifiètìj¹í spoleèné vlastnosti. 
+			\end{description}
+
+			Dále v¹ak lze uèení dìlit podle dal¹ích kritérií, dal¹ím z dùle¾itých je uèení on-line a off-line.
+
+			\begin{description}
+				\item[Off-line uèení] je metoda uèení, pøi které je sí» nejprve trénována na celé mno¾inì dat a a¾ v okam¾iku, kdy pro ka¾dý vstupní vektor podává oèekávané výsledky, váhy jednotlivých propojení jsou uchovány a sí» je nasazena do provozu, kde u¾ se nemìní. Výhodou takto nauèené sítì je nespornì to, ¾e se chová velmi pøedvídatelnì a pro ka¾dý vstup podá korektní výstup. Nevýhodou v¹ak je, ¾e v okam¾iku, kdy chceme do mno¾iny dat pøidat dal¹í vstup, celá sí» musí být pøetrénována. Dal¹í nevýhodou tìchto metod uèení je, ¾e u¾ v okam¾iku uèení musí být k dispozici v¹echny mo¾né kombinace vstupù s jejich oèekávanými výstupy a také ¾e uèení mù¾e velmi dlouho trvat. Nejznámìj¹ím zástupcem tìchto metod uèení je algoritmus \emph{backpropagation}.
+				\item[On-line uèení] je dynamiètìj¹í metoda uèení. Pokud je do tímto zpùsobem uèené sítì potøeba pøidat dal¹í vstupní vektor, je mo¾né to udìlat za bìhu bez ztráty døíve získané informace. Výhodou sítí uèených on.line tedy je mo¾nost uèení za bìhu. Pro komplikované, ale exaktnì definované problémy je v¹ak dnes výhodnìj¹í pou¾ívat metody off-line uèení. Výzvou do budoucnosti neuronových sítí v¹ak je pøijít s takovým algoritmem uèení, který by dosahoval pøesnosti off-line algoritmù, ale dokázal by pracovat s novými vstupními vektory za bìhu.
+			\end{description}
+
+		\subsection{Uèení backpropagation}\label{backpropagation}
+			Kdy¾ byl algoritmus backpropagation v roce 1986 pøedstaven, znamenalo to velký prùlom v uèení neuronových sítí. Na nìkterých neuronových sítích dosahoval oproti pøedchozím algoritmùm nìkolikanásobnì vy¹¹í rychlosti uèení. Tím umo¾nil vyu¾ití neuronových sítí k øe¹ení problémù, které do té doby byly neøe¹itelné. 
+
+			Pro ilustraci práce backpropagation nyní zaveïme zjednodu¹ující znaèení.
+			\begin{description}
+				\item[$w^l_{jk}$] znaèí váhu na propojení z $k$-tého neuronu $(l-1)$. vrstvy do $j$-tého neuronu $l$-té vrstvy neuronové sítì. 
+				\item [$y^l_j$] je výstup $j$-tého neuronu v $l$-té vrstvì. 
+				\item [$b^l_j$] je bias, který vstupuje do $j$-tého neuronu $l$-té vrstvy. 
+			\end{description}
+			Výstupní hodnotu ka¾dého neuronu lze tedy v souladu s touto notací zapsat jako 
+			\begin{equation}
+				y^l_j = \sigma\left(\sum\limits_k w^l_{jk} y^{l-1}_k + b^l_j\right)
+				\label{out_neuron}
+			\end{equation}
+			Kde $\sigma$ je jeho aktivaèní funkce a $k$ jde pøes v¹echny neurony z vrstvy $l-1$.
+
+			Pro ka¾dou vrstvu $l$ je dále definovaná váhová matice $w^l$ (viz vztah \ref{w_matrix}), která pøehlednì znázoròuje v¹echny váhy. Hodnota, která se v matici nachází v $j$-tém sloupci $k$-tého øádku znaèí váhu, která se vyu¾ívá pøi propojení z $k$-tého neuronu $l - 1$. vrstvy do $j$-tého neuronu $l$-té vrstvy sítì. Podobným zpùsobem je definován vektor biasù $b^l$ pro ka¾dou vrstvu a vektor výstupních hodnot $y^l$, také pro ka¾dou vrstvu. Oba dva obsahují postupnì hodnoty pro v¹echny neurony dané vrstvy od $1$ do $n$. Na vý¹e definované vektory lze také aplikovat aktivaèní funkci $\sigma$, kdy platí vztah \ref{sigma}.
+
+			\begin{equation}
+				w^l = 
+				\begin{bmatrix} w_{11} & w_{21} & \cdots & w_{n1} \\
+							    w_{12} & w_{22} & \cdots & w_{n2} \\
+							    \vdots & \vdots & \ddots & \vdots \\
+							    w_{1m} & w_{2m} & \cdots & w_{nm}
+				\end{bmatrix}
+				\label{w_matrix}
+			\end{equation}
+			\begin{equation}
+				 \sigma \left[ \begin{array}{c} x_1 \\ x_2 \\ x_3 \end{array} \right] = \left[ \begin{array}{c} \sigma (x_1) \\ \sigma (x_2) \\ \sigma (x_3) \end{array} \right]
+				\label{sigma}
+			\end{equation}
+
+			Se zavedeným zápisem u¾ lze vztah pro výpoèet výstupních hodnot vypoèíst pro celou jednu vrstvu zároveò, co¾ nám rovnou umo¾ní pøestat o neuronové síti pøemý¹let jako o mno¾inì neuronù, ale jako o mno¾inì vrstev, co¾ je pro úèely dal¹ího popisu praktiètìj¹í. Výpoèet tedy oproti vztahu \ref{out_neuron} zpøehledníme na vztah \ref{out_layer}.
+
+			\begin{equation}
+				y^l = \sigma\left(w^l y^{l-1} + b^l\right)
+				\label{out_layer}
+			\end{equation}
+			\begin{equation}
+				u^l = w^l y^{l-1} + b^l
+				\label{win_layer}
+			\end{equation}
+
+			Souèástí vztahu \ref{out_layer} je také \emph{vektor vnitøních potenciálù} neuronù vrstvy $l$ - $u^l$ (viz \ref{win_layer}), která bude v následujícím výkladu takté¾ vyu¾ita.
+
+			Chybu sítì pro aktuální vstupní vektor vypoèteme podle vztahu pro kvadratickou chybu sítì(viz \ref{cost_x}), kde $d(x)$ je oèekávaný výstup sítì pro vstup $x$, $y^L(x)$ je koncový výstup sítì pro vstup $x$. Pro celou mno¾inu vstupù se potom vyu¾ívá vztah \ref{cost_all}, podle kterého vypoèteme prùmìrnou chybu pro v¹echny vstupní vektory.
+
+			\begin{equation}
+				C_x = \frac{1}{2} \left(d\left(x\right) - y^L\left(x\right)\right)^2
+				\label{cost_x}
+			\end{equation}
+			\begin{equation}
+				C = \frac{1}{n} \sum\limits_{x} C_x = \frac{1}{2n} \sum\limits_{x} \left(d\left(x\right) - y^L\left(x\right)\right)^2
+				\label{cost_all}
+			\end{equation}
+
+			Dále zavedeme operaci $\odot$, v literatuøe té¾ nazývanou \emph{Hadamardùv souèin}. Pro dvì matice o stejných dimenzích $m \times n$ $A$ a $B$ je matice $C = A \odot B$ maticí takté¾ o dimenzích $m \times n$, kde $C_{ij} = A_{ij} \times B_{ij}$. 
+
+			Algoritmus backpropagation experimentálnì zji¹»uje, jaký vliv mají malé zmìny vah a biasù u jednotlivých neuronù na výslednou chybu sítì. Formálnì tedy jde o výpoèet parciálních derivací zapsaných ve vztahu \ref{derivatives}.
+
+			\begin{equation}
+				\frac{\partial C}{\partial w^l_{jk}} ,
+				\frac{\partial C}{\partial b^l_j}
+				\label{derivatives}
+			\end{equation}
+
+			V procesu uèení backpropagation tedy provádíme malé zmìny $\Delta u^l_j$ vnitøního potenciálu $j$-tého neuronu v $l$-té vrstvì a zji¹»ujeme, zda toto bude mít pozitivní vliv na výslednou chybu sítì $C$. Tyto zmìny vnitøního potenciálu jsou provádìny pomocí zmìny vah u jednotlivých propojení. Tyto jsou propagovány zpìt do celé sítì po výpoètu výstupu $y^L$ a chyby sítì $C$. Pro neurony výstupní vrstvy je hodnota $\Delta w^l_{jk}$ vypoètena podle vztahu \ref{delta_output}, kde $\delta$ je vypoètena podle vztahu \ref{error_output} a $\eta$ je konstanta pro uèení celé sítì nazývaná \emph{learning rate}, která se vìt¹inou pohybuje v intervalu $<0;1>$.
+
+			\begin{equation}
+				\Delta w^l_{jk} = \eta \delta^L_j y^{L-1}_{k}
+				\label{delta_output}
+			\end{equation} 
+
+			\begin{equation}
+				\delta^L_j = \frac{\partial C}{\partial y^L_j} \sigma \prime \left(u^L_j\right)
+				\label{error_output}
+			\end{equation}
+
+			Pøevedení do vztahu \ref{error_output} do maticové reprezantace, se kterou chceme pøi backpropagation pracovat u¾ není obtí¾né. Lze jej zapsat jako \ref{error_matrix}, kde $\nabla_y C$ je vektor, jeho¾ komponenty jsou parciální derivace $\frac{\partial C}{\partial y^L_j}$. Pro kvadratickou chybu sítì lze tedy tento vztah zjednodu¹it na vztah \ref{error_quadratic}.
+
+			\begin{equation}
+				\delta^L = \nabla_y C \odot \sigma \prime \left(u^L\right)
+				\label{error_matrix}
+			\end{equation}
+
+			\begin{equation}
+				\delta^L = (y^L - d) \odot \sigma \prime \left(u^L\right)
+				\label{error_quadratic}
+			\end{equation}
+
+			Výpoèet $\delta^l$ pro ka¾dou dal¹í vrstvu se potom provádí od poslední vrstvy smìrem k první podle vztahu \ref{delta_hidden}, kde $\left(w^{l+1}\right)^T$ je transponovaná váhová matice pro následující vrstvu. V takovéto podobì ji lze vyu¾ít pro zpìtný pøenos chyby sítì k jednotlivým neuronùm pøesnì podle jejich významu pøi dopøedném prùchodu. Váhy pro jednotlivá propojení se potom zmìní o $\Delta w^l_{jk}$, který je pro skryté vrstvy vypoèten analogicky jako pro výstupní vrstvu dle vztahu \ref{delta_output}.
+
+			\begin{equation}
+				\delta^l = \left(\left(w^{l+1}\right)^T \delta^{l+1}\right) \odot \sigma \prime \left(u^L\right)
+				\label{delta_hidden}
+			\end{equation}
 
 	\section{Hluboké neuronové sítì}
+		V pøedchozích kapitolách této práce byly pojmem neuronové sítì v¾dy rozumìny plnì propojené sítì. Tedy takové, ve kterých existuje propojení mezi ka¾dými dvìma neurony le¾ícími v sousedních vrstvách. Pokud v¹ak neuronová sí» pracuje nad obrázky, tímto propojením se ztrácí prostorová informace. U hodnot pocházejících ze dvou sousedních pixelù mù¾eme pracovat se stejnou závislostí jako u hodnot pocházejících z pixelù z opaèných hran obrázkù. Pokud vezmeme v architektuøe sítì v potaz, ¾e nìkteré pixely obrázku se nachází v bezprostøední blízkosti, zatímco jiné dvojice pixelù spolu vùbec nesousedí, mù¾eme získat mnohem lep¹í výsledky.
+
 
 \chapter{Návrh}
 
@@ -354,7 +454,8 @@
 
 	\section{Detekce aut v obrázku}
 
-		Neuronová sí» provádìjící detekci automobilù v obrázku je stì¾ejní èástí této diplomové práce. Je to té¾ její hlavní implementaèní èást. Cílem je získat neuronovou sí», je¾ na vstupu dostane feature vector vytvoøený v rámci pøedzpracování dat a na výstupu podá souøadnice èásti obrázku, ve které detekovala auto. 
+		Neuronová sí» provádìjící detekci automobilù v obrázku je stì¾ejní èástí této diplomové práce. Je to té¾ její hlavní implementaèní èást. Cílem je získat neuronovou sí», je¾ na vstupu dostane feature vektor vytvoøený v rámci pøedzpracování dat a na výstupu podá souøadnice èásti obrázku, ve které detekovala auto. Výøez pro dal¹í zkoumání bude mít tvar obdélníku a bude identifikován ètyrmi souøadnicemi: $x_1$ a $y_1$, které identifikují souøadnice levého horního rohu obdélníku, ve kterém se nachází auto a $x_2$ a $y_2$, které identifikují souøadnice pravého dolního rohu tohoto obdélníku.
+		
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=130mm]{fig/car_detection.png}
@@ -362,7 +463,22 @@
 			\label{car_detect}
 		\end{figure}
 
+		V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut a tedy i více SPZ. K tomuto problému bude pøistupováno nìkolika rùznými zpùsoby a v rámci experiemntù s programem budou vyhodnoceny výsledky jednotlivých øe¹ení a bude vybrána nejlep¹í varianta.
+
+		\begin{description}
+			\item[Víceprùchodová sí» s pamìtí] je první z navr¾ených variant. Takto navr¾ená sí» by ka¾dý obrázek zpracovávala cyklicky tak dlouho, dokud by v nìm nacházela dal¹í auta. Jakmile by jednou obrázek sítí pro¹el bez nalezení dal¹ího automobilu, je jeho zpracování ukonèeno a pøechází se k dal¹ímu vstupu. Nevýhodou tohoto pøístupu je nutnost implementace vnitøní pamìti sítì a slo¾itost algoritmu pro vyluèování výsledkù, které u¾ nad daným obrázkem byly dosa¾eny. 
+			\item[Jeden obdélník pro v¹echny auta v obrázku] je dal¹í variantou. Tento obdélník by ohranièoval oblast, ve které se nachází v¹echny SPZ z daného obrázku. Toto by byla nejjednodu¹¹í varianta v této fázi zpracování, zpùsobila by v¹ak velké komplikace ve fázi hledání SPZ. 
+			\item[Dynamický poèet detekovaných aut] je pravdìpodobnì nejpøijatelnìj¹í variantou øe¹ení detekce aut. Empiricky na základì dat trénovací mno¾iny bude urèena horní hranice $h$ poètu aut, která budou detekována v jednom obrázku. Neuronová sí» potom bude navr¾ena tak, aby na výstupu mìla $h \times 4$ souøadnice, které budou urèovat $0 - h$ výøezù, ve kterých se pravdìpodobnì nachází automobil.
+		\end{description}
+
 	\section{Detekce SPZ ve vybrané èásti obrázku}
+		Dal¹í navazující èástí této práce je detekce SPZ ve výøezech s pravdìpodobným výskytem automobilu urèených výstupy pøedchozího kroku. V této èásti se budu dvìma mo¾ným zpùsobùm, které v rámci této práce budou opìt porovnávány. Zpùsob, jakým tato èást bude pracovat je jednodu¹e znázornìn na obrázku \ref{plate_detect}, kde v rámci implementace výpoèetního bloku budou porovnávány následující mo¾nost:
+
+		\begin{description}
+			\item[Detektor hran] je nejèastìj¹ím zpùsobem vyu¾ívaným v pracích jakkoliv spojených s rozpoznáním a vyhledáváním SPZ v obraze. Tato varianta dosahuje velmi dobrých výsledkù v pøípadì statické kamery umístìné ve fixní pozici vùèi snímaným automobilùm. Data zachycená v rámci snímání pro slu¾bu Panorama jsou v¹ak velmi specifická a u tohoto typu dat nemù¾eme oèekávat tak vysokou úspì¹nost rozpoznání SPZ pomocí detektoru.
+			\item[]
+		\end{description}
+
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=130mm]{fig/plate_detection.png}

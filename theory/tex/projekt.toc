@@ -20,11 +20,12 @@
 \contentsline {subsection}{\numberline {3.3.1}Topologie s\IeC {\'\i }t\IeC {\'\i }}{14}{subsection.3.3.1}
 \contentsline {subsubsection}{V\IeC {\'\i }cevrstv\'e s\IeC {\'\i }t\v e}{14}{section*.13}
 \contentsline {subsection}{\numberline {3.3.2}U\v cen\IeC {\'\i }}{16}{subsection.3.3.2}
-\contentsline {section}{\numberline {3.4}Hlubok\'e neuronov\'e s\IeC {\'\i }t\v e}{16}{section.3.4}
-\contentsline {chapter}{\numberline {4}N\'avrh}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}P\v redzpracov\'an\IeC {\'\i } dat}{17}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Finetuning}{18}{subsection.4.1.1}
-\contentsline {section}{\numberline {4.2}Detekce aut v obr\'azku}{18}{section.4.2}
-\contentsline {section}{\numberline {4.3}Detekce SPZ ve vybran\'e \v c\'asti obr\'azku}{19}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Detekce SPZ v obr\'azku s autem}{19}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}Rozmaz\'an\IeC {\'\i } SPZ}{19}{section.4.4}
+\contentsline {subsection}{\numberline {3.3.3}U\v cen\IeC {\'\i } backpropagation}{17}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Hlubok\'e neuronov\'e s\IeC {\'\i }t\v e}{19}{section.3.4}
+\contentsline {chapter}{\numberline {4}N\'avrh}{20}{chapter.4}
+\contentsline {section}{\numberline {4.1}P\v redzpracov\'an\IeC {\'\i } dat}{20}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Finetuning}{21}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Detekce aut v obr\'azku}{21}{section.4.2}
+\contentsline {section}{\numberline {4.3}Detekce SPZ ve vybran\'e \v c\'asti obr\'azku}{22}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Detekce SPZ v obr\'azku s autem}{23}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Rozmaz\'an\IeC {\'\i } SPZ}{23}{section.4.4}
