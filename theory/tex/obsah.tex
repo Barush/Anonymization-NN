@@ -1,4 +1,14 @@
 \chapter{Úvod}
+	Cílem tohoto semestrálního projektu je polo¾it teoretický základ pro následující zpracování diplomové práce na téma anonymizace SPZ vozidel v obrazových datech. Tato práce probíhá ve spolupráci se spoleèností Seznam.cz a její výsledek by mìl pozdìji slou¾it k automatizované anonymizaci obrazových dat pro slu¾bu Panorama. 
+
+----- toto je vykopèené ze závìru:
+	V rámci semestrálního projektu jsem prostudovala principy a metody vyu¾ívané pro detekci a anonymizaci SPZ vozidel zachycených na fotografiích a nástroje vyu¾íané v souèasnosti. Dále jsem také analyzovala, které problémy souèasná øe¹ení doká¾í zpracovávat dobøe a které jsou naopak jejich slabými stránkami.
+
+	Ve spolupráci se zamìstnanci firmy Seznam.cz jsem analyzovala obrazový materiál pro slu¾bu Panorama a zpùsob jeho sbìru. V souvislosti s tìmito materiály jsem také nastudovala platnou legislativu ohlednì zpracování osobních údajù a manipulace s nimi.
+
+	Na základì získaných informací jsem navrhla program umo¾òující provádìt automatizovanou detekci a anonymizaci SPZ v obrazovém materiálu ze slu¾by Panorama s vyu¾itím metody zalo¾ené na hlubokých neuronových sítích. Tento program byl navr¾en s ohledem na to, aby mìl co nejvìt¹í potenciál odbourat problémy, se kterými se potýkají stávající komerèní øe¹ení.
+
+	V prùbìhu dal¹í práce na této diplomové práci bude program popsaný v kapitole \ref{ch:navrh} implementován a otestován na mno¾inì dat ze slu¾by Panorama spoleènosti Seznam.cz. Následnì budou vyhodnoceny výsledky a tyto budou porovnány s výsledky stávajících øe¹ení.
 
 \chapter{Anonymizace obrazových dat}
 
@@ -63,9 +73,10 @@
 		dobì provádìt plnì automatizovanì prostøednictvím mnoha nástrojù jak komerèních, tak volnì dostupných.
 
 		Anonymizace v obrazových datech zatím nedosáhla tak vysoké úrovnì a to hned z nìkolika dùvodù:
-		1. Anonymizace v obrazových datech je velmi aplikaènì specifická - není proto tak velký tlak na její vývoj
-		2. Anonymizace obrazových dat je výpoèetnì nároènìj¹í ne¾ anonymizace na úrovni datové
-		3. 
+		\begin{enumerate}
+			\item Anonymizace v obrazových datech je velmi aplikaènì specifická - není proto tak velký tlak na její vývoj
+			\item Anonymizace obrazových dat je výpoèetnì nároènìj¹í ne¾ anonymizace na úrovni datové
+		\end{enumerate}
 
 		Anonymizace obrazových dat sestává ze dvou èástí: detekce èásti obrázku urèené k anonymizaci a vlastního procesu anonymizace. Je zøejmé, ¾e vlastní proces anonymizace
 		u¾ není výpoèetnì nijak nároèný. Jedná se zpravidla o aplikaci rozostøení, pøípadnì o pøidání vrstvy, která plnì pøekrývá anonymizované èásti obrázku. 
@@ -113,11 +124,27 @@
 				\item celek (15 fotografií), do kterého snímek patøí a poloha v nìm
 				\item datum snímání
 				\item zemìpisná poloha snímacího auta v souøadnicích UTM 33
-				\item $\omega$ -- úhel náklonu automobilu v pravolevém smìru
-				\item $\varphi$ -- úhel náklonu automobilu v pøedozadním smìru
-				\item $\kappa$ -- odklon smìru jízdy automobilu od severního smìru, dále oznaèováno pojmem \emph{heading} 
-				\item TADY BY MOHL BÝT OBRÁZEK S JEDNOTLIVÝMA ÚHLAMA
+				\item $\omega$ -- úhel náklonu automobilu v pravolevém smìru (viz \ref{uhly:omega})
+				\item $\varphi$ -- úhel náklonu automobilu v pøedozadním smìru (viz \ref{uhly:phi})
+				\item $\kappa$ -- odklon smìru jízdy automobilu od severního smìru, dále oznaèováno pojmem \emph{heading}  (\viz \ref{uhly:kappa})
 			\end{itemize}
+
+			\begin{figure}
+				\begin{minipage}{.33\linewidth}
+					\centering
+					\subfloat[]{\label{uhly:omega}\includegraphics[width=80mm]{fig/uhel_omega.png}}
+				\end{minipage}%				
+				\begin{minipage}{.33\linewidth}
+					\centering
+					\subfloat[]{\label{uhly:phi}\includegraphics[width=40mm]{fig/uhel_phi.png}}
+				\end{minipage}%				
+				\begin{minipage}{.33\linewidth}
+					\centering
+					\subfloat[]{\label{uhly:kappa}\includegraphics[width=30mm]{fig/uhel_kappa.png}}
+				\end{minipage}%
+				\caption{Zaznamenávané úhly pøi snímání fotomateriálu.}
+				\label{uhly}
+			\end{figure}
 
 			Pro výpoèet jednotlivých úhlù jsou k dispozici speciální senzory. Pro zaznamenávání headingu jsou na autì dvì vysoce pøesné GPS jednotky, které na základì rozdílu svých GPS poloh doká¾í pøesnì urèit smìr, kterým se snímací automobil pohybuje. Náklony ve v¹ech smìrech jsou mìøeny pomocí inerciální jednotky a odometru. 
 
@@ -416,8 +443,15 @@
 	\section{Hluboké neuronové sítì}
 		V pøedchozích kapitolách této práce byly pojmem neuronové sítì v¾dy rozumìny plnì propojené sítì. Tedy takové, ve kterých existuje propojení mezi ka¾dými dvìma neurony le¾ícími v sousedních vrstvách. Pokud v¹ak neuronová sí» pracuje nad obrázky, tímto propojením se ztrácí prostorová informace. U hodnot pocházejících ze dvou sousedních pixelù mù¾eme pracovat se stejnou závislostí jako u hodnot pocházejících z pixelù z opaèných hran obrázkù. Pokud vezmeme v architektuøe sítì v potaz, ¾e nìkteré pixely obrázku se nachází v bezprostøední blízkosti, zatímco jiné dvojice pixelù spolu vùbec nesousedí, mù¾eme získat mnohem lep¹í výsledky.
 
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=100mm]{fig/convolutional_layer.png}
+			\caption{Schéma konvoluèní vrstvy sítì.}
+			\label{convolutional}
+		\end{figure}
 
-\chapter{Návrh}
+
+\chapter{Návrh}\label{ch:navrh}
 
 	V této kapitole je popsán návrh implementovaného programu. Cílem této práce je vyrobit nástroj, který doká¾e automaticky zpracovávat nafocené obrázky na vstupu a podávat anonymizované obrázky na výstupu. Práce s obrázky je rozdìlena do ètyø základních fází znázornìných na obrázku \ref{overall_scheme}, jejich¾ mechanismy budou v této kapitole podrobnì popsány. Barevné ¹ipky v obrázku \ref{overall_scheme} znázoròují jednotlivé mezivýsledky pøi zpracování a stejná barevná notace je pou¾ita i v dal¹ích obrázcích této kapitoly.  
 
@@ -428,7 +462,7 @@
 		\label{overall_scheme}
 	\end{figure}
 
-	\section{Pøedzpracování dat}	
+	\section{Pøedzpracování dat}\label{ch:preprocessing}	
 		Na primárním vstupu celého programu jsou pøijímány fotografie nasnímané v rámci sbìru dat pro slu¾bu Panorama. V¹echny dal¹í fáze u¾ v¹ak pracují nad èísly typu \emph{double}, pøedzpracování dat tedy spoèívá v reprezentaci celého obrázku pomocí èíselného vektoru. Tento èíselný vektor musí mít pro jednotlivé obrázky co nejlep¹í rozli¹ovací schopnost. Pokud je neuronová sí» natrénována ke klasifikaci velkých dat do \emph{n} tøíd, jejím hlavním úèelem je vyselektovat hodnoty, které jsou pro urèování tøíd podstatné - vytvoøit tzv. \emph{vektor rysù}. Tento vektor rysù, té¾ \emph{feature vector} je nejkondenzovanìj¹í informace z poèáteèních dat, výstupem z pøedzpracování dat je tedy právì feature vector.
 
 		K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc}, je¾ vznikla pøi pøíle¾itosti \emph{ImageNet Large Scale Visual Recognition Challenge 2015} - odtud zkratka Ilsvrc. Tato výzva se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a pak také na klasifikaci scény. Sí» Ilsvrc byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\0000 kategorií. 
@@ -454,7 +488,7 @@
 
 	\section{Detekce aut v obrázku}
 
-		Neuronová sí» provádìjící detekci automobilù v obrázku je stì¾ejní èástí této diplomové práce. Je to té¾ její hlavní implementaèní èást. Cílem je získat neuronovou sí», je¾ na vstupu dostane feature vektor vytvoøený v rámci pøedzpracování dat a na výstupu podá souøadnice èásti obrázku, ve které detekovala auto. Výøez pro dal¹í zkoumání bude mít tvar obdélníku a bude identifikován ètyrmi souøadnicemi: $x_1$ a $y_1$, které identifikují souøadnice levého horního rohu obdélníku, ve kterém se nachází auto a $x_2$ a $y_2$, které identifikují souøadnice pravého dolního rohu tohoto obdélníku.
+		Neuronová sí» provádìjící detekci automobilù v obrázku je stì¾ejní èástí této diplomové práce. Je to té¾ její hlavní implementaèní èást. Cílem je získat neuronovou sí», je¾ na vstupu dostane feature vektor vytvoøený v rámci pøedzpracování dat a na výstupu podá informaci, kde se v analyzovaném obrázku nachází automobil. 
 		
 		\begin{figure}[h]
 			\centering
@@ -463,21 +497,32 @@
 			\label{car_detect}
 		\end{figure}
 
-		V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut a tedy i více SPZ. K tomuto problému bude pøistupováno nìkolika rùznými zpùsoby a v rámci experiemntù s programem budou vyhodnoceny výsledky jednotlivých øe¹ení a bude vybrána nejlep¹í varianta.
+		Trénování neuronové sítì pro detekci automobilù bude provedeno na datové mno¾inì, která bude v¾dy obsahovat právì jedno nebo ¾ádné auto. Výstup této sítì tedy bude binární - na obrázku je auto/na obrázku není auto. V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut, proto je tøeba vytvoøit zpùsob, jakým detekovat v¹echna auta. Pro tuto práci jsem zvolila techniku, kdy na poèátku, je¹tì pøed pøedzpracováním dat dle kapitoly \ref{ch:preprocessing}, bude vstupní fotografie rozøezána na nìkolik podèástí, které budou zkoumány samostatnì. Neuronová sí» pro detekci automobilù pro ka¾dou podèást podá výstup na obrázku je/není auto. Tyto hodnoty jsou potom umístìny zpátky na pùvodní pozice a tím je vytvoøena \emph{heatmapa} (viz \ref{rozsek+sloz}). Na obrázku \ref{rozsek:b} mù¾eme vidìt postup tvorby heatmapy: výøezy, ve kterých nebylo nalezeno auto jsou znázornìny èervenou barvou, výøezy, ve kterých bylo nalezeno auto jsou znázornìny barvou zelenou. Na místech, kde se pøekrývá zelená barva se zelenou je nejvy¹¹í pravdìpodobnost výskytu auta. Naopak pøi pøekryvu èervených ploch je pravdìpodobnost nejmen¹í. Pøi pøekryvu èervené a zelené plochy je pravdìpodobnost výskytu auta malá.
 
-		\begin{description}
-			\item[Víceprùchodová sí» s pamìtí] je první z navr¾ených variant. Takto navr¾ená sí» by ka¾dý obrázek zpracovávala cyklicky tak dlouho, dokud by v nìm nacházela dal¹í auta. Jakmile by jednou obrázek sítí pro¹el bez nalezení dal¹ího automobilu, je jeho zpracování ukonèeno a pøechází se k dal¹ímu vstupu. Nevýhodou tohoto pøístupu je nutnost implementace vnitøní pamìti sítì a slo¾itost algoritmu pro vyluèování výsledkù, které u¾ nad daným obrázkem byly dosa¾eny. 
-			\item[Jeden obdélník pro v¹echny auta v obrázku] je dal¹í variantou. Tento obdélník by ohranièoval oblast, ve které se nachází v¹echny SPZ z daného obrázku. Toto by byla nejjednodu¹¹í varianta v této fázi zpracování, zpùsobila by v¹ak velké komplikace ve fázi hledání SPZ. 
-			\item[Dynamický poèet detekovaných aut] je pravdìpodobnì nejpøijatelnìj¹í variantou øe¹ení detekce aut. Empiricky na základì dat trénovací mno¾iny bude urèena horní hranice $h$ poètu aut, která budou detekována v jednom obrázku. Neuronová sí» potom bude navr¾ena tak, aby na výstupu mìla $h \times 4$ souøadnice, které budou urèovat $0 - h$ výøezù, ve kterých se pravdìpodobnì nachází automobil.
-		\end{description}
+		 Výøez, ve kterém byla zji¹tìna nejvy¹¹í pravdìpodobnost výskytu automobilu je na obrázku zvýraznìn zeleným rámeèkem. Vzniklý výøez bude pro dal¹í fáze zpracování identifikován ètyrmi souøadnicemi: $x_1$ a $y_1$, které identifikují souøadnice levého horního rohu obdélníku, ve kterém se nachází auto a $x_2$ a $y_2$, které identifikují souøadnice pravého dolního rohu tohoto obdélníku.
+
+		\begin{figure}
+			\begin{minipage}{.5\linewidth}
+				\centering
+				\subfloat[]{\label{rozsek:a}\includegraphics[scale=.6]{fig/rozsekani.png}}
+			\end{minipage}%				
+			\begin{minipage}{.5\linewidth}
+				\centering
+				\subfloat[]{\label{rozsek:b}\includegraphics[scale=.6]{fig/slozeni.png}}
+			\end{minipage}%		
+			\caption{Rozdìlení obrázku na podèásti a následné vytvoøení heatmapy}
+			\label{rozsek+sloz}
+		\end{figure}
 
 	\section{Detekce SPZ ve vybrané èásti obrázku}
-		Dal¹í navazující èástí této práce je detekce SPZ ve výøezech s pravdìpodobným výskytem automobilu urèených výstupy pøedchozího kroku. V této èásti se budu dvìma mo¾ným zpùsobùm, které v rámci této práce budou opìt porovnávány. Zpùsob, jakým tato èást bude pracovat je jednodu¹e znázornìn na obrázku \ref{plate_detect}, kde v rámci implementace výpoèetního bloku budou porovnávány následující mo¾nost:
+		Dal¹í navazující èástí této práce je detekce SPZ ve výøezech s pravdìpodobným výskytem automobilu urèených výstupy pøedchozího kroku. V této èásti se budu dvìma mo¾ným zpùsobùm, které v rámci této práce budou porovnávány. Zpùsob, jakým tato èást bude pracovat je jednodu¹e znázornìn na obrázku \ref{plate_detect}, kde v rámci implementace výpoèetního bloku budou porovnávány následující mo¾nosti:
 
 		\begin{description}
-			\item[Detektor hran] je nejèastìj¹ím zpùsobem vyu¾ívaným v pracích jakkoliv spojených s rozpoznáním a vyhledáváním SPZ v obraze. Tato varianta dosahuje velmi dobrých výsledkù v pøípadì statické kamery umístìné ve fixní pozici vùèi snímaným automobilùm. Data zachycená v rámci snímání pro slu¾bu Panorama jsou v¹ak velmi specifická a u tohoto typu dat nemù¾eme oèekávat tak vysokou úspì¹nost rozpoznání SPZ pomocí detektoru.
-			\item[]
+			\item[Detektor hran] je sada matematických metod slou¾ících k hledání výrazných (nespojitých) zmìn jasu v obrazu. Toto lze provádìt buïto na základì vy¹etøování funkce jasu a jejích derivací nebo na základì analýzy frekvencí v obraze. Mezi mnoha pøedstavenými hranovými detektory je nejvýraznìj¹í \emph{Cannùv hranový detektor}, pøedstavený Johnem Cannym v roce 1986 \ref{LITERATURA!!!}. Tento detektor je zalo¾en na Gaussovském rozostøení obrazu. Hrany detekuje pomocí hledání orientace gradientu a smìrových derivací. Funguje velmi dobøe pøi výskytu spojitých a dostateènì silných hran. Výsledný obraz je velmi ostrý, ale ne pøíli¹ detailní.
+			\item[Neuronová sí»] bude nasazena hlavnì pro porovnání s detektorem hran. Nauèení neuronové sítì samozøejmì bude výpoèetnì nároènìj¹í, nicménì pokud by výsledky byly výraznì lep¹í ne¾ u konvenèního øe¹ení, bude stále neuronová sí» ve výsledku lep¹ím øe¹ením. 
 		\end{description}
+
+		Výstupem detekce SPZ ve vybrané èásti obrázku je opìt obdélník, který je identifikován ètyømi souøadnicemi: $x_1$ a $y_1$ identifikujícími levý horní roh SPZ a $x_2$ a $y_2$ identifikující pravý dolní roh SPZ.
 
 		\begin{figure}[h]
 			\centering
@@ -486,16 +531,16 @@
 			\label{plate_detect}
 		\end{figure}
 
-		\subsection{Detekce SPZ v obrázku s autem}
-			Mo¾nosti provedení:
-			\begin{itemize}
-				\item Detektor hran
-				\item Neuronka
-				\item Nìco vy¹¹ího
-			\end{itemize}
+	\section{Zatemnìní SPZ}
+		Poslední fází zpracování je namapování detekované SPZ zpìt do celého vstupního obrázku bez výøezù a její rozmazání. Souøadnice výøezu, ve kterém byla SPZ vyhledávána jsou známy z pøedchozího kroku zpracování. Namapování SPZ zpìt do souøadnic celé Panorama fotografie tedy bude provedeno prostým souètem souøadnic $[x_1^{výøez} + x_1^{SPZ}, y_1^{výøez} + y_1^{SPZ}]$.
 
-	\section{Rozmazání SPZ}
-		Popsat blur algoritmy etc. 
+		Pro potøeby této diplomové práce bude postaèující pøes celou SPZ umístit neprùhledný obdélník, který znemo¾ní její èitelnost. Pro vyu¾ití v praxi v¹ak bude nutné zvolit jinou variantu, aby anonymizované SPZ vozidel v Panorama zobrazení nepùsobily pøíli¹ ru¹ivì. Nejvhodnìj¹í bude pou¾ít nìkterou z dostpuných rozostøovacích funkcí, napøíklad \emph{gausovské rozostøení} nebo \emph{rozostøení pohybem}.
 
+\chapter{Závìr}
+	V rámci semestrálního projektu jsem prostudovala principy a metody vyu¾ívané pro detekci a anonymizaci SPZ vozidel zachycených na fotografiích a nástroje vyu¾íané v souèasnosti. Dále jsem také analyzovala, které problémy souèasná øe¹ení doká¾í zpracovávat dobøe a které jsou naopak jejich slabými stránkami.
 
+	Ve spolupráci se zamìstnanci firmy Seznam.cz jsem analyzovala obrazový materiál pro slu¾bu Panorama a zpùsob jeho sbìru. V souvislosti s tìmito materiály jsem také nastudovala platnou legislativu ohlednì zpracování osobních údajù a manipulace s nimi.
 
+	Na základì získaných informací jsem navrhla program umo¾òující provádìt automatizovanou detekci a anonymizaci SPZ v obrazovém materiálu ze slu¾by Panorama s vyu¾itím metody zalo¾ené na hlubokých neuronových sítích. Tento program byl navr¾en s ohledem na to, aby mìl co nejvìt¹í potenciál odbourat problémy, se kterými se potýkají stávající komerèní øe¹ení.
+
+	V prùbìhu dal¹í práce na této diplomové práci bude program popsaný v kapitole \ref{ch:navrh} implementován a otestován na mno¾inì dat ze slu¾by Panorama spoleènosti Seznam.cz. Následnì budou vyhodnoceny výsledky a tyto budou porovnány s výsledky stávajících øe¹ení.
