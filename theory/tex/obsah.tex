@@ -1,7 +1,7 @@
 \chapter{Úvod}
 	V prùbìhu vývoje internetových slu¾eb se stále zvy¹uje objem dat, která je mo¾no u¾ivateli v reálném èase pøedat. Výpoèetní technika se dostala tak daleko, ¾e je mo¾né u¾ivateli ukázat reálnou podobu míst, která jsou od nìj vzdálena tisíce kilometrù. S nespornými výhodami plynoucími z vývoje tímto smìrem v¹ak pøicházejí i mnohé problémy. Jde pøevá¾nì o problémy rázu prozrazení osobních údajù, kterým je tøeba se jak z legislativních, tak z etických dùvodù vyvarovat. V souèasné dobì se tato problematika øe¹í pomocí anonymizace zachycených dat. Právì tomuto tématu se tato diplomová práce bude vìnovat - anonymizaci SPZ vozidel zachycených na snímcích veøejného prostoru.
 
-	Proto¾e v souèasné dobì máme díky neustálému zlep¹ování hardwaru k dispozici obrovský výpoèetní výkon, mù¾eme si troufnout i do øe¹ení tak obtí¾né úlohy jako je automatizovaná detekce a anonymizace obrazových dat. Díky velkému výpoèetnímu výkonu mohou být v této práci vyu¾ity hluboké neuronové sítì, jejich¾ uèení vy¾aduje velké mno¾ství strojového èasu.
+	V souèasné dobì máme díky neustálému zlep¹ování hardwaru k dispozici obrovský výpoèetní výkon. Díky tomuto výkonu si mù¾eme troufnout i do øe¹ení tak obtí¾né úlohy jako je uèení neuronových sítí na úloze automatizované detekce a anonymizace obrazových dat. 
 
 	Cílem tohoto semestrálního projektu je polo¾it teoretický základ pro následující zpracování diplomové práce na téma anonymizace SPZ vozidel v obrazových datech. Tato práce probíhá ve spolupráci se spoleèností Seznam.cz a její výsledek by mìl pozdìji slou¾it k automatizované anonymizaci obrazových dat pro slu¾bu Panorama. 
 
@@ -9,10 +9,10 @@
 
 \chapter{Osobní údaje a jejich ochrana}\label{ch:personaldata}
 
-	Anonymizace dat je v dne¹ní dobì velmi aktuálním tématem. Intenzivnì se na ní pracuje jak na úrovni datové, tak na úrovni anonymizace obrazových dat, která je také pøedmìtem této práce. Pokud je spoleènost schopna zajistit kvalitní anonymizaci dat, která spravuje, nejen, ¾e tím plní svoje zákonné povinnosti, mù¾e si tím také vylep¹it svoje jméno v oèích zákazníkù a spoleèností, se kterými spolupracuje. 
+	Anonymizace dat je v dne¹ní dobì velmi aktuálním tématem. Intenzivnì se na ní pracuje jak na úrovni datové, tak na úrovni anonymizace obrazových dat, která je také pøedmìtem této práce. Obchodní spoleènost, která je schopna zajistit kvalitní anonymizaci dat, která spravuje, tím nejen plní svoje zákonné povinnosti, mù¾e si tím také vylep¹it svoje jméno v oèích zákazníkù a spoleèností, se kterými spolupracuje. 
 
-	Tato kapitola se blí¾e zabývá legislativním podtextem ochrany osobních údajù v sekci , dále potom v sekci / popisem pojmu anonymizace dat a v sekci / jsou popsány
-	metody, které se k anonymizaci dat pou¾ívají v souèastnosti. 
+	Tato kapitola se blí¾e zabývá legislativním podtextem ochrany osobních údajù v èásti \ref{osobni_udaje}, dále potom v èásti \ref{ch:anonymization} popisem pojmu anonymizace dat, v èásti \ref{ch:actual} jsou popsány
+	metody, které se k anonymizaci dat pou¾ívají v souèastnosti a nakonec v èásti \ref{ch:data} je dokumentován postup snímání dat pro slu¾bu Panorama spoleènosti Seznam.cz. 
 
 	\section{Základy ochrany osobních údajù v ÈR}\label{osobni_udaje}
 
@@ -26,9 +26,9 @@
 		zákonem ukládány pøedev¹ím povinnosti, zatímco subjektùm jsou dána práva. Dodr¾ování práv a povinností obou stran je v Èeské republice kontrolováno 
 		prostøednictvím Úøadu na ochranu osobních údajù.
 
-		Základní ideou ochrany osobních údajù je ta, ¾e osobní údaje jsou shroma¾dovány a zpracovávány za nìjakým úèelem. Ka¾dý úèel vy¾aduje jiný typ osobních údajù a také
-		jiné mno¾ství takto zpracovávaných osobních údajù. Ve vý¹e uvedeném zákonì byly pro bli¾¹í specifikaci tìchto úèelù zavedeny pojmy úèel zpracování, prostøedky 
-		zpracování, zpùsob zpracování, kategorie osobních údajù, kategorie subjektù údajù a kategorie pøíjemcù. V tìchto termínech je tøeba zpracovávání osobních údajù v¾dy pøedem popsat. \footnote{Výklad zákona 101/2001 Sb. dle http://www.oou.cz}
+		Základní ideou ochrany osobních údajù je to, ¾e osobní údaje jsou shroma¾dovány a zpracovávány za nìjakým úèelem. Ka¾dý úèel vy¾aduje jiný typ osobních údajù a také
+		jiné mno¾ství takto zpracovávaných osobních údajù. Ve vý¹e uvedeném zákonì byly pro bli¾¹í specifikaci tìchto úèelù zavedeny pojmy \emph{úèel zpracování}, \emph{prostøedky 
+		zpracování}, \emph{zpùsob zpracování}, \emph{kategorie osobních údajù}, \emph{kategorie subjektù údajù} a \emph{kategorie pøíjemcù}. V tìchto termínech je tøeba zpracovávání osobních údajù v¾dy pøedem popsat. \footnote{Výklad zákona 101/2001 Sb. dle http://www.oou.cz}
 
 		V této práci se budu vìnovat zpracovávání obrazového materiálu nasbíraného na veøejném prostranství. Vzhledem k tomu, ¾e veøejné prostranství je v¾dy snímáno za 
 		bì¾ného dne, spolu s terénem, který je snímán, jsou nasnímáni i lidé a dal¹í objekty, které se v daném prostranství pohybují. Jak bylo øeèeno døíve v této kapitole,
@@ -63,18 +63,18 @@
 						\label{oblicej_anonym}
 		\end{figure}
 
-	\section{Metody vyu¾ívané v souèasnosti}
+	\section{Metody vyu¾ívané v souèasnosti}\label{ch:actual}
 
 		Datová anonymizace dosáhla v souèasné dobì uspokojivé úrovnì. Úspì¹nì anonymizována jsou jak data v \texttt{pdf} dokumentech, tak v databázích. Datovou anonymizaci lze v dne¹ní
 		dobì provádìt plnì automatizovanì prostøednictvím mnoha nástrojù jak komerèních, tak volnì dostupných.
 
 		Anonymizace v obrazových datech zatím nedosáhla tak vysoké úrovnì a to hned z nìkolika dùvodù:
 		\begin{enumerate}
-			\item Anonymizace v obrazových datech je velmi aplikaènì specifická - není proto tak velký tlak na její vývoj
-			\item Anonymizace obrazových dat je výpoèetnì nároènìj¹í ne¾ anonymizace na úrovni datové
+			\item Anonymizace v obrazových datech je velmi aplikaènì specifická - není proto tak velký tlak na její vývoj.
+			\item Anonymizace obrazových dat je výpoèetnì nároènìj¹í ne¾ anonymizace na úrovni datové.
 		\end{enumerate}
 
-		Anonymizace obrazových dat sestává ze dvou èástí: detekce èásti obrázku urèené k anonymizaci a vlastního procesu anonymizace. Je zøejmé, ¾e vlastní proces anonymizace
+		Anonymizace obrazových dat sestává ze dvou èástí: \emph{detekce} èásti obrázku urèené k anonymizaci a vlastního procesu \emph{anonymizace}. Je zøejmé, ¾e proces anonymizace
 		u¾ není výpoèetnì nijak nároèný. Jedná se zpravidla o aplikaci rozostøení, pøípadnì o pøidání vrstvy, která plnì pøekrývá anonymizované èásti obrázku. 
 		Problematická v¹ak je detekce èásti obrázku urèené k anonymizaci. 
 
@@ -92,7 +92,7 @@
 		\subsection{Automatizovaná anonymizace}
 
 			Automatizovaná anonymizace obrazových dat je zatím na poèátku svého vývoje. Zásadním problémem automatizované anonymizace, hlavnì pøi anonymizaci SPZ vozidel, jsou chyby vzniklé pøi detekci SPZ. Ty jsou toti¾ èasto detekovány i na místech, na kterých se 
-			sice na fotografii vyskytuje text, nikoliv v¹ak SPZ viz obrázek \ref{anonymized_bad} \footnote{Obrázek pochází z automatizovaného anonymizéru, který je aktuálnì pou¾íván ve spoleènosti Seznam.cz. Anonymizér byl nauèen pomocí blí¾e nespecifikovaného algoritmu strojového uèení.}. 
+			sice na fotografii vyskytuje text, nikoliv v¹ak SPZ viz obrázek \ref{anonymized_bad}. 
 
 			Pøi pou¾ití anonymizovaných dat pro slu¾bu Panorama je tento druh chyb nepøijatelný. Jde toti¾ o omezení jednoho
 			z dùle¾itých úèelù slu¾by Panorama. U¾ivatelùm slou¾í hlavnì pro lep¹í orientaci v terénu, který neznají. Pokud chce u¾ivatel slu¾bu vyu¾ít k rychlej¹ímu nalezení
@@ -101,92 +101,102 @@
 
 			\begin{figure}
 				\centering
-				\includegraphics[width=90mm]{fig/act_problems.png}
-				\caption{Problémy stávajícího øe¹ení anonymizace SPZ v Panoramì. Chybnì anonymizované nápisy nad obchody jsou na obrázku vyznaèeny èervenou barvou.}
+				\includegraphics[width=110mm]{fig/act_problems_cut.png}
+				\caption{Problémy stávajícího øe¹ení anonymizace SPZ v Panoramì. Chybnì anonymizované nápisy nad obchody jsou na obrázku vyznaèeny èervenou barvou\protect\footnotemark.}
 				\label{anonymized_bad}
-			\end{figure} 			
+			\end{figure} 		
 
-	\section{Obrazová data}
-		Obrazová data pro tuto práci byla dodána spoleèností Seznam.cz a.s. V této sekci bude popsán zpùsob, jakým jsou obrazová data pro slu¾bu Panorama snímána, a jak jsou dále zpracovávána ne¾ se dostanou ke koncovému u¾ivateli. Anonymizér, který je praktickým výstupem této práce je jen jedním èlánkem v sekvenci operací, která je nad ka¾dým zachyceným obrázkem provedena. 
+			\footnotetext{Obrázek pochází z automatizovaného anonymizéru, který je aktuálnì pou¾íván ve spoleènosti Seznam.cz. Anonymizér byl nauèen pomocí blí¾e nespecifikovaného algoritmu strojového uèení.}	
+
+	\section{Obrazová data pro slu¾bu Panorama}\label{ch:data}
+		Obrazová data pro tuto práci byla dodána spoleèností Seznam.cz a.s. Informace pro tuto èást byly pøevá¾nì získány v rámci nìkolika konzultací s jejími zamìstnanci, Ing. Adamem Koláøem a Ing. Miroslavem Talá¹kem. Ze spoleènosti Seznam.cz byla dále poskytnuta neveøejná prezentace o snímání obrazových dat pro slu¾bu Panorama, ze které bylo pøi pøípravì tohoto textu také vycházeno \cite{Talasek2015}. V této sekci bude popsán zpùsob, jakým jsou obrazová data pro slu¾bu Panorama snímána, a jak jsou dále zpracovávána ne¾ se dostanou ke koncovému u¾ivateli. Anonymizér, který je praktickým výstupem této práce je jen jedním èlánkem v sekvenci operací, která je nad ka¾dým zachyceným obrázkem provedena. 
 
 		\subsection{Snímání fotografií}
-			Fotografie jsou snímány speciálnì upraveným vozem s 15 kamerami rozmístìnými na støe¹e. Tyto kamery zabírají 360° okolí snímacího automobilu. Zpùsob, jakým jsou kamery na støe¹e automobilu umístìny, je znázornìn na obrázku \ref{snimaci_auto}\footnote{Fotografie pøevzatá z http://www.novinky.cz/internet-a-pc/348579-nova-skoda-octavia-bude-fotit-panorama-pro-mapy-cz.html}. Kamery jsou na snímací hlavì umístìny ve dvou øadách. První snímá dolní èást výsledné fotografie - v té je umístìno ¹est kamer. V horní øadì je kamer umístìno 9 a snímají hlavní èást obrazu. TODO:zjistit, jestli tam není je¹tì jedna kamera nahoøe - to by bylo 6-8-1.
+			Fotografie jsou snímány speciálnì upraveným vozem s 15 kamerami rozmístìnými na støe¹e. Tyto kamery zabírají 360° okolí snímacího automobilu. Zpùsob, jakým jsou kamery na støe¹e automobilu umístìny, je znázornìn na obrázku \ref{snimaci_auto}. Kamery jsou na snímací hlavì umístìny ve dvou øadách. První snímá dolní èást výsledné fotografie - v té je umístìno ¹est kamer. V druhé øadì jsou umístìny kamery snímající støední a horní èást fotografie. Na vrcholu záchytného zaøízení pro kamery je umísìna je¹tì jedna kamera míøící pøímo vzhùru. 
 
-			Pøi snímání se auto pohybuje rychlostí 70 km/h. Snímání se provádí na v¹ech 15 kamerách souèasnì ka¾dé 3 metry. Aby bylo mo¾né pozdìji fotografii co nejvíce pøiblí¾it tomu, jak prostøedí vnímá èlovìk, který se v nìm pohybuje, pøi ka¾dém snímku se zaznamená je¹tì sada metadat. Tyto zahrnují
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=90mm]{fig/snimaci_auto.jpg}
+				\caption{Automobil s 15 kamerami umístìnými na snímací hlavì na støe¹e\protect\footnotemark.}
+				\label{snimaci_auto}
+			\end{figure} 
+			\footnotetext{Fotografie pøevzatá z http://www.novinky.cz/internet-a-pc/348579-nova-skoda-octavia-bude-fotit-panorama-pro-mapy-cz.html}
+			
+			Pøi snímání se auto pohybuje rychlostí 70 km/h. Snímání se provádí na v¹ech 15 kamerách souèasnì ka¾dé 3 metry. Aby bylo mo¾né pozdìji fotografii co nejvíce pøiblí¾it tomu, jak prostøedí vnímá èlovìk, který se v nìm pohybuje, pøi ka¾dém snímku se zaznamená je¹tì sada metadat. Ta zahrnují:
 			\begin{itemize}
-				\item èíslo snímku
-				\item celek (15 fotografií), do kterého snímek patøí a poloha v nìm
-				\item datum snímání
-				\item zemìpisná poloha snímacího auta v souøadnicích UTM 33
-				\item $\omega$ -- úhel náklonu automobilu v pravolevém smìru (viz \ref{uhly:omega})
-				\item $\varphi$ -- úhel náklonu automobilu v pøedozadním smìru (viz \ref{uhly:phi})
-				\item $\kappa$ -- odklon smìru jízdy automobilu od severního smìru, dále oznaèováno pojmem \emph{heading}  (\viz \ref{uhly:kappa})
+				\item èíslo snímku,
+				\item celek (15 fotografií), do kterého snímek patøí a poloha v nìm,
+				\item datum snímání,
+				\item zemìpisná poloha snímacího auta v souøadnicích UTM 33,
+				\item $\omega$ -- úhel náklonu automobilu v pravolevém smìru (viz \ref{uhly:omega}),
+				\item $\varphi$ -- úhel náklonu automobilu v pøedozadním smìru (viz \ref{uhly:phi}),
+				\item $\kappa$ -- odklon smìru jízdy automobilu od severního smìru, dále oznaèováno pojmem \emph{heading}  (\viz \ref{uhly:kappa}).
 			\end{itemize}
 
 			\begin{figure}
 				\begin{minipage}{.33\linewidth}
 					\centering
-					\subfloat[]{\label{uhly:omega}\includegraphics[width=80mm]{fig/uhel_omega.png}}
+					\subfloat[]{\label{uhly:omega}\includegraphics[scale=.3]{fig/uhel_omega.pdf}}
 				\end{minipage}%				
 				\begin{minipage}{.33\linewidth}
 					\centering
-					\subfloat[]{\label{uhly:phi}\includegraphics[width=40mm]{fig/uhel_phi.png}}
+					\subfloat[]{\label{uhly:phi}\includegraphics[scale=.3]{fig/uhel_phi.pdf}}
 				\end{minipage}%				
 				\begin{minipage}{.33\linewidth}
 					\centering
-					\subfloat[]{\label{uhly:kappa}\includegraphics[width=30mm]{fig/uhel_kappa.png}}
+					\subfloat[]{\label{uhly:kappa}\includegraphics[scale=.3]{fig/uhel_kappa.pdf}}
 				\end{minipage}%
 				\caption{Zaznamenávané úhly pøi snímání fotomateriálu.}
 				\label{uhly}
 			\end{figure}
 
-			Pro výpoèet jednotlivých úhlù jsou k dispozici speciální senzory. Pro zaznamenávání headingu jsou na autì dvì vysoce pøesné GPS jednotky, které na základì rozdílu svých GPS poloh doká¾í pøesnì urèit smìr, kterým se snímací automobil pohybuje. Náklony ve v¹ech smìrech jsou mìøeny pomocí \emph{inerciální jednotky} a \emph{odometru}. 
-
-			\begin{figure}
-				\centering
-				\includegraphics[width=90mm]{fig/snimaci_auto.jpg}
-				\caption{Automobil s 15 kamerami umístìnými na snímací hlavì na støe¹e.}
-				\label{snimaci_auto}
-			\end{figure} 
+			Pro výpoèet jednotlivých úhlù jsou k dispozici speciální senzory. Pro zaznamenávání \emph{headingu} jsou na autì dvì vysoce pøesné GPS jednotky, které na základì rozdílu svých GPS poloh doká¾í pøesnì urèit smìr, kterým se snímací automobil pohybuje. Náklony ve v¹ech smìrech jsou mìøeny pomocí \emph{inerciální jednotky} a \emph{odometru}. 
 
 		\subsection{Ukládání fotografií}
-			Pøi snímání ka¾dé 3 metry v rychlosti 70 km/h musí kamery poøizovat fotografie v plném rozli¹ení v rychlosti 6,48 fps. V tomto okam¾iku tedy vzniká problém obrovského mno¾ství dat, která je potøeba okam¾itì zpracovávat. Je¹tì pøedtím, ne¾ jsou fotografie ve dvou kopiích ulo¾eny na jeden ze ètyø 600GB SSD diskù je tøeba je pøevést z formátu \texttt{raw}, do kterého jsou poøizovány do formátu \texttt{jpeg}, ve kterém jsou ukládány a dále zpracovávány. Tento pøevod je provádìn na výkonné grafické kartì umístìné v kufru automobilu pomocí technologie \emph{CUDA}.
+			Pøi snímání ka¾dé 3 metry v rychlosti 70\,km/h musí kamery poøizovat fotografie v plném rozli¹ení v rychlosti 6,48\,fps. V tomto okam¾iku tedy vzniká problém obrovského mno¾ství dat, která je potøeba okam¾itì zpracovávat. Je¹tì pøedtím, ne¾ jsou fotografie ve dvou kopiích ulo¾eny na jeden ze ètyø 600GB SSD diskù je tøeba je pøevést z formátu \texttt{raw}, do kterého jsou poøizovány, do formátu \texttt{jpeg}, ve kterém jsou ukládány a dále zpracovávány. Tento pøevod je provádìn na výkonné grafické kartì umístìné v kufru automobilu pomocí technologie \emph{CUDA}.
 
-			Ve¹keré operace nad daty jsou provádìny v kufru automobilu, kam data ze støechy putují pøes vysokorychlostní datové kabely. Ka¾dá z 15 kamer je s poèítaèem spojena pomocí svojí vlastní 1 Gbitové linky. 
+			Ve¹keré operace nad daty jsou provádìny v kufru automobilu, kam data ze støechy putují pøes vysokorychlostní datové kabely. Ka¾dá z 15 kamer je s poèítaèem spojena pomocí svojí vlastní gigabitové linky. 
 
 		\subsection{Se¹ívání fotografií}
-			Jakmile se data dostanou z terénu, zaèíná rozsáhlá mno¾ina operací, která je nad nimi provádìna. Jako první pøijde na øadu se¹ívání snímkù. Pomocí nástroje navr¾eného ve spoleènosti Seznam.cz je z 15 fotografií zachycených v jednom okam¾iku vytvoøena jedinná ¹irokoúhlá fotografie, nad kterou se nadále pracuje. V rámci se¹ívání fotografií jsou také odstranìny èásti snímacího automobilu, které se dostaly do zábìru.
+			Jakmile se data dostanou z terénu, zaèíná rozsáhlá mno¾ina operací, která je nad nimi provádìna. Jako první pøijde na øadu se¹ívání snímkù (znázornìno na obrázku \ref{sesivani}). Pomocí nástroje navr¾eného ve spoleènosti Seznam.cz je z 15 fotografií zachycených v jednom okam¾iku vytvoøena jedinná ¹irokoúhlá fotografie, nad kterou se nadále pracuje. V rámci se¹ívání fotografií jsou také odstranìny èásti snímacího automobilu, které se dostaly do zábìru.
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=120mm]{fig/hangar.jpg}
+				\caption{Se¹ívání 14 snímkù s pøekryvem do jedné panoramatické fotografie. Poslední snímek z horní kamery slou¾í k doplnìní volných míst v horní èásti fotografie.}
+				\label{sesivani}
+			\end{figure} 
 
 		\subsection{Vyrovnávání horizontu}
-			Na fotografii se¹ité z 15 fotek je znaènì deformován horizont. Nyní tedy pøichází na øadu vyrovnání horizontu zachyceného prostøedí. Pro tuto operaci byly takté¾ navr¾eny algoritmy pøímo ve spoleènosti Seznam.cz. Vzor výstupu z této operace je znázornìn na obrázku \ref{vyrovnano}\footnote{Fotografie pøevzatá z archivu firmy Seznam.cz}. Aèkoliv obrázek nevypadá pøirozenì, po jeho namapování na kouli se ve¹keré deformace vyrovnají a vznikne vìrná kopie reálného prostøedí.
+			Na fotografii se¹ité z 15 fotek je znaènì deformován horizont. Nyní tedy pøichází na øadu vyrovnání horizontu zachyceného prostøedí. Pro tuto operaci byly takté¾ navr¾eny algoritmy pøímo ve spoleènosti Seznam.cz. Vzor výstupu z této operace je znázornìn na obrázku \ref{vyrovnano}. Aèkoliv obrázek nevypadá pøirozenì, po jeho namapování na kouli se ve¹keré deformace vyrovnají a vznikne vìrná kopie reálného prostøedí.
 			\begin{figure}
 				\centering
-				\includegraphics[width=90mm]{fig/vyrovnano.jpg}
-				\caption{360° fotografie po vyrovnání horizontu.}
+				\includegraphics[width=120mm]{fig/vyrovnano.jpg}
+				\caption{360° fotografie po vyrovnání horizontu\protect\footnotemark.}
 				\label{vyrovnano}
-			\end{figure} 			
+			\end{figure} 
+			\footnotetext{Fotografie pøevzatá z archivu firmy Seznam.cz}			
 
-		\subsection{Namapování na kouli}
-			Výsledný obrázek je následnì namapován na kouli, na které u¾ je zobrazován koncovému u¾ivateli. Natoèení této koule v prostoru doká¾e dorovnat zakøivení, které vznikne vlivem snímání pod úhlem. V tomto okam¾iku jsou vyu¾ity zaznamenané úhly $\omega$ a $\varphi$, jejich¾ aplikace zamezí u¾ivatelskému pocitu \emph{padání obrazu}.
+		\subsection{Zobrazení u¾ivateli}
+			Výsledný obrázek je následnì namapován na kouli, na které u¾ je zobrazován koncovému u¾ivateli. Natoèení této koule v prostoru doká¾e dorovnat zakøivení, které vznikne vlivem snímání pod úhlem. V tomto okam¾iku jsou vyu¾ity zaznamenané úhly $\omega$ a $\varphi$, jejich¾ aplikace zamezí u¾ivatelskému pocitu tzv. \emph{padání obrazu}.
 
 			\subsubsection{Ekvirektangulární projekce}
-			Pro namapování obdélníkového obrazu na kouli je vyu¾ita ekvirektangulární projekce (v literatuøe té¾ oznaèována jako ekvidistantní projekce). Tato projekce vyu¾ívá pøepoèet souøadnic dle vztahù \ref{ekvi_x} a \ref{ekvi_y}, kde $x$ a $y$ jsou souøadnice na fotografii v rovinì, $\lambda$ znaèí zemìpisnou délku od centrálního poledníku v daném zobrazení, $\varphi$ znaèí zemìpisnou ¹íøku a $\varphi_1$ je parametr rovnobì¾ek, který urèuje rozsah skuteèné projekce. 
-
-			\begin{equation}
-				x = \lambda*cos(\varphi_1)
+			Pro namapování obdélníkového obrazu na kouli je vyu¾ita ekvirektangulární projekce (v literatuøe té¾ oznaèována jako ekvidistantní projekce) \cite{Snyder1997}. Tato projekce vyu¾ívá pøepoèet souøadnic dle vztahù:
+			 \begin{equation}
+				x = \lambda*cos(\varphi_1),
 				\label{ekvi_x}
 			\end{equation}
 
 			\begin{equation}
-				y = \varphi
+				y = \varphi,
 				\label{ekvi_y}
-			\end{equation}			
+			\end{equation}
+			kde $x$ a $y$ jsou souøadnice na fotografii v rovinì, $\lambda$ znaèí zemìpisnou délku od centrálního poledníku v daném zobrazení, $\varphi$ znaèí zemìpisnou ¹íøku a $\varphi_1$ je parametr rovnobì¾ek, který urèuje rozsah skuteèné projekce. 		
 
 \chapter{Neuronové sítì}\label{ch:neuronky}
 
-	Neuronové sítì jsou jednou ze tøí hlavních podskupin vìdního oboru soft computing. Dal¹ími problematikami, které tato vìdní disciplína zkoumá jsou fuzzy systémy a evoluèní algoritmy. Tato práce se vìnuje hlubokým neuronovým sítím pracujícím nad obrázkovými daty. Neuronové sítì jsou uvedeny do ¹ir¹ího kontextu v této kapitole, která je rozdìlena do nìkolika èástí. 
+	Neuronové sítì jsou jednou ze tøí hlavních podskupin vìdního oboru soft computing \cite{SekaninaSchwarz}. Dal¹ími problematikami, které tato vìdní disciplína zkoumá jsou fuzzy systémy a evoluèní algoritmy. Tato práce se vìnuje hlubokým neuronovým sítím pracujícím nad obrázkovými daty. Neuronové sítì jsou uvedeny do ¹ir¹ího kontextu v této kapitole, která je rozdìlena do nìkolika èástí. 
 
-	V èásti \ref{ch:bioneuron} je zjednodu¹enì popsán biologický neuron, na jeho¾ funkci je celá teorie neuronových sítí zalo¾ena. V sekci \ref{ch:artneuron} je potom popsán zpùsob, jakým je v umìlé inteligenci funkènost biologického neuronu napodobována. V sekci \ref{ch:neuralnets} je popsáno, jakým zpùsobem jsou umìlé neurony spojovány do neuronových sítí a jakých výhod je tím dosa¾eno. V této èásti je dùle¾itá podkapitola \ref{ch:uceni}, kde je podrobnì popsán jeden z nejpou¾ívanìj¹ích algoritmù pro uèení neuronových sítí: \emph{backpropagation}. Tato kapitola je potom zakonèena èástí \ref{ch:deeplearning}, ve které jsou popsány slo¾itìj¹í koncepty hlubokých neuronových sítí, které budou vyu¾ity v této diplomové práci.
+	V èásti \ref{ch:bioneuron} je zjednodu¹enì popsán biologický neuron, na jeho¾ funkci je celá teorie neuronových sítí zalo¾ena. V sekci \ref{ch:artneuron} je potom popsán zpùsob, jakým je v umìlé inteligenci funkènost biologického neuronu napodobována. V sekci \ref{ch:neuralnets} je popsáno, jakým zpùsobem jsou umìlé neurony spojovány do neuronových sítí a jakých výhod je tím dosa¾eno. V této èásti je dùle¾itá podkapitola \ref{ch:uceni}, kde je podrobnì popsán jeden z nejpou¾ívanìj¹ích algoritmù pro uèení neuronových sítí: \emph{backpropagation}. %Tato kapitola je potom zakonèena èástí \ref{ch:deeplearning}, ve které jsou popsány slo¾itìj¹í koncepty hlubokých neuronových sítí, které budou vyu¾ity v této diplomové práci.
 
 	\section{Biologický základ neuronových sítí}\label{ch:bioneuron}
 
@@ -203,18 +213,18 @@
 		\begin{figure}
 			\centering
 			\includegraphics[width=90mm]{fig/neuron.pdf}
-			\caption{Schéma biologického neuronu. Na obrázku je zobrazeno \emph{jádro}, které uchovává genetickou informaci buòky, \emph{soma} je tìlo buòky, \emph{dendrity} jsou vstupní body neuronu, \emph{axon} jsou výstupní výbì¾ky tvoøené axonovými vlákny a \emph{axonální zakonèení} jsou výstupní místa neuronu.}
+			\caption{Schéma biologického neuronu.}
 			\label{neuron}
 		\end{figure} 
 
-		V okam¾iku, kdy se v tìle neuronu nashromá¾dí dostateènì velký potenciál, zaène se ¹íøit nervovým vláknem (axonem) a¾ k axonálnímu zakonèení. Tady pøejde do dal¹ího neuronu. Velikost signálu pøená¹ená z dendritu do tìla neuronu závisí na síle impulzu sousedního neuronu, kterého se dendrit dotýká a také na \emph{synaptické váze}. V tìle neuronu se seètou hodnoty signálù od v¹ech aktivních dendritù. Pokud souèet hodnot pøekroèí jistý práh, soma vygeneruje nový impulz a tím se vzruch ¹íøí do dal¹ích neuronù. Bezprostøednì po vytvoøení pulzu se neuron stane na chvilku necitlivým. To má za následek generování nespojitého signálu, jeho¾ frekvence se mù¾e pohybovat v rozmezí 0,1-100Hz.
+		V okam¾iku, kdy se v tìle neuronu nashromá¾dí dostateènì velký potenciál, zaène se ¹íøit nervovým vláknem (axonem) a¾ k axonálnímu zakonèení. Tady pøejde do dal¹ího neuronu. Velikost signálu pøená¹ená z dendritu do tìla neuronu závisí na síle impulzu sousedního neuronu, kterého se dendrit dotýká a také na \emph{synaptické váze}. V tìle neuronu se seètou hodnoty signálù od v¹ech aktivních dendritù. Pokud souèet hodnot pøekroèí jistý práh, soma vygeneruje nový impulz a tím se vzruch ¹íøí do dal¹ích neuronù. Bezprostøednì po vytvoøení pulzu se neuron stane na chvilku necitlivým. To má za následek generování nespojitého signálu, jeho¾ frekvence se mù¾e pohybovat v rozmezí 0,1-100\,Hz.
 
 	\section{Umìlý neuron}\label{ch:artneuron}
 		Princip biologického neuronu je napodobován umìlým neuronem. Základní model umìlého neuronu je zobrazen na obrázku \ref{art_neuron}, kde
 
 		\begin{description}
-			\item[\textbf{$x_i$}] je vstupní hodnota, která mù¾e být napojena na primární vstup nebo na výstup jiného neuronu. 
-			\item[$w_i$] je váha propojení. Urèuje jak moc bude konkrétní vstup $i$ ovlivòovat výstup neuronu. Váhy se v prùbìhu výpoètu mìní - probíhá \emph{uèení}, pøípadnì pøes nemìnnou váhu mù¾e být pøipojen tzv. \emph{bias}. Ten není primárním vstupem ani výstupem jiného neuronu - jedná se o konstantu v¾dy vstupující do neuronu.
+			\item[\textbf{$x_i$}] je vstupní hodnota, která mù¾e být napojena na primární vstup nebo na výstup jiného neuronu, 
+			\item[$w_i$] je váha propojení. Urèuje jak moc bude konkrétní vstup $i$ ovlivòovat výstup neuronu. Váhy se v prùbìhu výpoètu mìní - probíhá \emph{uèení}, pøípadnì pøes nemìnnou váhu mù¾e být pøipojen tzv. \emph{bias}. Ten není primárním vstupem ani výstupem jiného neuronu - jedná se o konstantu v¾dy vstupující do neuronu,
 			\item[$u$] je hodnota vnitøního potenciálu neuronu.
 		\end{description}
 
@@ -225,32 +235,39 @@
 			\label{art_neuron}
 		\end{figure}
 
-		Jak je vidìt na obrázku \ref{art_neuron}, na vstup umìlého neuronu se pøivádí vektor èísel, ty jsou pronásobena vektorem vah, které mají zpravidla malé hodnoty (vìt¹inou v intervalu $<-1;1>$, pøípadnì $<-2;2>$), dále jsou nad nimi provedeny bázová a aktivaèní funkce (viz dále) a výstupem je jedinné èíslo. Umìlý neuron je tedy matematická struktura, která zpracovává èísla a na výstupu podává jiná èísla. \cite{Kulkarni1994}
+		Jak je vidìt na obrázku \ref{art_neuron}, na vstup umìlého neuronu se pøivádí vektor èísel, ty jsou pronásobena vektorem vah, které mají zpravidla malé hodnoty (vìt¹inou v intervalu $\left<-1;1\right>$, pøípadnì $\left<-2;2\right>$), dále jsou nad nimi provedeny bázová a aktivaèní funkce (viz dále) a výstupem je jedinné èíslo. Umìlý neuron je tedy matematická struktura, která zpracovává èísla a na výstupu podává jiná èísla \cite{Kulkarni1994}. 
 
 		\begin{description}
-			\item[Bázová funkce] - urèuje zpùsob výpoètu vnitøního potenciálu $u$ neuronu. Nejèastìji vyu¾íváná je lineární bázová funkce. Její vztah pro výpoèet vnitøního potenciálu je uveden ve vztahu \ref{base_linear}. Dal¹í z vyu¾ívaných bázových funkcí je radiální bázová funkce - viz vztah \ref{base_radial}. \cite{Zboril2015}
+			\item[Bázová funkce] - urèuje zpùsob výpoètu vnitøního potenciálu $u$ neuronu. Nejèastìji vyu¾íváná je lineární bázová funkce \cite{Zboril2015}. Její vztah pro výpoèet vnitøního potenciálu je následující: 
 			\begin{equation}
-				u = \sum_{i = 1}^n w_i \times x_i
+				u = \sum_{i = 1}^n w_i \times x_i.
 				\label{base_linear}
-			\end{equation}
+			\end{equation} 
+			Dal¹í z vyu¾ívaných bázových funkcí je radiální bázová funkce:
 			\begin{equation}
-				u = \sqrt{\sum_{i = 1}^n (w_i \times x_i)^2}
+				u = \sqrt{\sum_{i = 1}^n (w_i \times x_i)^2}.
 				\label{base_radial}
 			\end{equation}
-			\item[Aktivaèní funkce] - té¾ nazývaná \emph{pøenosová funkce}, vyu¾ívá se pro ni symbol $\sigma$. Urèuje zpùsob výpoètu výstupu neuronu z jeho vnitøního potenciálu. Tøi neèastìji pou¾ívané aktivaèní funkce jsou znázornìny na obrázku \ref{aktivacni_fce}. Na ose x je v¾dy hodnota vnitøního potenciálu neuronu $u$, na ose y je potom výstupní hodnota neuronu $y$.
+
+
+			\item[Aktivaèní funkce] - té¾ nazývaná \emph{pøenosová funkce}, vyu¾ívá se pro ni symbol $\sigma$. Urèuje zpùsob výpoètu výstupu neuronu z jeho vnitøního potenciálu. Ètyøi neèastìji pou¾ívané aktivaèní funkce jsou znázornìny na obrázku \ref{aktivacni_fce}. Na ose x je v¾dy hodnota vnitøního potenciálu neuronu $u$, na ose y je potom výstupní hodnota neuronu $y$.
 
 			\begin{figure}
-				\begin{minipage}{.33\linewidth}
+				\begin{minipage}{.45\linewidth}
 					\centering
-					\subfloat[Skoková funkce.]{\label{aktivacni:skokova}\includegraphics[scale=.33]{fig/skokova.pdf}}
+					\subfloat[Lineární funkce.]{\label{aktivacni:linear}\includegraphics[scale=.45]{fig/linear.pdf}}
+				\end{minipage}%	
+				\begin{minipage}{.45\linewidth}
+					\centering
+					\subfloat[Skoková funkce.]{\label{aktivacni:skokova}\includegraphics[scale=.45]{fig/skokova.pdf}}
+				\end{minipage}		\\		
+				\begin{minipage}{.45\linewidth}
+					\centering
+					\subfloat[Sigmoida.]{\label{aktivacni:sigmoida}\includegraphics[scale=.45]{fig/sigmoida.pdf}}
 				\end{minipage}%				
-				\begin{minipage}{.33\linewidth}
+				\begin{minipage}{.45\linewidth}
 					\centering
-					\subfloat[Sigmoida.]{\label{aktivacni:sigmoida}\includegraphics[scale=.33]{fig/sigmoida.pdf}}
-				\end{minipage}%				
-				\begin{minipage}{.33\linewidth}
-					\centering
-					\subfloat[Hyperbolický tangens.]{\label{aktivacni:tanhyp}\includegraphics[scale=.33]{fig/tanhyp.pdf}}
+					\subfloat[Hyperbolický tangens.]{\label{aktivacni:tanhyp}\includegraphics[scale=.45]{fig/tanhyp.pdf}}
 				\end{minipage}%
 				\caption{Nejèastìji vyu¾ívané aktivaèní funkce.}
 				\label{aktivacni_fce}
@@ -274,14 +291,14 @@
 		\end{figure}
 
 	\section{Vícevrstvé neuronové sítì}\label{ch:neuralnets}
-		Neuronová sí» jse výpoèetním systémem, o kterém mù¾e být uva¾ováno jako o \emph{èerné skøíòce}, která pøijímá vstupy a produkuje výstupy. Neuronová sí» se skládá z nìkolika vrstev umìlých neuronù a hlavní zlep¹ení, které neuronové sítì pøiná¹ejí oproti samotným neuronùm je mo¾nost klasifikace lineárnì neseparovatelných problémù.
+		Neuronová sí» je výpoèetním systémem, o kterém mù¾e být uva¾ováno jako o \emph{èerné skøíòce}, která pøijímá vstupy a produkuje výstupy. Neuronová sí» se skládá z nìkolika vrstev umìlých neuronù a hlavní zlep¹ení, které neuronové sítì pøiná¹ejí oproti samotným neuronùm je mo¾nost klasifikace lineárnì neseparovatelných problémù.
 
-		Neuronové sítì jsou v praxi èasto nasazovány na nìkteré z komplikovaných problémù, jako napøíklad \cite{Eberhart_shi2007}:
+		Neuronové sítì jsou v praxi èasto nasazovány na nìkteré z komplikovaných problémù \cite{Eberhart_shi2007}, jako napøíklad:
 
 		\begin{description}
 			\item[Klasifikace] - na vstup je pøilo¾en vektor a na výstupu je získáno zaøazení daného vektoru do nìkteré z pøedem definovaných tøíd.
-			\item[Hledání vzorù] - na vstup je pøilo¾en vzor a na výstupu je vygenerován výstup, který nejlépe odpovídá vzoru poskytnutému na vstupu.
-			\item[Doplòování vzorù] - na vstup je pøilo¾en vektor znázoròující èást hledaného vektoru. Na výstup jsou potom dotvoøeny chybìjící èásti vzoru.
+			\item[Hledání vzorù] - na vstup je pøilo¾en vektor a na výstupu je vygenerován vzor, který nejlépe popisuje vektor poskytnutý na vstupu.
+			\item[Doplòování vzorù] - na vstup je pøilo¾en vektor znázoròující èást hledaného vzoru. Na výstup jsou potom dotvoøeny chybìjící èásti vzoru.
 			\item[Odstraòování ¹umu] - na vstup je pøilo¾en za¹umìný obrázek a na výstupu je získán obrázek s odstranìným ¹umem.
 			\item[Optimalizace] - na vstup je pøilo¾en systém, který správnì øe¹í danou optimalizaèní úlohu a na výstupu je získáno nové funkèní øe¹ení, které pøineslo zlep¹ení v nìkterém ze sledovaných parametrù (napø. rychost, spotøeba energie apod.).
 			\item[Øízení] - na vstup je pøilo¾en aktuální stav øízení a stav, do kterého chceme, aby se øízení dostalo a na výstupu získáme sekvence krokù, která tento pøechod zajistí.
@@ -291,7 +308,7 @@
 		\subsection{Topologie sítí}
 			Aby bylo mo¾né pomocí neuronových sítí øe¹it i lineárnì neseparovatelné problémy, je tøeba podstatnì zeslo¾itit jejich architekturu. To se provádí vkládáním dal¹ích vrstev neuronù do sítí. Dùle¾itým faktorem pøitom je, aby jednotlivé vrstvy neuronové sítì mìly nelineární aktivaèní funkci. Pokud by toti¾ v¹echny vrstvy mìly lineární aktivaèní funkci, slo¾ením tìchto vrstev by pouze vznikla jiná lineární funkce a øe¹ení neuronové sítì by tedy stále bylo ekvivalentem hledání rovnice pøímky, která prostor øe¹ení rozdìlí na dvì poloroviny. 
 
-			Dal¹ím z dùle¾itých faktorù pøi návrhu neuronových sítí jsou jednotlivá propojení. V prùbìhu vývoje se experimentovalo s mnohými nastaveními propojení. Nìkterá pou¾ívaná propojení jsou zobrazena na obrázku \ref{nets}. Plnì propojená sí», ve které je ka¾dý neuron propojen se v¹emi neurony svojí vrstvy, vrstev pøedchozích i následujících se postupnì vyvinula ve vrstvovou sí» (viz \ref{nets:vrstvova}). Ve vrstvové síti lze výstup ka¾dého neuronu vyu¾ít jako vstup nìkterého z neuronù ve stejné vrstvì, pøípadnì jako vstup kteréhokoliv neuronu v nìkteré z vrstev následujících. Odstranìním zpìtných vazeb v rámci jednotlivých vrstev vzniká acyklická sí» (viz \ref{nets:acyklicka}). V acyklické síti mù¾e být výstup ka¾dého neuronu pøipojen na vstup kteréhokoliv neuronu v nìkteré z následujících vrstev. V této práci se v¹ak budu vìnovat výhradnì výzkumu na dopøedných sítích. Dopøedná sí» (viz \ref{nets:dopredna}) vzniká omezením propojení acyklických sítí. V dopøedné síti mù¾e být výstup ka¾dého neuronu pøipojen pouze na vstup kteréhokoliv neuronu v logicky následující vrstvì neuronù. \cite{Handbook_springer2012}
+			Dal¹ím z dùle¾itých faktorù pøi návrhu neuronových sítí jsou jednotlivá propojení. V prùbìhu vývoje se experimentovalo s mnohými nastaveními propojení. Nìkterá pou¾ívaná propojení jsou zobrazena na obrázku \ref{nets}. První experimenty probìhly nad plnì propojenou sítí, ve které je ka¾dý neuron propojen se v¹emi neurony svojí vrstvy, vrstev pøedchozích i následujících. Ta se postupnì vyvinula ve vrstvovou sí» (viz \ref{nets:vrstvova}). Ve vrstvové síti lze výstup ka¾dého neuronu vyu¾ít jako vstup nìkterého z neuronù ve stejné vrstvì, pøípadnì jako vstup kteréhokoliv neuronu v nìkteré z vrstev následujících. Odstranìním zpìtných vazeb v rámci jednotlivých vrstev vzniká acyklická sí» (viz \ref{nets:acyklicka}). V acyklické síti mù¾e být výstup ka¾dého neuronu pøipojen na vstup kteréhokoliv neuronu v nìkteré z následujících vrstev. V této práci se v¹ak budu vìnovat výhradnì výzkumu na dopøedných sítích. Dopøedná sí» (viz \ref{nets:dopredna}) vzniká omezením propojení acyklických sítí. V dopøedné síti mù¾e být výstup ka¾dého neuronu pøipojen pouze na vstup kteréhokoliv neuronu v logicky následující vrstvì neuronù \cite{Handbook_springer2012}.
 
 			\begin{figure}
 				\centering
@@ -430,20 +447,20 @@
 				\label{delta_hidden}
 			\end{equation}
 
-	\section{Hluboké neuronové sítì}\label{ch:deeplearning}
-		V pøedchozích kapitolách této práce byly pojmem neuronové sítì v¾dy rozumìny plnì propojené sítì. Tedy takové, ve kterých existuje propojení mezi ka¾dými dvìma neurony le¾ícími v sousedních vrstvách. Pokud v¹ak neuronová sí» pracuje nad obrázky, tímto propojením se ztrácí prostorová informace. U hodnot pocházejících ze dvou sousedních pixelù mù¾eme pracovat se stejnou závislostí jako u hodnot pocházejících z pixelù z opaèných hran obrázkù. Pokud vezmeme v architektuøe sítì v potaz, ¾e nìkteré pixely obrázku se nachází v bezprostøední blízkosti, zatímco jiné dvojice pixelù spolu vùbec nesousedí, mù¾eme získat mnohem lep¹í výsledky.
+%	\section{Hluboké neuronové sítì}\label{ch:deeplearning}
+%		V pøedchozích kapitolách této práce byly pojmem neuronové sítì v¾dy rozumìny plnì propojené sítì. Tedy takové, ve kterých existuje propojení mezi ka¾dými dvìma neurony le¾ícími v sousedních vrstvách. Pokud v¹ak neuronová sí» pracuje nad obrázky, tímto propojením se ztrácí prostorová informace. U hodnot pocházejících ze dvou sousedních pixelù mù¾eme pracovat se stejnou závislostí jako u hodnot pocházejících z pixelù z opaèných hran obrázkù. Pokud vezmeme v architektuøe sítì v potaz, ¾e nìkteré pixely obrázku se nachází v bezprostøední blízkosti, zatímco jiné dvojice pixelù spolu vùbec nesousedí, mù¾eme získat mnohem lep¹í výsledky.
 
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=100mm]{fig/convolutional_layer.png}
-			\caption{Schéma konvoluèní vrstvy sítì.}
-			\label{convolutional}
-		\end{figure}
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=100mm]{fig/convolutional_layer.pdf}
+%			\caption{Schéma konvoluèní vrstvy sítì.}
+%			\label{convolutional}
+%		\end{figure}
 
 
 \chapter{Návrh}\label{ch:navrh}
 
-	V této kapitole je popsán návrh implementovaného programu. Cílem této práce je vyrobit nástroj, který doká¾e automaticky zpracovávat nafocené obrázky na vstupu a podávat anonymizované obrázky na výstupu. Práce s obrázky je rozdìlena do ètyø základních fází znázornìných na obrázku \ref{overall_scheme}, jejich¾ mechanismy budou v této kapitole podrobnì popsány. Barevné ¹ipky v obrázku \ref{overall_scheme} znázoròují jednotlivé mezivýsledky pøi zpracování a stejná barevná notace je pou¾ita i v dal¹ích obrázcích této kapitoly.  
+	V této kapitole je popsán návrh implementovaného programu. Cílem této práce je vyrobit nástroj, který doká¾e automaticky zpracovávat nafocené obrázky na vstupu a podávat anonymizované obrázky na výstupu. Práce s obrázky je rozdìlena do ètyø základních fází znázornìných na obrázku \ref{overall_scheme}, jejich¾ mechanismy budou v této kapitole podrobnì popsány. Barevné hrany v obrázku \ref{overall_scheme} znázoròují jednotlivé mezivýsledky pøi zpracování a stejná barevná notace je pou¾ita i v dal¹ích obrázcích této kapitoly.  
 
 	\begin{figure}[h]
 		\centering
@@ -455,13 +472,13 @@
 	\section{Pøedzpracování dat}\label{ch:preprocessing}	
 		Na primárním vstupu celého programu jsou pøijímány fotografie nasnímané v rámci sbìru dat pro slu¾bu Panorama. V¹echny dal¹í fáze u¾ v¹ak pracují nad èísly typu \emph{double}, pøedzpracování dat tedy spoèívá v reprezentaci celého obrázku pomocí èíselného vektoru. Tento èíselný vektor musí mít pro jednotlivé obrázky co nejlep¹í rozli¹ovací schopnost. Pokud je neuronová sí» natrénována ke klasifikaci dat o velké velikosti jednoho vzorku do \emph{n} tøíd, jejím hlavním úèelem je vyselektovat hodnoty, které jsou pro urèování tøíd podstatné - vytvoøit tzv. \emph{vektor rysù}. Tento vektor rysù, té¾ \emph{feature vector} je nejkondenzovanìj¹í informace z poèáteèních dat, výstupem z pøedzpracování dat je tedy právì feature vector.
 
-		K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc}, je¾ vznikla pøi pøíle¾itosti \emph{ImageNet Large Scale Visual Recognition Challenge 2015} - odtud zkratka Ilsvrc. Tato výzva se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a pak také na klasifikaci scény. Sí» Ilsvrc byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\0000 kategorií. 
+		K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc} \cite{ilsvrc_web}. Tato sí» vznikla v rámci výzvy Ilsvrc, která se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a pak také na klasifikaci scény. Sí» Ilsvrc byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\,000 kategorií. 
 
 		Tato sí» byla v rámci této práce pomocí \emph{finetuningu} (viz èást \ref{finetuning}) optimalizována pro klasifikaci mno¾iny obrázkù bli¾¹í obrázkùm, se kterými budu v rámci této práce pracovat. Pro dal¹í pou¾ití není vyu¾íván primární výstup klasifikace (viz obrázek \ref{preprocessing}). Ze sítì je extrahován vektor rysù, jeho¾ informaènì nejbohat¹í varianta se nachází v pøedposlední vrstvì sítì, která nese název \emph{FC7}.
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=130mm]{fig/preprocessing_nn.png}
+			\includegraphics[width=130mm]{fig/preprocessing_nn.pdf}
 			\caption{Schéma pøedzpracování dat.}
 			\label{preprocessing}
 		\end{figure}			 
@@ -470,8 +487,8 @@
 			\emph{Finetuning} je metoda vyu¾íváná v pøípadì, ¾e u¾ máme úspì¹nì natrénovanou sí» a chceme ji vyu¾ít ke klasifikaci na podobná data. Stadardnì se na poèátku tréninku neuronové sítì na nový typ vstupu v¹echny váhy inicializují náhodnì. Pokud v¹ak máme k dispozici sí», která je u¾ nauèená na velké mno¾inì obrázkù, mù¾eme namísto náhodné inicializace nové sítì inicializovat váhy nové sítì na výsledné váhy nauèené sítì. Proces uèení této sítì se potom nazývá \emph{finetuning}. Ten lze provádìt více zpùsoby. Nejznámìj¹ími z nich jsou:
 
 			\begin{itemize}
-				\item Úpravou vah pouze v poslední vrstvì
-				\item Pøidáním nìkolika nových vrstev do nauèené neuronové sítì
+				\item úpravou vah pouze v poslední vrstvì,
+				\item pøidáním nìkolika nových vrstev do nauèené neuronové sítì.
 			\end{itemize}
 
 			Základním principem finetuningu je to, ¾e do vah v nauèené èásti sítì není pøíli¹ zasahováno. V pøípadì úpravy vah pouze v poslední vrstvì jsou ostatní váhy striktnì zachovány ve svojí pùvodní podobì. V pøípadì pøidání nových vrstev do nauèené sítì je tato celá zachována ve svojí pùvodní podobì a uèení probíhá pouze na nových vrstvách vzniklé sítì.
@@ -482,25 +499,25 @@
 		
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=130mm]{fig/car_detection_nn.png}
+			\includegraphics[width=130mm]{fig/detekce_aut_nn.pdf}
 			\caption{Schéma detekce aut v obrázku.}
 			\label{car_detect}
 		\end{figure}
 
-		Trénování neuronové sítì pro detekci automobilù bude provedeno na datové mno¾inì, která bude v¾dy obsahovat právì jedno nebo ¾ádné auto. Výstup této sítì tedy bude binární - na obrázku je auto/na obrázku není auto. V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut, proto je tøeba vytvoøit zpùsob, jakým detekovat v¹echna auta. Pro tuto práci jsem zvolila techniku, kdy na poèátku, je¹tì pøed pøedzpracováním dat dle kapitoly \ref{ch:preprocessing}, bude vstupní fotografie rozøezána na nìkolik podèástí, které budou zkoumány samostatnì. Neuronová sí» pro detekci automobilù pro ka¾dou podèást podá výstup na obrázku je/není auto. Tyto hodnoty budou potom umístìny zpátky na pùvodní pozice a tím bude vytvoøena \emph{heatmapa}. Na obrázku \ref{rozsek+sloz} mù¾eme vidìt postup tvorby heatmapy: výøezy, ve kterých nebylo nalezeno auto jsou znázornìny èervenou barvou, výøezy, ve kterých bylo nalezeno auto jsou znázornìny barvou zelenou. Na místech, kde se pøekrývá zelená barva se zelenou je nejvy¹¹í pravdìpodobnost výskytu auta. Naopak pøi pøekryvu èervených ploch je pravdìpodobnost nejmen¹í. Pøi pøekryvu èervené a zelené plochy je pravdìpodobnost výskytu auta malá.
+		Trénování neuronové sítì pro detekci automobilù bude provedeno na datové mno¾inì, která bude v¾dy obsahovat právì jedno nebo ¾ádné auto. Výstup této sítì tedy bude binární - na obrázku je auto/na obrázku není auto. V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut, proto je tøeba vytvoøit zpùsob, jakým detekovat v¹echna auta. Pro tuto práci jsem zvolila techniku, kdy na poèátku, je¹tì pøed pøedzpracováním dat dle kapitoly \ref{ch:preprocessing}, bude vstupní fotografie rozøezána na nìkolik podèástí, které budou zkoumány samostatnì. Neuronová sí» pro detekci automobilù pro ka¾dou podèást podá výstup -- na obrázku je/není auto. Tyto hodnoty budou potom umístìny zpátky na pùvodní pozice a tím bude vytvoøena tzv. \emph{zátì¾ová mapa}. Na obrázku \ref{rozsek+sloz} mù¾eme vidìt postup tvorby zátì¾ové mapy: výøezy, ve kterých nebylo nalezeno auto jsou znázornìny èervenou barvou, výøezy, ve kterých bylo nalezeno auto jsou znázornìny barvou zelenou. Na místech, kde se pøekrývá zelená barva se zelenou je nejvy¹¹í pravdìpodobnost výskytu auta. Naopak pøi pøekryvu èervených ploch je pravdìpodobnost nejmen¹í. Pøi pøekryvu èervené a zelené plochy je pravdìpodobnost výskytu auta malá.
 
 		 Výøez, ve kterém byla zji¹tìna nejvy¹¹í pravdìpodobnost výskytu automobilu je na obrázku zvýraznìn zeleným rámeèkem. Vzniklý výøez bude pro dal¹í fáze zpracování identifikován ètyrmi souøadnicemi: $x_1$ a $y_1$, které identifikují souøadnice levého horního rohu obdélníku, ve kterém se nachází auto a $x_2$ a $y_2$, které identifikují souøadnice pravého dolního rohu tohoto obdélníku.
 
 		\begin{figure}
 			\begin{minipage}{.5\linewidth}
 				\centering
-				\subfloat[]{\label{rozsek:a}\includegraphics[scale=.6]{fig/rozsekani.png}}
+				\subfloat[]{\label{rozsek:a}\includegraphics[scale=.65]{fig/rozsekani.pdf}}
 			\end{minipage}%				
 			\begin{minipage}{.5\linewidth}
 				\centering
-				\subfloat[]{\label{rozsek:b}\includegraphics[scale=.6]{fig/slozeni.png}}
+				\subfloat[]{\label{rozsek:b}\includegraphics[scale=.65]{fig/slozeni.pdf}}
 			\end{minipage}%		
-			\caption{Rozdìlení obrázku na podèásti a následné vytvoøení heatmapy}
+			\caption{Rozdìlení obrázku na podèásti a následné vytvoøení zátì¾ové mapy.}
 			\label{rozsek+sloz}
 		\end{figure}
 
@@ -508,7 +525,7 @@
 		Dal¹í navazující èástí této práce je detekce SPZ ve výøezech s pravdìpodobným výskytem automobilu urèených výstupy pøedchozího kroku. V této èásti se budu vìnovat dvìma mo¾ným zpùsobùm, které v rámci této práce budou porovnávány. Zpùsob, jakým tato èást bude pracovat je jednodu¹e znázornìn na obrázku \ref{plate_detect}, kde v rámci implementace výpoèetního bloku budou porovnávány následující mo¾nosti:
 
 		\begin{description}
-			\item[Detektor hran] - sada matematických metod slou¾ících k hledání výrazných (nespojitých) zmìn jasu v obrazu. Toto lze provádìt buïto na základì vy¹etøování funkce jasu a jejích derivací nebo na základì analýzy frekvencí v obraze. Mezi mnoha hranovými detektory je nejvýraznìj¹í \emph{Cannùv hranový detektor}, pøedstavený Johnem Cannym v roce 1986 \ref{LITERATURA!!!}. Tento detektor je zalo¾en na Gaussovském rozostøení obrazu. Hrany detekuje pomocí hledání orientace gradientu a smìrových derivací. Funguje velmi dobøe pøi výskytu spojitých a dostateènì silných hran. Výsledný obraz je velmi ostrý, ale ne pøíli¹ detailní.
+			\item[Detektor hran] - sada matematických metod slou¾ících k hledání výrazných (nespojitých) zmìn jasu v obrazu. Toto lze provádìt buïto na základì vy¹etøování funkce jasu a jejích derivací nebo na základì analýzy frekvencí v obraze. Mezi mnoha hranovými detektory je nejvýraznìj¹í \emph{Cannùv hranový detektor}, pøedstavený Johnem Cannym v roce 1986 \cite{Canny1986}. Tento detektor je zalo¾en na Gaussovském rozostøení obrazu. Hrany detekuje pomocí hledání orientace gradientu a smìrových derivací. Funguje velmi dobøe pøi výskytu spojitých a dostateènì silných hran. Výsledný obraz je velmi ostrý, ale ne pøíli¹ detailní.
 			\item[Neuronová sí»] bude nasazena hlavnì pro porovnání s detektorem hran. Nauèení neuronové sítì samozøejmì bude výpoèetnì nároènìj¹í, nicménì pokud by výsledky byly výraznì lep¹í ne¾ u konvenèního øe¹ení, bude stále neuronová sí» ve výsledku lep¹ím øe¹ením. 
 		\end{description}
 
@@ -516,7 +533,7 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=130mm]{fig/plate_detection.png}
+			\includegraphics[width=130mm]{fig/plate_detection.pdf}
 			\caption{Schéma detekce SPZ ve vybrané sekci obrázku}
 			\label{plate_detect}
 		\end{figure}
@@ -527,7 +544,7 @@
 		Pro potøeby této diplomové práce bude postaèující pøes celou SPZ umístit neprùhledný obdélník, který znemo¾ní její èitelnost. Pro vyu¾ití v praxi v¹ak bude nutné zvolit jinou variantu, aby anonymizované SPZ vozidel v Panorama zobrazení nepùsobily pøíli¹ ru¹ivì. Nejvhodnìj¹í bude pou¾ít nìkterou z dostupných rozostøovacích funkcí, napøíklad \emph{gausovské rozostøení} nebo \emph{rozostøení pohybem}.
 
 \chapter{Závìr}\label{ch:zaver}
-	V rámci semestrálního projektu jsem prostudovala principy a metody vyu¾ívané pro detekci a anonymizaci SPZ vozidel zachycených na fotografiích a nástroje vyu¾íané v souèasnosti. Dále jsem také analyzovala, které problémy souèasná øe¹ení doká¾í zpracovávat dobøe a které jsou naopak jejich slabými stránkami.
+	V rámci semestrálního projektu jsem prostudovala principy a metody vyu¾ívané pro detekci a anonymizaci SPZ vozidel zachycených na fotografiích a nástroje vyu¾ívané v souèasnosti. Dále jsem také analyzovala, které problémy souèasná øe¹ení doká¾í zpracovávat dobøe a které jsou naopak jejich slabými stránkami.
 
 	Ve spolupráci se zamìstnanci firmy Seznam.cz jsem analyzovala obrazový materiál pro slu¾bu Panorama a zpùsob jeho sbìru. V souvislosti s tìmito materiály jsem také nastudovala platnou legislativu ohlednì zpracování osobních údajù a manipulace s nimi.
 
