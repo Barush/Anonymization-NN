@@ -1,0 +1,250 @@
+qplot(x,sig, size=I(0.2), xlab="", ylab="", xlim=c(-5, 5)) + geom_line(size=1, color="#32BEED")
+dev.off()
+tan=tanh(x)
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-5, 5)) + geom_line(size=1, color="#32BEED")
+pdf("sigmoida.pdf")
+qplot(x,sig, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5)) + geom_line(size=1, color="#32BEED")
+dev.off()
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-5, 5)) + geom_line(size=1, color="#32BEED")
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5)) + geom_line(size=1, color="#32BEED")
+pdf("tanhyp.pdf")
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5)) + geom_line(size=1, color="#32BEED")
+dev.off()
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-0.9, 0.9)) + geom_line(size=1, color="#32BEED")
+s=(x>0)?1:0
+x
+s<-ifelse(x>0,1,0)
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-0.9, 0.9)) + geom_line(size=1, color="#32BEED")
+x<-seq(-5,5,0.001)
+s<-ifelse(x>0,1,0)
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-0.9, 0.9)) + geom_line(size=1, color="#32BEED")
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-0.1,0.1)) + geom_line(size=1, color="#32BEED")
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+pdf("skokova.pdf")
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+dev.off()
+sig=1/(1+e^(-x))
+qplot(x,sig, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+pdf("sigmoida.pdf")
+qplot(x,sig, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+dev.off()
+tan=tanh(x)
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+pdf("tanhyp.pdf")
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+dev.off()
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(size=14)
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(element_text(size=14))
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=14))
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16))
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+pdf("tanhyp.pdf")
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+dev.off()
+pdf("skokova.pdf")
+qplot(x,s, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+dev.off()
+pdf("sigmoida.pdf")
+qplot(x,sig, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+dev.off()
+x<-c(1,1,0,0)
+y<-c(1,0,1,0)
+plot(x,y)
+val<-(1,0,0,0)
+val<-c(1,0,0,0)
+qplot(x,y) + geom_point(shape=val)
+qplot(x,y, xlim=c(0,3), ylim=c(0,3)) + geom_point(shape=val)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, colour="#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2),colour="#32BEED") + geom_point(shape=val, colour="#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2),col="#32BEED") + geom_point(shape=val, colour="#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, aes(colour="#32BEED"))
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, aes(colour="blue"))
+col=c("blue", "red", "red", "red")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, aes(colour=col))
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="blue")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), color="blue") + geom_point(shape=val, color="blue")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), colour="blue") + geom_point(shape=val, color="blue")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="blue")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="colour="#32BEED"")
+)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="#32BEED", fill="#32BEED")
+val<-c(16,17,17,17)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2)) + geom_point(shape=val, color="#32BEED", size=2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(shape=val, color="#32BEED")
+col=("#32BEED", "#ED6132", "#ED6132", "#ED6132")
+col=c("#32BEED", "#ED6132", "#ED6132", "#ED6132")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(shape=val, color=col)
+val
+col
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(aes(shape=val, color=col))
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(shape=val, color=col)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(color="red")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(color=c("#32BEED", "#ED6132", "#ED6132", "#ED6132")
+)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(color="red")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(shape=val)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(shape=13)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2) + geom_point(shape=16)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=vaů) + geom_point(color="red")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val) + geom_point(color="red")
+val
+val<-"16","17","17","17"
+val<-c()"16","17","17","17")
+val<-c("16","17","17","17")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val) + geom_point(color="red")
+val<-c("16","15","15","15")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val) + geom_point(color="red")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val) + geom_point(color=col)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col)
+val
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col, legend=off)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color(guide=FALSE)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(guide=FALSE)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE)
+col
+col=c("#ED6132","#32BEED", "#32BEED", "#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE)
+val
+val<-c("15","16","16","16")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE)
+val<-c("21","22","22","22")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, shape=val, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=-2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=2, slope=-3)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=2, slope=-2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=2.5, slope=-2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=2.5, slope=-1.5)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=2.5, slope=-1)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, size=2, color="green")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, color="#17E867")
+pdf("and.pdf")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col) + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, color="#17E867")
+dev.off()
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, color="#17E867")
+pdf("and.pdf")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, color="#17E867")
+dev.off()
+val
+x
+y
+col
+col_x<-c("#32BEED",#ED6132",#ED6132","#32BEED")
+)
+col_x<-c("#32BEED","#ED6132","#ED6132","#32BEED")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, color="#17E867")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=-1, color="#17E867") + geom_abline(intercept=0.5, slope=-1, color="#17E867")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=1.5, slope=1, color="#17E867") + geom_abline(intercept=0.5, slope=1, color="#17E867")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=0.5, slope=1, color="#17E867") + geom_abline(intercept=-0.5, slope=1, color="#17E867")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=0.5, slope=1, color="#E81798") + geom_abline(intercept=-0.5, slope=1, color="#E81798")
+pdf("xor.pdf")
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=0.5, slope=1, color="#E81798") + geom_abline(intercept=-0.5, slope=1, color="#E81798")
+dev.off()
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=0.5, slope=1, color="#E81798") + geom_abline(intercept=-0.5, slope=1, color="#E81798")
+library(ggplot2)
+qplot(x,y, xlim=c(-1,2), ylim=c(-1,2), size=2, color=col_x, xlab="", ylab="") + scale_shape(guide=FALSE) + scale_size(guide=FALSE) + scale_color_manual(values=col, guide=FALSE) + geom_abline(intercept=0.5, slope=1, color="#E81798") + geom_abline(intercept=-0.5, slope=1, color="#E81798")
+history()
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+x
+x<-seq(-5,5,0.001)
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+qplot(x,x, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+pdf("linear.pdf")
+qplot(x,x, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED")
+dev.off()
+qplot(x,tan, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+qplot(x,x, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+pdf("linear.pdf")
+qplot(x,x, size=I(0.2), xlab="", ylab="", xlim=c(-4.5, 4.5), ylim=c(-1,1)) + geom_line(size=1, color="#32BEED") + theme(axis.text.x=element_text(size=16), axis.text.y=element_text(size=16))
+dev.off()
+read.table(auta_heatmap.csv)
+ld()
+list.directory()
+print.wd()
+list.files()
+heatmap <- read.table("auta_heatmap.csv")
+heatmap
+heatmap[1]
+heatmap[1,]
+heatmap[,1]
+heatmap <- read.csv("auta_heatmap.csv")
+heatmap[,1]
+heatmap[,2]
+heatmap[,3:4]
+heatmap[2="7",]
+heatmap[2=="7",]
+heatmap[heatmap[2]=="7",]
+heatmap[heatmap[2]=="7",3:4]
+zone7<-heatmap[heatmap[2]=="7",3:4]
+zone8<-heatmap[heatmap[2]=="8",3:4]
+zone9<-heatmap[heatmap[2]=="9",3:4]
+lenght(zone7)
+length(zone7)
+rows(zone7)
+size(zone7)
+ncol(zone7)
+nrow(zone7)
+nrow(zone8)
+nrow(zone9)
+zone89<-heatmap[heatmap[2]=="8-09",3:4]
+nrow(zone89)
+zone78<-heatmap[heatmap[2]=="7-08",3:4]
+nrow(zone78)
+zone7[2,]
+zone7[,2]
+zone7[,1]
+avg(zone7[,1])
+mean(zone7[,1])
+median(zone7[,1])
+max(zone7[,1])
+min(zone7[,1])
+mean(zone7[,2])
+median(zone7[,1])
+median(zone7[,2])
+max(zone7[,2])
+min(zone7[,2])
+list.files()
+rscript.R
+run rscript.R
+zone7<-heatmap[heatmap[2]=="7",3:4]
+heatmap
+heatmap[1,]
+heatmap[,1]
+levels(heatmap[,1])
+lenght(heatmap[,1])
+length(heatmap[,1])
+length(levels(heatmap[,1]))
+heatmap
+heatmap[,3]
+roundwidth <- 10^ceiling(log10(heatmap[,3]))
+roundwidth
+library(plyr)
+roundwidth <- round_any(heatmap[,3], 10)
+roundwidth
+roundheight <- round_any(heatmap[,4], 10)
+roundheight
+mean(roundwidth)
+roundwidth
+roundwidth[1]
+roundwidth[,1]
+type(roundwidth)
+roundwidth[1:284]
+roundwidth[1:285]
+mean(roundwidth[1:285])
+roundwidth
+roundwidth[roundwidth[1]!="0"]
+cleanhm <- heatmap[heatmap[2]!="0",]
+cleanhm
+table(heatmap)
+table(heatmap[1])
+obrazky <- table(heatmap[1])
+cip <- as.data.frame(obrazky)
+cip
+cip$Freq
