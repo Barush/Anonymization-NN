@@ -5,7 +5,7 @@
 
 	Cílem tohoto semestrálního projektu je polo¾it teoretický základ pro následující zpracování diplomové práce na téma anonymizace SPZ vozidel v obrazových datech. Tato práce probíhá ve spolupráci se spoleèností Seznam.cz a její výsledek by mìl pozdìji slou¾it k automatizované anonymizaci obrazových dat pro slu¾bu Panorama. 
 
-	Tato práce je èlenìna do pìti kapitol. Po této úvodní kapitole následuje kapitola \ref{ch:personaldata}, která se v první polovinì (\ref{osobni_udaje}) zabývá platnou legislativou definující, jakým zpùsobem jsou osobní údaje v Èeské republice definovány a jak je tøeba s nimi nakládat. Ve druhé polovinì této kapitoly (\ref{ch:anonymization}) je potom rozebrána anonymizace nejen obrazových dat a její metody vyu¾ívané v souèasnosti. V následující kapitole \ref{ch:neuronky} je popsána návaznost umìlých neuronových sítí na biologický neuron, dále pak neuronové sítì a jejich pou¾ití v praxi. V kapitole \ref{ch:navrh} je na základì pøedchozích kapitol navr¾en program, který bude øe¹it automatizovanou anonymizaci obrazových dat s vyu¾itím neuronových sítí a detektoru hran. V kapitole \ref{ch:zaver} jsou potom shrnuty výsledky studia teorie pro tento semestrální projekt a pøedpokládaný vývoj této diplomové práce do budoucna.
+	Tato práce je èlenìna do pìti kapitol. Po této úvodní kapitole následuje kapitola \ref{ch:personaldata}, která se v první polovinì -- \ref{osobni_udaje} -- zabývá platnou legislativou definující, jakým zpùsobem jsou osobní údaje v Èeské republice definovány a jak je tøeba s nimi nakládat. Ve druhé polovinì této kapitoly -- \ref{ch:anonymization} -- je potom rozebrána anonymizace nejen obrazových dat a její metody vyu¾ívané v souèasnosti. V následující kapitole \ref{ch:neuronky} je popsána návaznost umìlých neuronových sítí na biologický neuron, dále pak neuronové sítì a jejich pou¾ití v praxi. V kapitole \ref{ch:navrh} je na základì pøedchozích kapitol navr¾en program, který bude øe¹it automatizovanou anonymizaci obrazových dat s vyu¾itím neuronových sítí a detektoru hran. V kapitole \ref{ch:zaver} jsou potom shrnuty výsledky studia teorie pro tento semestrální projekt a pøedpokládaný vývoj této diplomové práce do budoucna.
 
 \chapter{Osobní údaje a jejich ochrana}\label{ch:personaldata}
 
@@ -20,7 +20,7 @@
 		osoby. Osobní údaje nemusí být v¾dy pøímo identifikující danou osobu (jako je napøíklad rodné èíslo, jméno a pøíjmenní, adresa trvalého bydli¹tì apod.). Za 
 		osobní údaje jsou pova¾ovány jakékoliv údaje pøímo související se ¾ivotem konkrétní nebo urèitelné osoby. Mù¾e jít napøíklad o provozování koníèkù, èlenství v 
 		politických stranách, úèast na specifických událostech, náv¹tìvy rùzných míst, velikost obleèení a podobnì. Ochrana osobních údajù (ochrana osobních dat) je v 
-		Èeské republice regulována zákonem è. 101/2001 Sb., o ochranì osobních údajù a dal¹ími právními pøedpisy.
+		Èeské republice regulována zákonem è. 101/2001 Sb. \cite{uz_oou}, o ochranì osobních údajù a dal¹ími právními pøedpisy.
 
 		Zákon rozli¹uje osoby, které zpracovávají osobní údaje (\emph{správce osobních údajù}) a osoby, jejich¾ data správci zpracovávají (\emph{subjekt osobních údajù}). Správcùm jsou
 		zákonem ukládány pøedev¹ím povinnosti, zatímco subjektùm jsou dána práva. Dodr¾ování práv a povinností obou stran je v Èeské republice kontrolováno 
@@ -109,7 +109,7 @@
 			\footnotetext{Obrázek pochází z automatizovaného anonymizéru, který je aktuálnì pou¾íván ve spoleènosti Seznam.cz. Anonymizér byl nauèen pomocí blí¾e nespecifikovaného algoritmu strojového uèení.}	
 
 	\section{Obrazová data pro slu¾bu Panorama}\label{ch:data}
-		Obrazová data pro tuto práci byla dodána spoleèností Seznam.cz a.s. Informace pro tuto èást byly pøevá¾nì získány v rámci nìkolika konzultací s jejími zamìstnanci, Ing. Adamem Koláøem a Ing. Miroslavem Talá¹kem. Ze spoleènosti Seznam.cz byla dále poskytnuta neveøejná prezentace o snímání obrazových dat pro slu¾bu Panorama, ze které bylo pøi pøípravì tohoto textu také vycházeno \cite{Talasek2015}. V této sekci bude popsán zpùsob, jakým jsou obrazová data pro slu¾bu Panorama snímána, a jak jsou dále zpracovávána ne¾ se dostanou ke koncovému u¾ivateli. Anonymizér, který je praktickým výstupem této práce je jen jedním èlánkem v sekvenci operací, která je nad ka¾dým zachyceným obrázkem provedena. 
+		Obrazová data pro tuto práci byla dodána spoleèností Seznam.cz a.s. Vìt¹ina informací pro tuto èást práce byla získána v rámci nìkolika konzultací s jejími zamìstnanci, Ing. Adamem Koláøem a Ing. Miroslavem Talá¹kem. Ze spoleènosti Seznam.cz byla dále poskytnuta neveøejná prezentace o snímání obrazových dat pro slu¾bu Panorama, ze které bylo pøi pøípravì tohoto textu také vycházeno \cite{Talasek2015}. V této sekci bude popsán zpùsob, jakým jsou obrazová data pro slu¾bu Panorama snímána. Dále bude popsáno, jak jsou data dále zpracovávána, ne¾ se dostanou ke koncovému u¾ivateli. Anonymizér, který je praktickým výstupem této práce je jen jedním èlánkem v sekvenci operací, která je nad ka¾dým zachyceným obrázkem provedena. 
 
 		\subsection{Snímání fotografií}
 			Fotografie jsou snímány speciálnì upraveným vozem s 15 kamerami rozmístìnými na støe¹e. Tyto kamery zabírají 360° okolí snímacího automobilu. Zpùsob, jakým jsou kamery na støe¹e automobilu umístìny, je znázornìn na obrázku \ref{snimaci_auto}. Kamery jsou na snímací hlavì umístìny ve dvou øadách. První snímá dolní èást výsledné fotografie - v té je umístìno ¹est kamer. V druhé øadì jsou umístìny kamery snímající støední a horní èást fotografie. Na vrcholu záchytného zaøízení pro kamery je umísìna je¹tì jedna kamera míøící pøímo vzhùru. 
@@ -124,7 +124,7 @@
 			
 			Pøi snímání se auto pohybuje rychlostí 70 km/h. Snímání se provádí na v¹ech 15 kamerách souèasnì ka¾dé 3 metry. Aby bylo mo¾né pozdìji fotografii co nejvíce pøiblí¾it tomu, jak prostøedí vnímá èlovìk, který se v nìm pohybuje, pøi ka¾dém snímku se zaznamená je¹tì sada metadat. Ta zahrnují:
 			\begin{itemize}
-				\item èíslo snímku,
+				\item Èíslo snímku,
 				\item celek (15 fotografií), do kterého snímek patøí a poloha v nìm,
 				\item datum snímání,
 				\item zemìpisná poloha snímacího auta v souøadnicích UTM 33,
@@ -162,9 +162,9 @@
 			\begin{figure}[h]
 				\centering
 				\includegraphics[width=120mm]{fig/hangar.jpg}
-				\caption{Se¹ívání 14 snímkù s pøekryvem do jedné panoramatické fotografie. Poslední snímek z horní kamery slou¾í k doplnìní volných míst v horní èásti fotografie.}
+				\caption{Se¹ívání 14 snímkù s pøekryvem do jedné panoramatické fotografie. Poslední snímek z horní kamery slou¾í k doplnìní volných míst v horní èásti fotografie.\protect\footnotemark}
 				\label{sesivani}
-			\end{figure} 
+			\end{figure} 	
 
 		\subsection{Vyrovnávání horizontu}
 			Na fotografii se¹ité z 15 fotek je znaènì deformován horizont. Nyní tedy pøichází na øadu vyrovnání horizontu zachyceného prostøedí. Pro tuto operaci byly takté¾ navr¾eny algoritmy pøímo ve spoleènosti Seznam.cz. Vzor výstupu z této operace je znázornìn na obrázku \ref{vyrovnano}. Aèkoliv obrázek nevypadá pøirozenì, po jeho namapování na kouli se ve¹keré deformace vyrovnají a vznikne vìrná kopie reálného prostøedí.
@@ -174,6 +174,9 @@
 				\caption{360° fotografie po vyrovnání horizontu\protect\footnotemark.}
 				\label{vyrovnano}
 			\end{figure} 
+			\addtocounter{footnote}{-1}
+			\footnotetext{Fotografie pøevzatá z archivu firmy Seznam.cz}
+			\addtocounter{footnote}{+1}
 			\footnotetext{Fotografie pøevzatá z archivu firmy Seznam.cz}			
 
 		\subsection{Zobrazení u¾ivateli}
@@ -297,8 +300,8 @@
 
 		\begin{description}
 			\item[Klasifikace] - na vstup je pøilo¾en vektor a na výstupu je získáno zaøazení daného vektoru do nìkteré z pøedem definovaných tøíd.
-			\item[Hledání vzorù] - na vstup je pøilo¾en vektor a na výstupu je vygenerován vzor, který nejlépe popisuje vektor poskytnutý na vstupu.
-			\item[Doplòování vzorù] - na vstup je pøilo¾en vektor znázoròující èást hledaného vzoru. Na výstup jsou potom dotvoøeny chybìjící èásti vzoru.
+			\item[Rozpoznávání vzorù] - na vstup je pøilo¾en vektor a na výstupu je vygenerován vzor, který nejlépe popisuje vektor poskytnutý na vstupu.
+			\item[Porovnávání vzorù] - na vstup je pøilo¾en vektor znázoròující èást hledaného vzoru. Na výstup jsou potom dotvoøeny chybìjící èásti vzoru.
 			\item[Odstraòování ¹umu] - na vstup je pøilo¾en za¹umìný obrázek a na výstupu je získán obrázek s odstranìným ¹umem.
 			\item[Optimalizace] - na vstup je pøilo¾en systém, který správnì øe¹í danou optimalizaèní úlohu a na výstupu je získáno nové funkèní øe¹ení, které pøineslo zlep¹ení v nìkterém ze sledovaných parametrù (napø. rychost, spotøeba energie apod.).
 			\item[Øízení] - na vstup je pøilo¾en aktuální stav øízení a stav, do kterého chceme, aby se øízení dostalo a na výstupu získáme sekvence krokù, která tento pøechod zajistí.
@@ -306,7 +309,7 @@
 		\end{description}
 
 		\subsection{Topologie sítí}
-			Aby bylo mo¾né pomocí neuronových sítí øe¹it i lineárnì neseparovatelné problémy, je tøeba podstatnì zeslo¾itit jejich architekturu. To se provádí vkládáním dal¹ích vrstev neuronù do sítí. Dùle¾itým faktorem pøitom je, aby jednotlivé vrstvy neuronové sítì mìly nelineární aktivaèní funkci. Pokud by toti¾ v¹echny vrstvy mìly lineární aktivaèní funkci, slo¾ením tìchto vrstev by pouze vznikla jiná lineární funkce a øe¹ení neuronové sítì by tedy stále bylo ekvivalentem hledání rovnice pøímky, která prostor øe¹ení rozdìlí na dvì poloroviny. 
+			Aby bylo mo¾né pomocí neuronových sítí øe¹it i lineárnì neseparovatelné problémy, je tøeba podstatnì zeslo¾itit jejich architekturu. To se provádí vkládáním dal¹ích vrstev neuronù do sítí. Dùle¾itým faktorem pøitom je, aby jednotlivé vrstvy neuronové sítì mìly nelineární aktivaèní funkci. Pokud by toti¾ v¹echny vrstvy mìly lineární aktivaèní funkci, slo¾ením tìchto vrstev by pouze vznikla jiná lineární funkce a øe¹ení neuronové sítì by tedy stále bylo ekvivalentem hledání rovnice pøímky, která prostor øe¹ení rozdìlí na dva podprostory. 
 
 			Dal¹ím z dùle¾itých faktorù pøi návrhu neuronových sítí jsou jednotlivá propojení. V prùbìhu vývoje se experimentovalo s mnohými nastaveními propojení. Nìkterá pou¾ívaná propojení jsou zobrazena na obrázku \ref{nets}. První experimenty probìhly nad plnì propojenou sítí, ve které je ka¾dý neuron propojen se v¹emi neurony svojí vrstvy, vrstev pøedchozích i následujících. Ta se postupnì vyvinula ve vrstvovou sí» (viz \ref{nets:vrstvova}). Ve vrstvové síti lze výstup ka¾dého neuronu vyu¾ít jako vstup nìkterého z neuronù ve stejné vrstvì, pøípadnì jako vstup kteréhokoliv neuronu v nìkteré z vrstev následujících. Odstranìním zpìtných vazeb v rámci jednotlivých vrstev vzniká acyklická sí» (viz \ref{nets:acyklicka}). V acyklické síti mù¾e být výstup ka¾dého neuronu pøipojen na vstup kteréhokoliv neuronu v nìkteré z následujících vrstev. V této práci se v¹ak budu vìnovat výhradnì výzkumu na dopøedných sítích. Dopøedná sí» (viz \ref{nets:dopredna}) vzniká omezením propojení acyklických sítí. V dopøedné síti mù¾e být výstup ka¾dého neuronu pøipojen pouze na vstup kteréhokoliv neuronu v logicky následující vrstvì neuronù \cite{Handbook_springer2012}.
 
@@ -336,18 +339,24 @@
 				Váhy jednotlivých propojení se pro pøehlednost zapisují pomocí matic. V ka¾dé neuronové síti existuje jedna váhová matice pro ka¾dou dvojici za sebou následujících vrstev. Zápis jednotlivých vah je blí¾e popsán v èásti \ref{backpropagation}.
 
 		\subsection{Uèení neuronových sítí}\label{ch:uceni}
-			Nejdùle¾itìj¹í vlastností neuronových sítí je pochopitelnì schopnost najít øe¹ení daného problému. Toto hledání øe¹ení - \emph{uèení} - probíhá prostøednictvím zmìny vah jednotlivých propojení tak, aby neuronová sí» podávala co nejpøesnìj¹í výsledky pro daný problém. Stejná neuronová sí» v reakci na stejný vstup podá v¾dy stejný výstup. Nejobecnìj¹ím dìlením algoritmù pro uèení je na uèení s uèitelem a bez uèitele \cite{Eberhart_shi2007}.
+			Nejdùle¾itìj¹í vlastností neuronových sítí je pochopitelnì schopnost najít øe¹ení daného problému. Toto hledání øe¹ení - \emph{uèení} - probíhá prostøednictvím zmìny vah jednotlivých propojení tak, aby neuronová sí» podávala co nejpøesnìj¹í výsledky pro daný problém. Nejobecnìj¹ím dìlením algoritmù pro uèení je na uèení s uèitelem a bez uèitele \cite{Eberhart_shi2007}.
 
 			\begin{description}
 				\item[Uèení s uèitelem] je proces, který vyu¾ívá vnìj¹ího uèitele nebo globálnì známou informaci. V ka¾dém cyklu uèení je vypoètena aktuální odchylka výstupu sítì od oèekávaného výstupu, která se potom minimalizuje. Hlavní problémy, kolem kterých se diskuze o uèení s uèitelem ubírá jsou kdy uèení ukonèit, jak èasto a jak dlouho vyu¾ívat k uèení jeden vzorek vstupu a jak vyu¾ívat informaci o vývoji uèení a zmìnì chyby. Uèení s uèitelem lze dále rozdìlit na \emph{strukturální uèení s uèitelem}, kde hodnota výstupu sítì závisí pouze na aktuálních hodnotách na vstupu, zatímco u \emph{temporálního uèení s uèitelem} aktuální hodnota výstupu závisí i na vstupech a výstupech z pøedchozích cyklù uèení.
-				\item[Uèení bez uèitele] je té¾ nazýváno \emph{samo-organizace}. Nebere v potaz ¾ádného vnìj¹ího uèitele a pracuje pouze s informacemi známymi bìhem uèení. Algoritmy uèení bez uèitele se sna¾í zorganizovat trénovací data a nalézt v nich co nejspecifiètìj¹í spoleèné vlastnosti. 
+				\item[Uèení bez uèitele] je té¾ nazýváno \emph{samo-organizace}. Nebere v potaz ¾ádného vnìj¹ího uèitele a pracuje pouze s informacemi známými bìhem uèení. Algoritmy uèení bez uèitele se sna¾í zorganizovat trénovací data a nalézt v nich co nejspecifiètìj¹í spoleèné vlastnosti. 
 			\end{description}
 
 			Dále v¹ak lze uèení dìlit podle dal¹ích kritérií, jedním z nich je uèení \emph{on-line} a \emph{off-line}.
 
 			\begin{description}
-				\item[Off-line uèení] je metoda uèení, pøi které je sí» nejprve trénována na celé mno¾inì dat a a¾ v okam¾iku, kdy pro ka¾dý vstupní vektor podává oèekávané výsledky, váhy jednotlivých propojení jsou uchovány a sí» je nasazena do provozu, kde u¾ se nemìní. Výhodou takto nauèené sítì je nespornì to, ¾e se chová velmi pøedvídatelnì a pro ka¾dý vstup podá korektní výstup. Nevýhodou v¹ak je, ¾e v okam¾iku, kdy chceme do mno¾iny dat pøidat dal¹í vstup, celá sí» musí být znova natrénována. Dal¹í nevýhodou tìchto metod uèení je, ¾e u¾ v okam¾iku uèení musí být k dispozici v¹echny mo¾né kombinace vstupù s jejich oèekávanými výstupy a také ¾e uèení mù¾e velmi dlouho trvat. Nejznámìj¹ím zástupcem tìchto metod uèení je algoritmus \emph{backpropagation}, který je popsán dále v této kapitole.
-				\item[On-line uèení] je dynamiètìj¹í metoda uèení. Pokud je do tímto zpùsobem uèené sítì potøeba pøidat dal¹í vstupní vektor, je mo¾né to udìlat za bìhu bez ztráty døíve získané informace. Výhodou sítí uèených on-line tedy je mo¾nost uèení za bìhu. Pro komplikované, ale exaktnì definované problémy je v¹ak dnes výhodnìj¹í pou¾ívat metody off-line uèení. Výzvou do budoucnosti neuronových sítí v¹ak je pøijít s takovým algoritmem uèení, který by dosahoval pøesnosti off-line algoritmù, ale dokázal by pracovat s novými vstupními vektory za bìhu, tedy on-line.
+				\item[Off-line uèení] je metoda uèení, pøi které je sí» nejprve trénována na celé mno¾inì dat a a¾ v okam¾iku, kdy pro ka¾dý vstupní vektor podává oèekávané výsledky, váhy jednotlivých propojení jsou uchovány a sí» je nasazena do provozu, kde u¾ se nemìní. 
+
+				Výhodou takto nauèené sítì je nespornì to, ¾e se chová velmi pøedvídatelnì a pro ka¾dý vstup podá korektní výstup. Nevýhodou v¹ak je, ¾e v okam¾iku, kdy chceme do mno¾iny dat pøidat dal¹í vstup, celá sí» musí být znova natrénována. Dal¹í nevýhodou tìchto metod uèení je, ¾e u¾ v okam¾iku uèení musí být k dispozici v¹echny mo¾né kombinace vstupù s jejich oèekávanými výstupy a také ¾e uèení mù¾e velmi dlouho trvat. 
+
+				Nejznámìj¹ím zástupcem tìchto metod uèení je algoritmus \emph{backpropagation}, který je popsán dále v této kapitole.
+				\item[On-line uèení] je dynamiètìj¹í metoda uèení. Pokud je do tímto zpùsobem uèené sítì potøeba pøidat dal¹í vstupní vektor, je mo¾né to udìlat za bìhu bez ztráty døíve získané informace. Výhodou sítí uèených on-line tedy je mo¾nost uèení za bìhu. 
+
+				Pro komplikované, ale exaktnì definované problémy je dnes je¹tì výhodnìj¹í pou¾ívat metody off-line uèení. Výzvou do budoucnosti neuronových sítí v¹ak je pøijít s takovým algoritmem uèení, který by dosahoval pøesnosti off-line algoritmù, ale dokázal by pracovat s novými vstupními vektory za bìhu, tedy on-line.
 			\end{description}
 
 		\subsubsection{Uèení backpropagation}\label{backpropagation}
@@ -447,15 +456,45 @@
 				\label{delta_hidden}
 			\end{equation}
 
-%	\section{Hluboké neuronové sítì}\label{ch:deeplearning}
-%		V pøedchozích kapitolách této práce byly pojmem neuronové sítì v¾dy rozumìny plnì propojené sítì. Tedy takové, ve kterých existuje propojení mezi ka¾dými dvìma neurony le¾ícími v sousedních vrstvách. Pokud v¹ak neuronová sí» pracuje nad obrázky, tímto propojením se ztrácí prostorová informace. U hodnot pocházejících ze dvou sousedních pixelù mù¾eme pracovat se stejnou závislostí jako u hodnot pocházejících z pixelù z opaèných hran obrázkù. Pokud vezmeme v architektuøe sítì v potaz, ¾e nìkteré pixely obrázku se nachází v bezprostøední blízkosti, zatímco jiné dvojice pixelù spolu vùbec nesousedí, mù¾eme získat mnohem lep¹í výsledky.
+	\section{Konvoluèní neuronové sítì}\label{ch:deeplearning}
+		Konvoluèní neuronové sítì (té¾ \emph{hluboké neuronové sítì}) jsou neuronové sítì navr¾ené speciálnì pro zpracovávání obrazových dat. Na rozdíl od plnì propojených neuronových sítí, které jsme uva¾ovali v pøedchozích kapitolách, konvoluèní neuronové sítì doká¾í s výhodou vyu¾ít prostorového uspoøádání jednotlivých vstupních hodnot naèítaných z obrázku. Konvoluèní neuronové sítì se skládají ze tøí typù vrstev, které jsou podrobnì popsány dále v této kapitole: \emph{konvoluèní vrstva}, \emph{pooling vrstva} a nakonec \emph{výstupní vrstva}.
 
-%		\begin{figure}[h]
-%			\centering
-%			\includegraphics[width=100mm]{fig/convolutional_layer.pdf}
-%			\caption{Schéma konvoluèní vrstvy sítì.}
-%			\label{convolutional}
-%		\end{figure}
+		Odli¹nost konvoluèních neuronových sítí tkví v chápání jednotlivých vrstev sítì. V plnì propojené síti je ka¾dá vrstva chápána jako lineární pole neuronù, zatímco v konvoluèní neuronové síti je mo¾né ji chápat jako dvourozmìrné pole neuronù. Toto pole svým uspoøádáním bude odpovídat uspoøádání pixelù ve zpracovávaném obrázku.
+
+		Pro tuto kapitolu si vytvoøme jednoduchý ilustrativní obrázek o rozmìrech $10 \times 10$ pixelù, nad kterým budeme demonstrovat fungování konvoluèních neuronových sítí a zároveò provedeme srovnání poètu hledaných parametrù konvoluèní a plnì propojené sítì.
+
+		\subsection{Vstupní vrstva}
+			Vstupní vrstva konvoluèní neuronové sítì slou¾í k naètení vstupu. Stejnì jako u plnì propojených sítí, ani v konvoluèní síti vstupní vrstva neprovádí ¾ádné zpracování informace a nepoèítá se do celkového poètu vrstev. Rozmìry vstupní vrstvy neuronové sítì urèují rozmìry obrázkù, které bude mo¾né pomocí dané sítì zpracovávat, v pixelech. Vztah obrázku na vstupu a vstupní vrstvy je ilustrován na obrázku \ref{in_layer}.
+
+		\subsection{Konvoluèní vrstva}
+			Konvoluèní vrstva je stì¾ejním elementem konvoluèních neuronových sítí a zároveò první vrstvou, která nad daty ve vstupní vrstvì provádí nìjakou operaci. Konvoluèní vrstva se skládá z nìkolika map rysù (\emph{feature maps}), které pracují nezávisle na sobì.
+
+			\subsubsection{Feature map}
+				\texttt{Feature map}, tedy mapa rysù je analogií døíve popsaného \emph{vektoru rysù}. Popisuje primitiva, která se v analyzovaném vstupu nacházejí s tím rozdílem, ¾e mapa rysù ukazuje i jejich pøesnou polohu ve zdrojovém obrázku. Takovýmto primitivem tak mù¾e být napøíklad hrana v obraze. Ka¾dá mapa rysù v¹ak doká¾e obraz prohledávat se zacílením na jedinné primitivum, v reálných aplikacích je tedy tìchto map pou¾itých v¾dy více. Práci konvoluèní vrstvy v této práci uká¾eme na neuronové síti se tøemi mapami rysù, v praxi je v¹ak zpravidla vyu¾íváno map rysù nìkolikanásobnì více. 
+
+				Ka¾dá mapa rysù pracuje nezávisle na ostatních zpùsobem, který je zobrazen na obrázku \ref{feature_map}. Vezmìme v potaz obrázek o rozmìrech $10 \times 10$\,pixelù, který u¾ máme naètený ve vstupní vrstvì a nyní má být zpracován na mapu rysù. Hodnota ka¾dého neuronu v konvoluèní vrstvì je vypoètena z hodnot podmno¾iny neuronù vstupní vrstvy - tzv. \emph{lokální pole} \texttt{local receptive fields}, nikoliv ze v¹ech jako tomu je u plnì propojených sítí. V pøípadì, který je uveden na obrázku \ref{feature_map} se jedná o podèást pole neuronù vstupní vrstvy o rozmìrech $4 \times 4$ neurony (oznaèeno modøe). Jakmile je vypoètena hodnota, pole se posouvá a je vypoètena hodnota dal¹ího neuronu z nové podmno¾iny neuronù vstupní vrstvy (v obrázku \ref{feature_map} oznaèeno rù¾ovou barvou)
+
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=100mm]{fig/convolutional_layer.pdf}
+					\caption{Schéma konvoluèní vrstvy sítì.}
+					\label{feature_map}
+				\end{figure}
+
+				\begin{description}
+					\item[Krok] - anglicky \texttt{stride} - poèet neuronù, o které se lokální pole posune mezi výpoètem hodnot dvou sousedních neuronù v mapì rysù. Základní a zároveò hojnì vyu¾ívanou hodnotou je $1$, ale bývá experimentováno i s jinými. Pøi délce kroku $1$ a velikosti lokálního pole $4 \times 4$ po vstupní vrstvì o velikosti $10 \times 10$ neuronù následuje mapa rysù o velikosti $5 \times 5$ neuronù. Pokud tedy zvolíme del¹í krok, ve výsledné síti se bude nacházet ménì neuronù, co¾ lze nìkdy s výhodou vyu¾ít. 
+					\item[Sdílené váhy] - mapa rysù provádí prohledání celého vstupního obrázku na jeden konkrétní rys, proto není tøeba pro ka¾dé lokální pole odvozovat váhy jednotlivých propojení. Pro ka¾dou mapu rysù staèí pouze jedinná matice vah s jedením BIASem, která je pou¾ita pro výpoèet hodnoty ka¾dého neuronu. 
+				\end{description}
+
+			Slo¾ením nìkolika map rysù vzniká konvoluèní vrstva. Pro ilustraci v této práci budeme uva¾ovat konvoluèní vrstvu slo¾enou ze tøí map rysù, v praxi se v¹ak vyu¾ívají mnohonásobnì rozsáhlej¹í konvoluèní vrstvy. 
+
+		\subsection{Pooling vrstva}
+			\subsubsection{Max-pooling}
+			\subsubsection{L2 pooling}
+
+		\subsection{Výstupní vrstva}
+
+		\subsection{Finetunning}
 
 
 \chapter{Návrh}\label{ch:navrh}
@@ -472,7 +511,7 @@
 	\section{Pøedzpracování dat}\label{ch:preprocessing}	
 		Na primárním vstupu celého programu jsou pøijímány fotografie nasnímané v rámci sbìru dat pro slu¾bu Panorama. V¹echny dal¹í fáze u¾ v¹ak pracují nad èísly typu \emph{double}, pøedzpracování dat tedy spoèívá v reprezentaci celého obrázku pomocí èíselného vektoru. Tento èíselný vektor musí mít pro jednotlivé obrázky co nejlep¹í rozli¹ovací schopnost. Pokud je neuronová sí» natrénována ke klasifikaci dat o velké velikosti jednoho vzorku do \emph{n} tøíd, jejím hlavním úèelem je vyselektovat hodnoty, které jsou pro urèování tøíd podstatné - vytvoøit tzv. \emph{vektor rysù}. Tento vektor rysù, té¾ \emph{feature vector} je nejkondenzovanìj¹í informace z poèáteèních dat, výstupem z pøedzpracování dat je tedy právì feature vector.
 
-		K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc} \cite{ilsvrc_web}. Tato sí» vznikla v rámci výzvy Ilsvrc, která se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a pak také na klasifikaci scény. Sí» Ilsvrc byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\,000 kategorií. 
+		K extrakci feature vectoru byla v této práci vyu¾ita ji¾ nauèená neuronová sí» \emph{Ilsvrc} \cite{ilsvrc_web}. Tato sí» vznikla v rámci výzvy Ilsvrc, která se koná ka¾doroènì a je zamìøena na algoritmy pro lokalizaci a detekci objektù v obraze a také na klasifikaci scény. Sí» Ilsvrc byla nauèena na mno¾inì obrázkù \emph{ImageNet}, která obsahuje více ne¾ 14 milionù obrázkù rozøazených do 1\,000 kategorií. 
 
 		Tato sí» byla v rámci této práce pomocí \emph{finetuningu} (viz èást \ref{finetuning}) optimalizována pro klasifikaci mno¾iny obrázkù bli¾¹í obrázkùm, se kterými budu v rámci této práce pracovat. Pro dal¹í pou¾ití není vyu¾íván primární výstup klasifikace (viz obrázek \ref{preprocessing}). Ze sítì je extrahován vektor rysù, jeho¾ informaènì nejbohat¹í varianta se nachází v pøedposlední vrstvì sítì, která nese název \emph{FC7}.
 
@@ -487,7 +526,7 @@
 			\emph{Finetuning} je metoda vyu¾íváná v pøípadì, ¾e u¾ máme úspì¹nì natrénovanou sí» a chceme ji vyu¾ít ke klasifikaci na podobná data. Stadardnì se na poèátku tréninku neuronové sítì na nový typ vstupu v¹echny váhy inicializují náhodnì. Pokud v¹ak máme k dispozici sí», která je u¾ nauèená na velké mno¾inì obrázkù, mù¾eme namísto náhodné inicializace nové sítì inicializovat váhy nové sítì na výsledné váhy nauèené sítì. Proces uèení této sítì se potom nazývá \emph{finetuning}. Ten lze provádìt více zpùsoby. Nejznámìj¹ími z nich jsou:
 
 			\begin{itemize}
-				\item úpravou vah pouze v poslední vrstvì,
+				\item Úpravou vah pouze v poslední vrstvì,
 				\item pøidáním nìkolika nových vrstev do nauèené neuronové sítì.
 			\end{itemize}
 
@@ -504,7 +543,7 @@
 			\label{car_detect}
 		\end{figure}
 
-		Trénování neuronové sítì pro detekci automobilù bude provedeno na datové mno¾inì, která bude v¾dy obsahovat právì jedno nebo ¾ádné auto. Výstup této sítì tedy bude binární - na obrázku je auto/na obrázku není auto. V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut, proto je tøeba vytvoøit zpùsob, jakým detekovat v¹echna auta. Pro tuto práci jsem zvolila techniku, kdy na poèátku, je¹tì pøed pøedzpracováním dat dle kapitoly \ref{ch:preprocessing}, bude vstupní fotografie rozøezána na nìkolik podèástí, které budou zkoumány samostatnì. Neuronová sí» pro detekci automobilù pro ka¾dou podèást podá výstup -- na obrázku je/není auto. Tyto hodnoty budou potom umístìny zpátky na pùvodní pozice a tím bude vytvoøena tzv. \emph{zátì¾ová mapa}. Na obrázku \ref{rozsek+sloz} mù¾eme vidìt postup tvorby zátì¾ové mapy: výøezy, ve kterých nebylo nalezeno auto jsou znázornìny èervenou barvou, výøezy, ve kterých bylo nalezeno auto jsou znázornìny barvou zelenou. Na místech, kde se pøekrývá zelená barva se zelenou je nejvy¹¹í pravdìpodobnost výskytu auta. Naopak pøi pøekryvu èervených ploch je pravdìpodobnost nejmen¹í. Pøi pøekryvu èervené a zelené plochy je pravdìpodobnost výskytu auta malá.
+		Trénování neuronové sítì pro detekci automobilù bude provedeno na datové mno¾inì, která bude v¾dy obsahovat právì jedno nebo ¾ádné auto. Výstup této sítì tedy bude binární -- na obrázku je auto/na obrázku není auto. V rámci jednoho obrázku se v¹ak mù¾e nacházet více aut, proto je tøeba vytvoøit zpùsob, jakým detekovat v¹echna auta. Pro tuto práci jsem zvolila techniku, kdy na poèátku, je¹tì pøed pøedzpracováním dat dle kapitoly \ref{ch:preprocessing}, bude vstupní fotografie rozøezána na nìkolik podèástí, které budou zkoumány samostatnì. Neuronová sí» pro detekci automobilù pro ka¾dou podèást podá výstup -- na obrázku je/není auto. Tyto hodnoty budou potom umístìny zpátky na pùvodní pozice a tím bude vytvoøena tzv. \emph{zátì¾ová mapa}. Na obrázku \ref{rozsek+sloz} mù¾eme vidìt postup tvorby zátì¾ové mapy: výøezy, ve kterých nebylo nalezeno auto jsou znázornìny èervenou barvou, výøezy, ve kterých bylo nalezeno auto jsou znázornìny barvou zelenou. Na místech, kde se pøekrývá zelená barva se zelenou je nejvy¹¹í pravdìpodobnost výskytu auta. Naopak pøi pøekryvu èervených ploch je pravdìpodobnost nejmen¹í. Pøi pøekryvu èervené a zelené plochy je pravdìpodobnost výskytu auta malá.
 
 		 Výøez, ve kterém byla zji¹tìna nejvy¹¹í pravdìpodobnost výskytu automobilu je na obrázku zvýraznìn zeleným rámeèkem. Vzniklý výøez bude pro dal¹í fáze zpracování identifikován ètyrmi souøadnicemi: $x_1$ a $y_1$, které identifikují souøadnice levého horního rohu obdélníku, ve kterém se nachází auto a $x_2$ a $y_2$, které identifikují souøadnice pravého dolního rohu tohoto obdélníku.
 
