@@ -2,4 +2,4 @@
 xskriv01@fit.vutbr.cz
 
 * Diploma thesis
-* Application over Caffe NN framework detecting and anonymizing car plates in the panorama photos.
+* Application using Caffe NN framework for detecting and anonymizing car plates in the Panorama photos.
